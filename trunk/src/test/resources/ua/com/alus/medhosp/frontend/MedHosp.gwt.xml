@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module rename-to='MedHosp'>
-  <!-- Inherit the core Web Toolkit stuff.                        -->
-  <inherits name='ua.com.alus.medhosp.frontend.MedHosp'/>
-
-
-</module>
