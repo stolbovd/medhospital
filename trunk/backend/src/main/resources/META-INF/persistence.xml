@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+    <persistence-unit name="MedHospUnit" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>org.axonframework.eventstore.jpa.DomainEventEntry</class>
+        <class>org.axonframework.eventstore.jpa.SnapshotEventEntry</class>
+    </persistence-unit>
+</persistence>

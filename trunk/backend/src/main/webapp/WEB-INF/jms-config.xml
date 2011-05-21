@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:amq="http://activemq.apache.org/schema/core"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:jms="http://www.springframework.org/schema/jms"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	                           http://www.springframework.org/schema/beans/spring-beans.xsd
+	                           http://www.springframework.org/schema/jms
+	                           http://www.springframework.org/schema/jms/spring-jms.xsd
+	                           http://activemq.apache.org/schema/core
+	                           http://activemq.apache.org/schema/core/activemq-core.xsd">
+
+    <amq:broker id="broker" useJmx="false" persistent="true">
+        <amq:transportConnectors>
+            <amq:transportConnector uri="tcp://localhost:9091"/>
+        </amq:transportConnectors>
+    </amq:broker>
+
+    <amq:queue id="commandProcessorDestination" physicalName="ua.com.alus.medhosp.commandprocessor"/>
+
+    <amq:queue id="clientListenerDestination" physicalName="ua.com.alus.medhosp.clientListener"/>
+
+    <amq:connectionFactory id="jmsFactory" brokerURL="tcp://localhost:9091"/>
+
+    <!-- JMS Listener Configuration -->
+    <bean id="jmsConnectionFactory"
+          class="org.springframework.jms.connection.SingleConnectionFactory"
+          depends-on="broker"
+          p:targetConnectionFactory-ref="jmsFactory"/>
+
+    <bean id="jmsCommandListener" class="ua.com.alus.medhosp.backend.jms.JmsCommandListener">
+        <property name="commandProcessor" ref="commandProcessor"/>
+    </bean>
+
+    <jms:listener-container container-type="default"
+                            connection-factory="jmsConnectionFactory"
+                            acknowledge="auto">
+        <jms:listener destination="ua.com.alus.medhosp.commandprocessor" ref="jmsCommandListener"/>
+    </jms:listener-container>
+
+
+    <!-- JMS Producer Configuration -->
+    <bean id="jmsProducerTemplate" class="org.springframework.jms.core.JmsTemplate"
+          p:connectionFactory-ref="jmsConnectionFactory"
+          p:defaultDestination-ref="clientListenerDestination"/>
+
+    <bean id="jmsEventProducer" class="ua.com.alus.medhosp.backend.jms.JmsEventProducer">
+        <property name="template" ref="jmsProducerTemplate"/>
+    </bean>
+
+</beans>
