@@ -55,30 +55,11 @@ public class PatientsTable extends ListGrid implements ITable {
 
         AttributeValueField firstNameColumn = new AttributeValueField(NAME_ATTRIBUTE, constants.firstName());
         firstNameColumn.setType(ListGridFieldType.TEXT);
-        firstNameColumn.setCanEdit(true);
-        firstNameColumn.addCellSavedHandler(new CellSavedHandler() {
-            public void onCellSaved(CellSavedEvent event) {
-                PatientCTO patient = (PatientCTO) event.getRecord();
-                //Map<String, String> attribute = patient.getPatAtttribueValue(NAME_ATTRIBUTE);
-                //attribute.put(PatientAttributeValue.ATTRIBUTE_VALUE, String.valueOf(event.getNewValue()));
-                /*getController().savePatient(patCTOSample.convertPersonCTO(patient, new PatientAttributeValue()),
-                        PatientAttributeValue.ATTRIBUTE_ID); */
-            }
-        });
+        firstNameColumn.setCanEdit(false);
 
         AttributeValueField lastNameColumn = new AttributeValueField(LAST_NAME_ATTRIBUTE, constants.lastName());
         lastNameColumn.setType(ListGridFieldType.TEXT);
-        lastNameColumn.setCanEdit(true);
-        lastNameColumn.addCellSavedHandler(new CellSavedHandler() {
-            public void onCellSaved(CellSavedEvent event) {
-                PatientCTO patient = (PatientCTO) event.getRecord();
-                //Map<String, String> attribute = patient.getPatAtttribueValue(LAST_NAME_ATTRIBUTE);
-                //attribute.put(PatientAttributeValue.ATTRIBUTE_VALUE, String.valueOf(event.getNewValue()));
-
-                /*getController().savePatient(patCTOSample.convertPersonCTO(patient, new PatientAttributeValue()),
-                        PatientAttributeValue.ATTRIBUTE_ID);*/
-            }
-        });
+        lastNameColumn.setCanEdit(false);
 
         setFields(checkBoxColumn, lastNameColumn, firstNameColumn);
 

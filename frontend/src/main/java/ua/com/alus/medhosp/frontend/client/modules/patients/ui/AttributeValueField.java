@@ -12,10 +12,19 @@ import ua.com.alus.medhosp.frontend.client.modules.patients.cto.PatientCTO;
  * Time: 19:41
  */
 public class AttributeValueField extends ListGridField {
+
+    private AttributeCellFormatter attributeFormatter;
+
     public AttributeValueField(String name, String title) {
         super(name, title);
-        setCellFormatter(new AttributeCellFormatter());
+        setCellFormatter(getAttributeFormatter());
+    }
 
+    private AttributeCellFormatter getAttributeFormatter(){
+        if(attributeFormatter == null){
+            attributeFormatter = new AttributeCellFormatter();
+        }
+        return attributeFormatter;
     }
 
     private class AttributeCellFormatter implements CellFormatter {
