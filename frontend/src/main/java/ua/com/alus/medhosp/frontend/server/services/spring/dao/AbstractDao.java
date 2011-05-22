@@ -7,8 +7,7 @@ import me.prettyprint.hector.api.Cluster;
 import me.prettyprint.hector.api.Keyspace;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Admin
+ * Created by Usatov Alexey
  * Date: 13.05.11
  * Time: 19:14
  */

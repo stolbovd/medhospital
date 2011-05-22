@@ -13,8 +13,7 @@ import com.smartgwt.client.widgets.grid.events.CellSavedHandler;
 import java.util.HashSet;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Admin
+ * Created by Usatov Alexey
  * Date: 02.05.11
  * Time: 12:47
  */

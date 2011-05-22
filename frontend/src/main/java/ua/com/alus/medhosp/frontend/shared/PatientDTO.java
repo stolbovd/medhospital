@@ -2,8 +2,7 @@ package ua.com.alus.medhosp.frontend.shared;
 
 
 /**
- * Created by IntelliJ IDEA.
- * User: Admin
+ * Created by Usatov Alexey
  * Date: 02.05.11
  * Time: 1:21
  */

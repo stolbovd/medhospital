@@ -5,8 +5,7 @@ import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientServiceA
 import com.google.gwt.core.client.GWT;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Admin
+ * Created by Usatov Alexey
  * Date: 01.05.11
  * Time: 23:32
  */
