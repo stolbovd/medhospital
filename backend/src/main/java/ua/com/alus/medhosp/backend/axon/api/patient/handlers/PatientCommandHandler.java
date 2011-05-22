@@ -10,8 +10,7 @@ import ua.com.alus.medhosp.backend.axon.api.patient.command.RemovePatientCommand
 import ua.com.alus.medhosp.backend.axon.api.patient.command.SavePatientCommand;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Usatov Alexey
+ * Created by Usatov Alexey
  * Date: 19.05.11
  * Time: 11:30
  */

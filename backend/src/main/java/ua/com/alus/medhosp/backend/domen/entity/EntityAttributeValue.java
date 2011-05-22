@@ -5,8 +5,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Usatov Alexey
+ * Created by Usatov Alexey
  * Date: 18.05.11
  * Time: 16:57
  */

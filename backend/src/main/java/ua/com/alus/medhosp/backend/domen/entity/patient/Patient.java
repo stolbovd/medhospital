@@ -8,8 +8,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Usatov Alexey
+ * Created by Usatov Alexey
  * Date: 18.05.11
  * Time: 16:38
  */

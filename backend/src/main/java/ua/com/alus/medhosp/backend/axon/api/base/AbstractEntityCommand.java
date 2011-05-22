@@ -1,8 +1,7 @@
 package ua.com.alus.medhosp.backend.axon.api.base;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Usatov Alexey
+ * Created by Usatov Alexey
  * Date: 19.05.11
  * Time: 13:20
  */

@@ -7,8 +7,7 @@ import ua.com.alus.medhosp.backend.axon.api.patient.event.RemovePatientEvent;
 import ua.com.alus.medhosp.backend.axon.api.patient.event.SavePatientEvent;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Usatov Alexey
+ * Created by Usatov Alexey
  * Date: 19.05.11
  * Time: 11:49
  */

@@ -11,8 +11,7 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Usatov Alexey
+ * Created by Usatov Alexey
  * Date: 19.05.11
  * Time: 17:00
  */

@@ -18,11 +18,12 @@
 
     <axon:event-sourcing-repository id="patientRepository"
                                     aggregate-type="ua.com.alus.medhosp.backend.axon.api.patient.PatientAggregate"/>
-
+    <!--Handler of commands from client app -->
     <bean id="patientCommandHandler"
           class="ua.com.alus.medhosp.backend.axon.api.patient.handlers.PatientCommandHandler">
         <property name="repository" ref="patientRepository"/>
     </bean>
+
     <bean id="patientEventHandler" class="ua.com.alus.medhosp.backend.axon.api.patient.handlers.PatientEventHandler">
         <property name="patientService" ref="patientService"/>
     </bean>

@@ -11,8 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ua.com.alus.medhosp.backend.service.PatientService;
 
 /**
- * Created by IntelliJ IDEA.
- * User: alus
+ * Created by Usatov Alexey
  * Date: 18.05.11
  * Time: 14:54
  */
