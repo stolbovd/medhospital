@@ -1,10 +1,11 @@
 package ua.com.alus.medhosp.frontend.client.modules.patients.ui;
 
-import ua.com.alus.medhosp.frontend.client.ServiceStorage;
-import ua.com.alus.medhosp.frontend.client.modules.patients.cto.PatientCTO;
-import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.smartgwt.client.util.SC;
+import ua.com.alus.medhosp.frontend.client.ServiceStorage;
+import ua.com.alus.medhosp.frontend.client.modules.patients.cto.PatientCTO;
+import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
+import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,7 @@ public class PatientsController implements IController {
         });
     }
 
-    public void savePatient(PatientDTO patientDTO, String... column) {
+    public void savePatient(PatientAttributeValue patientDTO, String... column) {
         ServiceStorage.getInstance().getPatientServiceAsync().savePatient(patientDTO, column, new AsyncCallback<Void>() {
             public void onFailure(Throwable caught) {
                 SC.say("Error:" + caught);

@@ -1,15 +1,15 @@
 package ua.com.alus.medhosp.frontend.client.modules.patients.ui;
 
-import ua.com.alus.medhosp.frontend.client.main.ui.MainPanel;
-import ua.com.alus.medhosp.frontend.client.main.ui.ToolBarPanel;
-import ua.com.alus.medhosp.frontend.client.resources.images.Icons;
-import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientConstants;
-import ua.com.alus.medhosp.frontend.client.utils.ConstantsBundle;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.layout.HLayout;
 import ua.com.alus.medhosp.frontend.client.main.ui.LeftToolPanel;
+import ua.com.alus.medhosp.frontend.client.main.ui.MainPanel;
+import ua.com.alus.medhosp.frontend.client.main.ui.ToolBarPanel;
 import ua.com.alus.medhosp.frontend.client.main.ui.ToolbarButton;
+import ua.com.alus.medhosp.frontend.client.resources.images.Icons;
+import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientConstants;
+import ua.com.alus.medhosp.frontend.client.utils.ConstantsBundle;
 
 
 /**

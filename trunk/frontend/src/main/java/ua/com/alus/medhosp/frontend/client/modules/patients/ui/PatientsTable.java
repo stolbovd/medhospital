@@ -1,14 +1,15 @@
 package ua.com.alus.medhosp.frontend.client.modules.patients.ui;
 
-import ua.com.alus.medhosp.frontend.client.modules.patients.cto.PatientCTO;
-import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientConstants;
-import ua.com.alus.medhosp.frontend.client.utils.ConstantsBundle;
-import ua.com.alus.medhosp.frontend.shared.PatientDTO;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.smartgwt.client.types.ListGridFieldType;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.events.CellSavedEvent;
 import com.smartgwt.client.widgets.grid.events.CellSavedHandler;
+import ua.com.alus.medhosp.frontend.client.modules.patients.cto.PatientCTO;
+import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientConstants;
+import ua.com.alus.medhosp.frontend.client.utils.ConstantsBundle;
+import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 
 import java.util.HashSet;
 
@@ -21,6 +22,9 @@ public class PatientsTable extends ListGrid implements ITable {
     private static final String SELECTED = "selected";
     private PatientConstants constants = ConstantsBundle.getInstance().getPsConst();
     private PatientCTO patCTOSample = new PatientCTO();
+
+    public static final String NAME_ATTRIBUTE = "name";
+    public static final String LAST_NAME_ATTRIBUTE = "lastName";
 
     public PatientsTable() {
         initTable();
@@ -49,27 +53,30 @@ public class PatientsTable extends ListGrid implements ITable {
             }
         });
 
-        ListGridField firstNameColumn = new ListGridField(PatientDTO.NAME, constants.firstName());
+        AttributeValueField firstNameColumn = new AttributeValueField(NAME_ATTRIBUTE, constants.firstName());
         firstNameColumn.setType(ListGridFieldType.TEXT);
         firstNameColumn.setCanEdit(true);
         firstNameColumn.addCellSavedHandler(new CellSavedHandler() {
             public void onCellSaved(CellSavedEvent event) {
                 PatientCTO patient = (PatientCTO) event.getRecord();
-                patient.setAttribute(PatientDTO.NAME, event.getNewValue());
-                getController().savePatient(patCTOSample.convertPersonCTO(patient, new PatientDTO()),
-                        PatientDTO.NAME);
+                //Map<String, String> attribute = patient.getPatAtttribueValue(NAME_ATTRIBUTE);
+                //attribute.put(PatientAttributeValue.ATTRIBUTE_VALUE, String.valueOf(event.getNewValue()));
+                /*getController().savePatient(patCTOSample.convertPersonCTO(patient, new PatientAttributeValue()),
+                        PatientAttributeValue.ATTRIBUTE_ID); */
             }
         });
 
-        ListGridField lastNameColumn = new ListGridField(PatientDTO.LASTNAME, constants.lastName());
+        AttributeValueField lastNameColumn = new AttributeValueField(LAST_NAME_ATTRIBUTE, constants.lastName());
         lastNameColumn.setType(ListGridFieldType.TEXT);
         lastNameColumn.setCanEdit(true);
         lastNameColumn.addCellSavedHandler(new CellSavedHandler() {
             public void onCellSaved(CellSavedEvent event) {
                 PatientCTO patient = (PatientCTO) event.getRecord();
-                patient.setAttribute(PatientDTO.LASTNAME, event.getNewValue());
-                getController().savePatient(patCTOSample.convertPersonCTO(patient, new PatientDTO()),
-                        PatientDTO.LASTNAME);
+                //Map<String, String> attribute = patient.getPatAtttribueValue(LAST_NAME_ATTRIBUTE);
+                //attribute.put(PatientAttributeValue.ATTRIBUTE_VALUE, String.valueOf(event.getNewValue()));
+
+                /*getController().savePatient(patCTOSample.convertPersonCTO(patient, new PatientAttributeValue()),
+                        PatientAttributeValue.ATTRIBUTE_ID);*/
             }
         });
 
@@ -80,6 +87,10 @@ public class PatientsTable extends ListGrid implements ITable {
         setHeight(500);
 
     }
+
+    private native String getJLabel(JavaScriptObject object)/*-{
+        return object['attributeValue'];
+    }-*/;
 
     private HashSet<String> selectedPatients = new HashSet<String>();
 

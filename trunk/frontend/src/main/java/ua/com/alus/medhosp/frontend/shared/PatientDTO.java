@@ -1,27 +1,32 @@
 package ua.com.alus.medhosp.frontend.shared;
 
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by Usatov Alexey
- * Date: 02.05.11
- * Time: 1:21
+ * Created by Usatov Alexey.
+ * Date: 22.05.11
+ * Time: 16:38
  */
+public class PatientDTO extends AbstractDTO {
 
-public class PatientDTO extends AbstractDTO implements SuperColumn {
-    public static final String MAIN = "main";
+    private List<PatientAttributeValue> patientAttributeValues;
 
-    public static final String LASTNAME = "lastName";
-    public static final String NAME = "name";
-
-
-    public static final String[] COLUMNS = {KEY, NAME, LASTNAME};
+    public static final String[] COLUMNS = {KEY};
 
     @Override
     public String[] getColumns() {
         return COLUMNS;
     }
 
-    public String getSuperKeyName() {
-        return MAIN;
+    public List<PatientAttributeValue> getPatientAttributeValues() {
+        if (patientAttributeValues == null) {
+            patientAttributeValues = new ArrayList<PatientAttributeValue>();
+        }
+        return patientAttributeValues;
+    }
+
+    public void setPatientAttributeValues(List<PatientAttributeValue> patientAttributeValues) {
+        this.patientAttributeValues = patientAttributeValues;
     }
 }

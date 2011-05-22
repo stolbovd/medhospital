@@ -1,8 +1,5 @@
 package ua.com.alus.medhosp.frontend.client.modules.patients.ui;
 
-import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientConstants;
-import ua.com.alus.medhosp.frontend.client.utils.ConstantsBundle;
-import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.VerticalAlignment;
 import com.smartgwt.client.util.SC;
@@ -14,6 +11,10 @@ import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
+import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientConstants;
+import ua.com.alus.medhosp.frontend.client.utils.ConstantsBundle;
+import ua.com.alus.medhosp.frontend.shared.AbstractDTO;
+import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
 
 
 /**
@@ -59,10 +60,12 @@ public class PatientDialog extends Window {
                     SC.say(constants.nameCannotBeEmpty());
                     return;
                 }
-                PatientDTO patientDTO = new PatientDTO();
-                patientDTO.put(PatientDTO.LASTNAME, lastNameItem.getValue().toString());
-                patientDTO.put(PatientDTO.NAME, nameItem.getValue().toString());
-                getController().savePatient(patientDTO, PatientDTO.LASTNAME, PatientDTO.NAME);
+
+                PatientAttributeValue patientAttributeValue = new PatientAttributeValue();
+                patientAttributeValue.setSuperKeyName("name");
+                patientAttributeValue.put(AbstractDTO.KEY, "1305841537281000");
+                patientAttributeValue.put(PatientAttributeValue.ATTRIBUTE_VALUE, lastNameItem.getValueAsString());
+                getController().savePatient(patientAttributeValue, PatientAttributeValue.ATTRIBUTE_VALUE);
                 destroy();
             }
         });

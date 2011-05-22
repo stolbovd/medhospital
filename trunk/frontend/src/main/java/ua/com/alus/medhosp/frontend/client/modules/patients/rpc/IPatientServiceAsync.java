@@ -1,7 +1,8 @@
 package ua.com.alus.medhosp.frontend.client.modules.patients.rpc;
 
-import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
+import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 
 import java.util.List;
 
@@ -17,5 +18,5 @@ public interface IPatientServiceAsync {
 
     void removeSelected(final List<String> ids, AsyncCallback<Integer> async);
 
-    void savePatient(PatientDTO patientDTO, String[] columns, AsyncCallback<Void> async);
+    void savePatient(PatientAttributeValue patientAttributeValue, String[] columns, AsyncCallback<Void> async);
 }

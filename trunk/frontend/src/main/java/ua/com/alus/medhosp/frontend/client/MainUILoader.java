@@ -1,9 +1,9 @@
 package ua.com.alus.medhosp.frontend.client;
 
-import ua.com.alus.medhosp.frontend.client.modules.patients.ui.PatientsPanel;
 import com.smartgwt.client.types.Side;
 import com.smartgwt.client.widgets.tab.Tab;
 import com.smartgwt.client.widgets.tab.TabSet;
+import ua.com.alus.medhosp.frontend.client.modules.patients.ui.PatientsPanel;
 
 /**
  * Created by Usatov Alexey
