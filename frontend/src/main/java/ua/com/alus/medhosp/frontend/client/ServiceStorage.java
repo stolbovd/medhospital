@@ -1,8 +1,8 @@
 package ua.com.alus.medhosp.frontend.client;
 
+import com.google.gwt.core.client.GWT;
 import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientService;
 import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientServiceAsync;
-import com.google.gwt.core.client.GWT;
 
 /**
  * Created by Usatov Alexey

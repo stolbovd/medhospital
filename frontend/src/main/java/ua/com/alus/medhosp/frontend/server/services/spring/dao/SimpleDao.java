@@ -1,13 +1,13 @@
 package ua.com.alus.medhosp.frontend.server.services.spring.dao;
 
-import ua.com.alus.medhosp.frontend.shared.AbstractDTO;
-import ua.com.alus.medhosp.frontend.shared.SuperColumn;
 import me.prettyprint.hector.api.beans.*;
 import me.prettyprint.hector.api.factory.HFactory;
 import me.prettyprint.hector.api.mutation.Mutator;
 import me.prettyprint.hector.api.query.QueryResult;
 import me.prettyprint.hector.api.query.RangeSlicesQuery;
 import me.prettyprint.hector.api.query.RangeSuperSlicesQuery;
+import ua.com.alus.medhosp.frontend.shared.AbstractDTO;
+import ua.com.alus.medhosp.frontend.shared.SuperColumn;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
@@ -106,15 +106,15 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
         m1.execute();
     }
 
-    public List<D> findAll() {
+    public List<D> find(String keyFirst, String keyLast) {
         if (dtoObject instanceof SuperColumn) {
-            return findAllSuper();
+            return findSuper(keyFirst, keyLast, new String[]{});
         } else {
-            return findAllSimple();
+            return findSimple(keyFirst, keyLast);
         }
     }
 
-    public List<D> findAllSimple() {
+    private List<D> findSimple(String keyFirst, String keyLast) {
         ArrayList<D> abstractDTOs = new ArrayList<D>();
         try {
             RangeSlicesQuery<String, String, String> rangeSlicesQuery =
@@ -122,6 +122,7 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
             rangeSlicesQuery.setColumnFamily(cFamilyName);
             rangeSlicesQuery.setColumnNames(dtoObject.getColumns());
             rangeSlicesQuery.setRange("", "", false, dtoObject.getColumns().length);
+            rangeSlicesQuery.setKeys(keyFirst, keyLast);
             QueryResult<OrderedRows<String, String, String>> result = rangeSlicesQuery.execute();
             OrderedRows<String, String, String> orderedRows = result.get();
 
@@ -143,33 +144,50 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
         return abstractDTOs;
     }
 
-    public List<D> findAllSuper() {
+    private List<D> findSuper(String keyFirst, String keyLast, String[] superColumnNames) {
         ArrayList<D> abstractDTOs = new ArrayList<D>();
         try {
-            String superColumnKey = ((SuperColumn) dtoObject).getSuperKeyName();
             RangeSuperSlicesQuery<String, String, String, String> rangeSliceQuery =
                     HFactory.createRangeSuperSlicesQuery(keyspace, ss, ss, ss, ss);
             rangeSliceQuery.setColumnFamily(cFamilyName);
-            rangeSliceQuery.setColumnNames(superColumnKey);
+            rangeSliceQuery.setColumnNames(superColumnNames);
             rangeSliceQuery.setRange("", "", false, 1);
+            rangeSliceQuery.setKeys(keyFirst, keyLast);
             QueryResult<OrderedSuperRows<String, String, String, String>> result = rangeSliceQuery.execute();
             OrderedSuperRows<String, String, String, String> orderedSuperRows = result.get();
             for (SuperRow<String, String, String, String> row : orderedSuperRows) {
-                HSuperColumn<String, String, String> superColumn = row.getSuperSlice().getColumnByName(superColumnKey);
-                if (superColumn == null) {
-                    continue;
+                if (superColumnNames.length != 0) {
+                    for (String superColumnName : superColumnNames) {
+                        HSuperColumn<String, String, String> superColumn =
+                                row.getSuperSlice().getColumnByName(superColumnName);
+                        if (superColumn == null) {
+                            continue;
+                        }
+                        abstractDTOs.add(createDto(superColumn));
+                    }
+                } else {
+                    for (HSuperColumn<String, String, String> superColumn : row.getSuperSlice().getSuperColumns()) {
+                        if (superColumn == null) {
+                            continue;
+                        }
+                        abstractDTOs.add(createDto(superColumn));
+                    }
                 }
-                D currentDto = dtoClass.newInstance();
-                for (HColumn<String, String> simpleColumns : superColumn.getColumns()) {
-                    currentDto.put(simpleColumns.getName(), String.valueOf(simpleColumns.getValue()));
-                }
-                abstractDTOs.add(currentDto);
             }
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return abstractDTOs;
+    }
+
+    private D createDto(HSuperColumn<String, String, String> superColumn) throws IllegalAccessException, InstantiationException {
+        D currentDto = dtoClass.newInstance();
+        for (HColumn<String, String> simpleColumns : superColumn.getColumns()) {
+            currentDto.put(simpleColumns.getName(), String.valueOf(simpleColumns.getValue()));
+        }
+        ((SuperColumn) currentDto).setSuperKeyName(superColumn.getName());
+        return currentDto;
     }
 
     public Integer removeSelected(List<String> keys) {

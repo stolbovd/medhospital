@@ -1,7 +1,7 @@
 package ua.com.alus.medhosp.frontend.client.main.domen;
 
-import ua.com.alus.medhosp.frontend.shared.AbstractDTO;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
+import ua.com.alus.medhosp.frontend.shared.AbstractDTO;
 
 import static ua.com.alus.medhosp.frontend.shared.AbstractDTO.KEY;
 

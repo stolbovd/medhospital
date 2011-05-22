@@ -1,8 +1,8 @@
 package ua.com.alus.medhosp.frontend.client.utils;
 
+import com.google.gwt.core.client.GWT;
 import ua.com.alus.medhosp.frontend.client.resources.images.Icons;
 import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientConstants;
-import com.google.gwt.core.client.GWT;
 
 /**
  * Created by Usatov Alexey
