@@ -27,11 +27,18 @@
           abstract="true"/>
 
     <bean id="patientDao" class="ua.com.alus.medhosp.frontend.server.services.spring.dao.PatientDao" parent="simpleDao">
+        <property name="cFamilyName" value="Patients"/>
+    </bean>
+
+    <bean id="patientAttributeValueDao"
+          class="ua.com.alus.medhosp.frontend.server.services.spring.dao.PatientAttributeValueDao"
+          parent="simpleDao">
         <property name="cFamilyName" value="PatientView"/>
     </bean>
 
     <bean id="personService" class="ua.com.alus.medhosp.frontend.server.services.spring.PatientServiceImpl">
         <property name="patientDao" ref="patientDao"/>
+        <property name="patientAttributeValueDao" ref="patientAttributeValueDao"/>
     </bean>
     <import resource="jms-config.xml"/>
 </beans>

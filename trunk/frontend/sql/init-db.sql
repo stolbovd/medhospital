@@ -8,3 +8,7 @@ create column family PatientView with
   comparator='BytesType' and
   subcomparator='BytesType'
 ;
+
+create column family Patients with
+  comparator='BytesType'
+;
