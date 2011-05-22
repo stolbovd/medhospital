@@ -13,8 +13,7 @@ import ua.com.alus.medhosp.frontend.client.main.ui.ToolbarButton;
 
 
 /**
- * Created by IntelliJ IDEA.
- * User: Admin
+ * Created by Usatov Alexey
  * Date: 02.05.11
  * Time: 13:05
  */

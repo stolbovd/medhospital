@@ -3,8 +3,7 @@ package ua.com.alus.medhosp.frontend.shared;
 import java.util.HashMap;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Admin
+ * Created by Usatov Alexey
  * Date: 13.05.11
  * Time: 23:21
  */

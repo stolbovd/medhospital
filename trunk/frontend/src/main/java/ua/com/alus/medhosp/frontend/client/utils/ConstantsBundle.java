@@ -5,8 +5,7 @@ import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientCon
 import com.google.gwt.core.client.GWT;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Admin
+ * Created by Usatov Alexey
  * Date: 13.05.11
  * Time: 16:43
  */

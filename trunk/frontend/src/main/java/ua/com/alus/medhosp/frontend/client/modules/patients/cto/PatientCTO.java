@@ -4,8 +4,7 @@ import ua.com.alus.medhosp.frontend.client.main.domen.ObjectCTO;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Admin
+ * Created by Usatov Alexey
  * Date: 14.05.11
  * Time: 1:13
  */
