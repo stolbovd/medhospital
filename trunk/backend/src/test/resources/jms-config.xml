@@ -21,7 +21,7 @@
 
     <amq:connectionFactory id="jmsFactory" brokerURL="tcp://localhost:9091"/>
 
-    <!-- JMS Consumer Configuration -->
+    <!-- JMS Listener Configuration -->
     <bean id="jmsConsumerConnectionFactory"
           class="org.springframework.jms.connection.SingleConnectionFactory"
           depends-on="broker"

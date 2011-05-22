@@ -10,8 +10,7 @@ import ua.com.alus.medhosp.backend.service.PatientService;
 import java.util.ArrayList;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Usatov Alexey
+ * Created by Usatov Alexey
  * Date: 19.05.11
  * Time: 12:09
  */

@@ -10,11 +10,9 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Admin
+ * Created by Usatov Alexey.
  * Date: 21.05.11
  * Time: 14:00
- * To change this template use File | Settings | File Templates.
  */
 public class JmsEventProducer {
 

@@ -9,8 +9,6 @@ import java.lang.reflect.ParameterizedType;
 public abstract class JpaDAO<K, E> {
     private static Logger logger = Logger.getLogger(JpaDAO.class);
 
-    private static final String ID = "id";
-
     protected Class<E> entityClass;
 
     @PersistenceContext(unitName = "MedHospUnit")

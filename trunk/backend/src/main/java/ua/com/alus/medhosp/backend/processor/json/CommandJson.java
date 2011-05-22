@@ -6,8 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import java.util.HashMap;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Usatov Alexey
+ * Created by Usatov Alexey
  * Date: 19.05.11
  * Time: 15:27
  */

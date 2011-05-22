@@ -15,8 +15,7 @@ import ua.com.alus.medhosp.backend.test.jms.JmsClientMessageProducer;
 import javax.jms.JMSException;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Usatov Alexey
+ * Created by Usatov Alexey
  * Date: 19.05.11
  * Time: 17:04
  */

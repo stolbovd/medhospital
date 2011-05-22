@@ -9,8 +9,7 @@ import javax.jms.MessageListener;
 
 /**
  * This is listener for JMS messages from client application that contain command and its properties.
- * Created by IntelliJ IDEA.
- * User: Usatov Alexey
+ * Created by Usatov Alexey
  * Date: 19.05.11
  * Time: 14:48
  */

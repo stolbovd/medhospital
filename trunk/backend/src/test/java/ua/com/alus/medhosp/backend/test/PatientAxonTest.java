@@ -13,8 +13,7 @@ import ua.com.alus.medhosp.backend.axon.api.patient.handlers.PatientCommandHandl
 import ua.com.alus.medhosp.backend.domen.utils.UUID;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Usatov Alexey
+ * Created by Usatov Alexey
  * Date: 19.05.11
  * Time: 12:18
  */

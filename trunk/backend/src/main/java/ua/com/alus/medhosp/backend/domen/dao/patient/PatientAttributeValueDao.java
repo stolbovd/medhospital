@@ -6,8 +6,7 @@ import ua.com.alus.medhosp.backend.domen.entity.patient.PatientAttributeValue;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Usatov Alexey
+ * Created by Usatov Alexey
  * Date: 18.05.11
  * Time: 17:19
  */

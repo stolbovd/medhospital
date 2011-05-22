@@ -15,8 +15,7 @@ import ua.com.alus.medhosp.backend.domen.utils.UUID;
 import ua.com.alus.medhosp.backend.service.PatientService;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Usatov Alexey
+ * Created by Usatov Alexey
  * Date: 19.05.11
  * Time: 12:24
  */

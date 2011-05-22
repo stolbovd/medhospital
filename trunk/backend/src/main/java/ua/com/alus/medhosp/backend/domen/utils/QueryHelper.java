@@ -3,8 +3,7 @@ package ua.com.alus.medhosp.backend.domen.utils;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Admin
+ * Created by Usatov Alexey
  * Date: 02.05.11
  * Time: 23:35
  */

@@ -15,9 +15,9 @@ import ua.com.alus.medhosp.backend.domen.utils.UUID;
 import ua.com.alus.medhosp.backend.service.PatientService;
 
 /**
+ * Created by Usatov Alexey<br/>
  * JUnit test for testing PatientService.
  * <p/>
- * Author: Usatov Alexey
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @TestExecutionListeners({})
