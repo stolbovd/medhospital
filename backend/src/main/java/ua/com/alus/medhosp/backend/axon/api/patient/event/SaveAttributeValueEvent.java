@@ -1,14 +1,14 @@
 package ua.com.alus.medhosp.backend.axon.api.patient.event;
 
-import ua.com.alus.medhosp.backend.axon.api.base.AbstractEntityEvent;
+
+import java.io.Serializable;
 
 /**
  * Created Usatov Alexey
  * Date: 23.05.11
  * Time: 11:50
  */
-public class SaveAttributeValueEvent extends AbstractEntityEvent {
-    private String attributeId;
+public class SaveAttributeValueEvent extends AttributeValueEvent implements Serializable{
     private String attributeValue;
 
     public SaveAttributeValueEvent(String entityId, String messageId) {
@@ -17,16 +17,8 @@ public class SaveAttributeValueEvent extends AbstractEntityEvent {
 
     public SaveAttributeValueEvent(String entityId, String messageId, String attributeId, String attributeValue){
         super(entityId, messageId);
-        this.attributeId = attributeId;
+        setAttributeId(attributeId);
         this.attributeValue = attributeValue;
-    }
-
-    public String getAttributeId() {
-        return attributeId;
-    }
-
-    public void setAttributeId(String attributeId) {
-        this.attributeId = attributeId;
     }
 
     public String getAttributeValue() {
