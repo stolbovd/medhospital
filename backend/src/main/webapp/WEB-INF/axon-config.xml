@@ -37,6 +37,10 @@
         <property name="repository" ref="attributeValueRepository"/>
     </bean>
 
+    <bean id="attributeValueEventHandler" class="ua.com.alus.medhosp.backend.axon.api.patient.handlers.AttributeValueEventHandler">
+        <property name="patientService" ref="patientService"/>
+    </bean>
+
     <bean id="commandProcessor" class="ua.com.alus.medhosp.backend.processor.CommandProcessorImpl">
         <property name="commandBus" ref="commandBus"/>
         <property name="command2Class">

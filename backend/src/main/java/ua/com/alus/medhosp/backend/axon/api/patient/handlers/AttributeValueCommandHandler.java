@@ -22,6 +22,11 @@ public class AttributeValueCommandHandler {
 
     @CommandHandler
     private void saveAttributeValueHandler(SaveAttributeValueCommand saveAttributeValueCommand) {
-
+        PatientAttributeValueAggregate patientAttributeValueAggregate =
+                new PatientAttributeValueAggregate(saveAttributeValueCommand.getEntityId(), saveAttributeValueCommand.getAttributeId(),
+                        saveAttributeValueCommand.getAttributeValue());
+        repository.add(patientAttributeValueAggregate);
+        patientAttributeValueAggregate.save(saveAttributeValueCommand.getMessageId());
+        logger.trace("Handling saveAttributeValue event");
     }
 }
