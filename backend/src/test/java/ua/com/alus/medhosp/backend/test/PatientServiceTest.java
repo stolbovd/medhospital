@@ -22,7 +22,7 @@ import ua.com.alus.medhosp.backend.service.PatientService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TestExecutionListeners({})
 @ContextConfiguration(locations = {"/spring-config.xml"})
-@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
+@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = false)
 public class PatientServiceTest extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Autowired

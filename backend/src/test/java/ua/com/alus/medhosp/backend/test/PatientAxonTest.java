@@ -3,12 +3,21 @@ package ua.com.alus.medhosp.backend.test;
 import org.axonframework.test.FixtureConfiguration;
 import org.axonframework.test.Fixtures;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import ua.com.alus.medhosp.backend.axon.api.patient.PatientAggregate;
 import ua.com.alus.medhosp.backend.axon.api.patient.PatientAttributeValueAggregate;
+import ua.com.alus.medhosp.backend.axon.api.patient.command.RemoveAttributeValueCommand;
 import ua.com.alus.medhosp.backend.axon.api.patient.command.RemovePatientCommand;
 import ua.com.alus.medhosp.backend.axon.api.patient.command.SaveAttributeValueCommand;
 import ua.com.alus.medhosp.backend.axon.api.patient.command.SavePatientCommand;
+import ua.com.alus.medhosp.backend.axon.api.patient.event.RemoveAttributeValueEvent;
 import ua.com.alus.medhosp.backend.axon.api.patient.event.RemovePatientEvent;
 import ua.com.alus.medhosp.backend.axon.api.patient.event.SaveAttributeValueEvent;
 import ua.com.alus.medhosp.backend.axon.api.patient.event.SavePatientEvent;
@@ -21,6 +30,8 @@ import ua.com.alus.medhosp.backend.domen.utils.UUID;
  * Date: 19.05.11
  * Time: 12:18
  */
+//TODO check if we need to separate creating and savving of Aggregate roots
+@Ignore
 public class PatientAxonTest {
     private FixtureConfiguration fixture;
 
@@ -40,8 +51,8 @@ public class PatientAxonTest {
     public void savePatient() {
         String uuid = UUID.uuid();
         fixture.given()
-                .when(new SavePatientCommand(uuid, null))
-                .expectEvents(new SavePatientEvent(uuid, null));
+                .when(new SavePatientCommand(uuid, ""))
+                .expectEvents(new SavePatientEvent(fixture.getAggregateIdentifier().asString(), ""));
     }
 
     @Test
@@ -53,12 +64,21 @@ public class PatientAxonTest {
     }
 
     @Test
-    public void saveAttributeValue(){
+    public void saveAttributeValue() {
         String entityId = UUID.uuid();
         String attributeId = UUID.uuid();
         String attributeValue = "value";
-        fixture.given().when(new SaveAttributeValueCommand(entityId,"",attributeId,attributeValue))
+        fixture.given().when(new SaveAttributeValueCommand(entityId, "", attributeId, attributeValue))
                 .expectEvents(new SaveAttributeValueEvent(entityId, "", attributeId, attributeValue));
+    }
 
+    @Test
+    public void removeAttributeValue() {
+        String entityId = UUID.uuid();
+        String attributeId = UUID.uuid();
+        fixture.given().when(new SaveAttributeValueCommand(entityId, "", attributeId, ""))
+                .expectEvents(new SaveAttributeValueEvent(entityId, "", attributeId, ""));
+        fixture.given().when(new RemoveAttributeValueCommand(entityId, "", attributeId))
+                .expectEvents(new RemoveAttributeValueEvent(entityId, "", attributeId));
     }
 }
