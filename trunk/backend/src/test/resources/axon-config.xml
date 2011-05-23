@@ -16,6 +16,7 @@
         </axon:interceptors>
     </axon:command-bus>
 
+    <!-- Patient axon config -->
     <axon:event-sourcing-repository id="patientRepository"
                                     aggregate-type="ua.com.alus.medhosp.backend.axon.api.patient.PatientAggregate"/>
 
@@ -26,6 +27,15 @@
     <bean id="patientEventHandler" class="ua.com.alus.medhosp.backend.axon.api.patient.handlers.PatientEventHandler">
         <property name="patientService" ref="patientService"/>
     </bean>
+
+    <!-- AttributeValue axon config -->
+    <axon:event-sourcing-repository id="attributeValueRepository"
+                                    aggregate-type="ua.com.alus.medhosp.backend.axon.api.patient.PatientAttributeValueAggregate"/>
+
+    <bean id="attributeValueCommandHandler" class="ua.com.alus.medhosp.backend.axon.api.patient.handlers.AttributeValueCommandHandler">
+        <property name="repository" ref="attributeValueRepository"/>
+    </bean>
+
 
     <bean id="commandProcessor" class="ua.com.alus.medhosp.backend.processor.CommandProcessorImpl">
         <property name="commandBus" ref="commandBus"/>
