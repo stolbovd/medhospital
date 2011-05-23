@@ -45,7 +45,8 @@ public class AttributeValueCommandHandler {
     @CommandHandler
     private void removeAttributeValueHandler(RemoveAttributeValueCommand removeAttributeValueCommand) {
         PatientAttributeValueAggregate aggregate =
-                repository.load(new StringAggregateIdentifier(removeAttributeValueCommand.getEntityId() + removeAttributeValueCommand.getAttributeId()));
+                repository.load(PatientAttributeValueAggregate.generateIdentifier(removeAttributeValueCommand.getEntityId(),
+                        removeAttributeValueCommand.getAttributeId()));
         aggregate.remove(removeAttributeValueCommand.getMessageId());
         logger.trace("Handling removeAttributeValue event");
     }
