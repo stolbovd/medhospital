@@ -55,7 +55,7 @@
     <!--This repository deserialize values from DomainEvent into AggregateRoot - that values that cannot be changed and when aggregate root
  is loaded from repository-->
     <bean id="patientAttributeValueEvSource"
-          class="ua.com.alus.medhosp.backend.axon.api.eventsources.PatientAttributeValueEventSource"/>
+          class="ua.com.alus.medhosp.backend.axon.api.patient.eventsource.PatientAttributeValueEventSource"/>
 
     <bean id="attributeValueCommandHandler"
           class="ua.com.alus.medhosp.backend.axon.api.patient.handlers.AttributeValueCommandHandler">

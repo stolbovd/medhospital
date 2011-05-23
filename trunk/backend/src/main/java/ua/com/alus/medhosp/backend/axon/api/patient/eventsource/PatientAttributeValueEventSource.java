@@ -1,8 +1,9 @@
-package ua.com.alus.medhosp.backend.axon.api.eventsources;
+package ua.com.alus.medhosp.backend.axon.api.patient.eventsource;
 
 import org.axonframework.domain.AggregateIdentifier;
 import org.axonframework.domain.DomainEvent;
 import org.axonframework.eventsourcing.EventSourcedAggregateRoot;
+import ua.com.alus.medhosp.backend.axon.api.eventsources.AttributeValueEventSource;
 import ua.com.alus.medhosp.backend.axon.api.patient.PatientAttributeValueAggregate;
 import ua.com.alus.medhosp.backend.axon.api.patient.event.AttributeValueEvent;
 
