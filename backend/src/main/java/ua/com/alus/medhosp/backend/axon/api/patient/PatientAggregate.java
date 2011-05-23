@@ -17,7 +17,7 @@ public class PatientAggregate extends AbstractAnnotatedAggregateRoot {
         super(identifier);
     }
 
-    public PatientAggregate(String entityId, String messageId) {
+    public PatientAggregate(String entityId) {
         super(new StringAggregateIdentifier(entityId));
     }
 

@@ -23,7 +23,7 @@ public class PatientCommandHandler {
     @CommandHandler
     public void savePatient(SavePatientCommand savePatientCommand) {
         PatientAggregate patientAggregate =
-                new PatientAggregate(savePatientCommand.getEntityId(), savePatientCommand.getMessageId());
+                new PatientAggregate(savePatientCommand.getEntityId());
         repository.add(patientAggregate);
         patientAggregate.save(savePatientCommand.getMessageId());
         logger.debug("Handling savePatient command");
@@ -36,8 +36,8 @@ public class PatientCommandHandler {
         try {
             patientAggregate = repository.load(new StringAggregateIdentifier(removePatientCommand.getEntityId()));
         } catch (AggregateNotFoundException age) {
-            patientAggregate = new PatientAggregate(removePatientCommand.getEntityId(),
-                    removePatientCommand.getMessageId());
+            patientAggregate = new PatientAggregate(removePatientCommand.getEntityId()
+            );
             repository.add(patientAggregate);
         }
         patientAggregate.remove(removePatientCommand.getMessageId());
