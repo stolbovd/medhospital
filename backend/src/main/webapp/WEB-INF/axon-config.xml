@@ -51,7 +51,7 @@
         <axon:snapshotter-trigger id="snapshotterTrigger" snapshotter-ref="snapshotter" event-count-threshold="50"/>
     </axon:event-sourcing-repository>-->
 
-    <bean id="patientAttributeValueEvSource" class="ua.com.alus.medhosp.backend.axon.api.eventsources.PatientAttributeValueEventSource"/>
+    <bean id="patientAttributeValueEvSource" class="ua.com.alus.medhosp.backend.axon.api.patient.eventsource.PatientAttributeValueEventSource"/>
 
     <bean id="attributeValueCommandHandler"
           class="ua.com.alus.medhosp.backend.axon.api.patient.handlers.AttributeValueCommandHandler">
