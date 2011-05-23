@@ -5,10 +5,14 @@ import org.axonframework.test.Fixtures;
 import org.junit.Before;
 import org.junit.Test;
 import ua.com.alus.medhosp.backend.axon.api.patient.PatientAggregate;
+import ua.com.alus.medhosp.backend.axon.api.patient.PatientAttributeValueAggregate;
 import ua.com.alus.medhosp.backend.axon.api.patient.command.RemovePatientCommand;
+import ua.com.alus.medhosp.backend.axon.api.patient.command.SaveAttributeValueCommand;
 import ua.com.alus.medhosp.backend.axon.api.patient.command.SavePatientCommand;
 import ua.com.alus.medhosp.backend.axon.api.patient.event.RemovePatientEvent;
+import ua.com.alus.medhosp.backend.axon.api.patient.event.SaveAttributeValueEvent;
 import ua.com.alus.medhosp.backend.axon.api.patient.event.SavePatientEvent;
+import ua.com.alus.medhosp.backend.axon.api.patient.handlers.AttributeValueCommandHandler;
 import ua.com.alus.medhosp.backend.axon.api.patient.handlers.PatientCommandHandler;
 import ua.com.alus.medhosp.backend.domen.utils.UUID;
 
@@ -26,6 +30,10 @@ public class PatientAxonTest {
         PatientCommandHandler commandHandler = new PatientCommandHandler();
         commandHandler.setRepository(fixture.createGenericRepository(PatientAggregate.class));
         fixture.registerAnnotatedCommandHandler(commandHandler);
+
+        AttributeValueCommandHandler atrValueCommandHandler = new AttributeValueCommandHandler();
+        atrValueCommandHandler.setRepository(fixture.createGenericRepository(PatientAttributeValueAggregate.class));
+        fixture.registerAnnotatedCommandHandler(atrValueCommandHandler);
     }
 
     @Test
@@ -42,5 +50,15 @@ public class PatientAxonTest {
         fixture.given(new SavePatientEvent(uuid, ""))
                 .when(new RemovePatientCommand(fixture.getAggregateIdentifier().asString(), null))
                 .expectEvents(new RemovePatientEvent(fixture.getAggregateIdentifier().asString(), null));
+    }
+
+    @Test
+    public void saveAttributeValue(){
+        String entityId = UUID.uuid();
+        String attributeId = UUID.uuid();
+        String attributeValue = "value";
+        fixture.given().when(new SaveAttributeValueCommand(entityId,"",attributeId,attributeValue))
+                .expectEvents(new SaveAttributeValueEvent(entityId, "", attributeId, attributeValue));
+
     }
 }
