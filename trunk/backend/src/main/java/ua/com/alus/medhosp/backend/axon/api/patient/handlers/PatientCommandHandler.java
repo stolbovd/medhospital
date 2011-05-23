@@ -22,9 +22,14 @@ public class PatientCommandHandler {
 
     @CommandHandler
     public void savePatient(SavePatientCommand savePatientCommand) {
-        PatientAggregate patientAggregate =
-                new PatientAggregate(savePatientCommand.getEntityId());
-        repository.add(patientAggregate);
+        PatientAggregate patientAggregate;
+        try {
+            patientAggregate = repository.load(new StringAggregateIdentifier(savePatientCommand.getEntityId()));
+        } catch (AggregateNotFoundException agnf) {
+            logger.info("Aggregate PatientAggregate not found, adding to repository");
+            patientAggregate = new PatientAggregate(savePatientCommand.getEntityId());
+            repository.add(patientAggregate);
+        }
         patientAggregate.save(savePatientCommand.getMessageId());
         logger.debug("Handling savePatient command");
     }
@@ -33,13 +38,7 @@ public class PatientCommandHandler {
     public void removePatient(RemovePatientCommand removePatientCommand) {
         logger.debug("Handling removePatient command");
         PatientAggregate patientAggregate;
-        try {
-            patientAggregate = repository.load(new StringAggregateIdentifier(removePatientCommand.getEntityId()));
-        } catch (AggregateNotFoundException age) {
-            patientAggregate = new PatientAggregate(removePatientCommand.getEntityId()
-            );
-            repository.add(patientAggregate);
-        }
+        patientAggregate = repository.load(new StringAggregateIdentifier(removePatientCommand.getEntityId()));
         patientAggregate.remove(removePatientCommand.getMessageId());
     }
 
