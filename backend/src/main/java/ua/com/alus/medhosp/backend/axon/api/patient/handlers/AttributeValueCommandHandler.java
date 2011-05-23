@@ -2,7 +2,6 @@ package ua.com.alus.medhosp.backend.axon.api.patient.handlers;
 
 import org.apache.log4j.Logger;
 import org.axonframework.commandhandling.annotation.CommandHandler;
-import org.axonframework.domain.StringAggregateIdentifier;
 import org.axonframework.repository.AggregateNotFoundException;
 import org.axonframework.repository.Repository;
 import ua.com.alus.medhosp.backend.axon.api.patient.PatientAttributeValueAggregate;
