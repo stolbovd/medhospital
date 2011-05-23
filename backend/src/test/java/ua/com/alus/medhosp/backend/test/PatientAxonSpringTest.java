@@ -1,6 +1,7 @@
 package ua.com.alus.medhosp.backend.test;
 
 import org.axonframework.commandhandling.CommandBus;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,7 @@ public class PatientAxonSpringTest extends AbstractTransactionalJUnit4SpringCont
         commandBus.dispatch(new RemovePatientCommand(uuid, null));
     }
 
+    @Ignore
     @Test
     public void saveAttributeValue(){
         String entityId = "12C6A3D7-5EDD-4508-AD3D-C0CBAE131ABD";
