@@ -46,12 +46,15 @@
         <property name="waitForTasksToCompleteOnShutdown" value="true"/>
     </bean>
 
-    <!--<axon:event-sourcing-repository id="attributeValueRepository"
-                                    aggregate-type="ua.com.alus.medhosp.backend.axon.api.patient.PatientAttributeValueAggregate">
-        <axon:snapshotter-trigger id="snapshotterTrigger" snapshotter-ref="snapshotter" event-count-threshold="50"/>
-    </axon:event-sourcing-repository>-->
-
-    <bean id="patientAttributeValueEvSource" class="ua.com.alus.medhosp.backend.axon.api.patient.eventsource.PatientAttributeValueEventSource"/>
+    <bean id="attributeValueSnapshotterTriger" class="org.axonframework.eventsourcing.EventCountSnapshotterTrigger">
+        <property name="snapshotter" ref="snapshotter"/>
+        <property name="trigger" value="50"/>
+    </bean>
+     <!--This repository deserialize values from DomainEvent into AggregateRoot - that values that cannot be changed and when aggregate root
+    is loaded from repository-->
+    <bean id="patientAttributeValueEvSource" class="ua.com.alus.medhosp.backend.axon.api.patient.eventsource.PatientAttributeValueEventSource">
+        <property name="snapshotterTrigger" ref="attributeValueSnapshotterTriger"/>
+    </bean>
 
     <bean id="attributeValueCommandHandler"
           class="ua.com.alus.medhosp.backend.axon.api.patient.handlers.AttributeValueCommandHandler">

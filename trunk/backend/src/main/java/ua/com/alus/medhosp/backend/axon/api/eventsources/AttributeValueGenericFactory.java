@@ -2,13 +2,8 @@ package ua.com.alus.medhosp.backend.axon.api.eventsources;
 
 import org.axonframework.domain.AggregateIdentifier;
 import org.axonframework.domain.DomainEvent;
-import org.axonframework.eventsourcing.AggregateSnapshot;
 import org.axonframework.eventsourcing.EventSourcedAggregateRoot;
 import org.axonframework.eventsourcing.GenericAggregateFactory;
-import org.axonframework.eventsourcing.IncompatibleAggregateException;
-import org.axonframework.util.Assert;
-
-import java.lang.reflect.Constructor;
 
 /**
  * Created Usatov Alexey
