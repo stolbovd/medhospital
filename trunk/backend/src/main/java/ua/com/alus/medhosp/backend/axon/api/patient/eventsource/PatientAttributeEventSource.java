@@ -4,21 +4,20 @@ import org.axonframework.domain.AggregateIdentifier;
 import org.axonframework.domain.DomainEvent;
 import org.axonframework.eventsourcing.EventSourcedAggregateRoot;
 import ua.com.alus.medhosp.backend.axon.api.eventsources.AttributeValueEventSource;
-import ua.com.alus.medhosp.backend.axon.api.patient.PatientAttributeValueAggregate;
-import ua.com.alus.medhosp.backend.axon.api.patient.event.AttributeValueEvent;
+import ua.com.alus.medhosp.backend.axon.api.patient.PatientAttributeAggregate;
+import ua.com.alus.medhosp.backend.axon.api.patient.event.AttributeEvent;
 
 /**
  * Created Usatov Alexey
- * Date: 23.05.11
- * Time: 17:50
+ * Date: 24.05.11
+ * Time: 14:42
  */
-public class PatientAttributeValueEventSource extends AttributeValueEventSource<PatientAttributeValueAggregate> {
-
-    public PatientAttributeValueEventSource() {
-        super(PatientAttributeValueAggregate.class);
+public class PatientAttributeEventSource extends AttributeValueEventSource<PatientAttributeAggregate> {
+    public PatientAttributeEventSource() {
+        super(PatientAttributeAggregate.class);
     }
 
-    public PatientAttributeValueEventSource(Class<PatientAttributeValueAggregate> aggregateType) {
+    public PatientAttributeEventSource(Class<PatientAttributeAggregate> aggregateType) {
         super(aggregateType);
     }
 
@@ -32,11 +31,13 @@ public class PatientAttributeValueEventSource extends AttributeValueEventSource<
      */
     @Override
     protected EventSourcedAggregateRoot instantiateAggregate(AggregateIdentifier aggregateIdentifier, DomainEvent firstEvent) {
-        PatientAttributeValueAggregate root = aggregateFactory.createAggregate(aggregateIdentifier, firstEvent);
-        if (firstEvent instanceof AttributeValueEvent) {
-            AttributeValueEvent attributeValueEvent = (AttributeValueEvent) firstEvent;
+        PatientAttributeAggregate root = aggregateFactory.createAggregate(aggregateIdentifier, firstEvent);
+        if (firstEvent instanceof AttributeEvent) {
+            AttributeEvent attributeValueEvent = (AttributeEvent) firstEvent;
             root.setEntityId(attributeValueEvent.getEntityId());
-            root.setAttributeId(attributeValueEvent.getAttributeId());
+            root.setName(attributeValueEvent.getName());
+            root.setType(attributeValueEvent.getType());
+            root.setValueType(attributeValueEvent.getValueType());
         }
         return root;
     }

@@ -28,10 +28,11 @@
         <property name="patientService" ref="patientService"/>
     </bean>
 
-    <!-- AttributeValue axon config -->
-    <bean id="snapshotter" class="org.axonframework.eventsourcing.SpringAggregateSnapshotter">
+    <!--############################ AttributeValue axon config #######################################-->
+
+    <bean id="attribValueSnapshotter" class="org.axonframework.eventsourcing.SpringAggregateSnapshotter">
         <property name="eventStore" ref="eventStore"/>
-        <property name="executor" ref="taskExecutor"/>
+        <property name="executor" ref="attribValueTaskExecutor"/>
         <property name="aggregateFactories">
             <list>
                 <bean class="ua.com.alus.medhosp.backend.axon.api.patient.snapshot.AttributeValueAggregateFactory"/>
@@ -39,13 +40,13 @@
         </property>
     </bean>
 
-    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+    <bean id="attribValueTaskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
         <property name="corePoolSize" value="2"/>
         <property name="maxPoolSize" value="5"/>
         <property name="waitForTasksToCompleteOnShutdown" value="true"/>
     </bean>
     <bean id="attributeValueSnapshotterTriger" class="org.axonframework.eventsourcing.EventCountSnapshotterTrigger">
-        <property name="snapshotter" ref="snapshotter"/>
+        <property name="snapshotter" ref="attribValueSnapshotter"/>
         <property name="trigger" value="50"/>
     </bean>
 
@@ -65,6 +66,48 @@
           class="ua.com.alus.medhosp.backend.axon.api.patient.handlers.AttributeValueEventHandler">
         <property name="patientService" ref="patientService"/>
     </bean>
+    <!--############################## End of AttributeValue axon config ######################-->
+
+
+    <!--############################## Attribute axon config ############################-->
+
+
+    <bean id="attributeSnapshotter" class="org.axonframework.eventsourcing.SpringAggregateSnapshotter">
+        <property name="eventStore" ref="eventStore"/>
+        <property name="executor" ref="attribValueTaskExecutor"/>
+        <property name="aggregateFactories">
+            <list>
+                <bean class="ua.com.alus.medhosp.backend.axon.api.patient.snapshot.AttributeAggregateFactory"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="attribTaskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="2"/>
+        <property name="maxPoolSize" value="5"/>
+        <property name="waitForTasksToCompleteOnShutdown" value="true"/>
+    </bean>
+
+    <bean id="attributeSnapshotterTriger" class="org.axonframework.eventsourcing.EventCountSnapshotterTrigger">
+        <property name="snapshotter" ref="attributeSnapshotter"/>
+        <property name="trigger" value="50"/>
+    </bean>
+    <bean id="patientAttributeEvSource"
+          class="ua.com.alus.medhosp.backend.axon.api.patient.eventsource.PatientAttributeEventSource">
+        <property name="snapshotterTrigger" ref="attributeSnapshotterTriger"/>
+    </bean>
+
+    <bean id="attributeCommandHandler"
+          class="ua.com.alus.medhosp.backend.axon.api.patient.handlers.AttributeCommandHandler">
+        <property name="repository" ref="patientAttributeEvSource"/>
+    </bean>
+
+    <bean id="attributeEventHandler"
+          class="ua.com.alus.medhosp.backend.axon.api.patient.handlers.AttributeEventHandler">
+        <property name="patientService" ref="patientService"/>
+    </bean>
+
+    <!--############################ End of Attribute axon config #######################-->
 
     <bean id="commandProcessor" class="ua.com.alus.medhosp.backend.processor.CommandProcessorImpl">
         <property name="commandBus" ref="commandBus"/>
