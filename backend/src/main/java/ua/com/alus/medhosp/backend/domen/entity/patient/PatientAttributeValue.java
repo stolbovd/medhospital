@@ -2,10 +2,7 @@ package ua.com.alus.medhosp.backend.domen.entity.patient;
 
 import ua.com.alus.medhosp.backend.domen.entity.EntityAttributeValue;
 
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by Usatov Alexey
@@ -18,4 +15,17 @@ import javax.persistence.Table;
         @NamedQuery(name = "selectAttributeValue", query = "SELECT p FROM PatientAttributeValue p WHERE p.entityId=:entityId and p.attributeId=:attrId")
 })
 public class PatientAttributeValue extends EntityAttributeValue {
+
+    @ManyToOne
+    @JoinColumn(name = "FK_ATTRIBUTE_ID")
+    private PatientAttribute patientAttribute;
+
+
+    public PatientAttribute getPatientAttribute() {
+        return patientAttribute;
+    }
+
+    public void setPatientAttribute(PatientAttribute patientAttribute) {
+        this.patientAttribute = patientAttribute;
+    }
 }
