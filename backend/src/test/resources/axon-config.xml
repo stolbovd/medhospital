@@ -115,6 +115,14 @@
             <map>
                 <entry key="SavePatientCommand"
                        value="ua.com.alus.medhosp.backend.axon.api.patient.command.SavePatientCommand"/>
+                <entry key="SaveAttributeValueCommand"
+                       value="ua.com.alus.medhosp.backend.axon.api.patient.command.SaveAttributeValueCommand"/>
+                <entry key="SaveAttributeCommand"
+                       value="ua.com.alus.medhosp.backend.axon.api.patient.command.SaveAttributeCommand"/>
+                <entry key="RemovePatientCommand"
+                       value="ua.com.alus.medhosp.backend.axon.api.patient.command.RemovePatientCommand"/>
+                <entry key="RemoveAttributeValueCommand"
+                       value="ua.com.alus.medhosp.backend.axon.api.patient.command.RemoveAttributeValueCommand"/>
             </map>
         </property>
     </bean>
