@@ -72,7 +72,6 @@ public class PatientService {
             patientAttributeValue = new PatientAttributeValue();
             patientAttributeValue.setEntityId(entityId);
             patientAttributeValue.setAttributeId(attributeId);
-            patientAttributeValue.setPatientAttribute(getPatientAttributeDao().findById(attributeId));
         }
         patientAttributeValue.setValue(value);
         getPatientAttributeValueDao().persist(patientAttributeValue);

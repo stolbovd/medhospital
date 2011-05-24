@@ -16,24 +16,5 @@ import javax.persistence.*;
 })
 public class PatientAttributeValue extends EntityAttributeValue {
 
-    @ManyToOne
-    @JoinColumn(name = "FK_ATTRIBUTE_ID")
-    private PatientAttribute patientAttribute;
-
-    public PatientAttribute getPatientAttribute() {
-        return patientAttribute;
-    }
-
-    public void setPatientAttribute(PatientAttribute patientAttribute) {
-        this.patientAttribute = patientAttribute;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "PK_ENTITY_ID")
-    private Patient patient;
-
-    public Patient getPatient() {
-        return patient;
-    }
 
 }
