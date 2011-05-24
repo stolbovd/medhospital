@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import ua.com.alus.medhosp.backend.domen.entity.patient.Patient;
 import ua.com.alus.medhosp.backend.domen.entity.patient.PatientAttribute;
+import ua.com.alus.medhosp.backend.domen.entity.patient.PatientAttributeValue;
 import ua.com.alus.medhosp.backend.domen.utils.UUID;
 import ua.com.alus.medhosp.backend.service.PatientService;
 
@@ -43,9 +44,15 @@ public class PatientServiceTest extends AbstractTransactionalJUnit4SpringContext
 
         PatientAttribute patientAttribute = new PatientAttribute();
         patientAttribute.setEntityId(UUID.uuid());
+        patientAttribute.setName("name");
         patientService.savePatientAttribute(patientAttribute);
 
+
         patientService.savePatientAttributeValue(patient.getEntityId(), patientAttribute.getEntityId(), "Hello");
+
+        PatientAttributeValue patientAttributeValue = patientService.getPatientAttributeValue(
+                patient.getEntityId(),
+                patientAttribute.getEntityId());
 
         Assert.assertEquals(patientService.getPatientAttributeValue(
                 patient.getEntityId(),

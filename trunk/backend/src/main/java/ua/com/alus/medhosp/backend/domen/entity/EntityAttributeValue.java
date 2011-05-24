@@ -17,7 +17,7 @@ public abstract class EntityAttributeValue implements Serializable {
     @Column(name = "FK_ENTITY_ID")
     private String entityId;
 
-    @Column(name = "FK_ATTRIBUTE_ID")
+    @Column(name = "FK_ATTRIBUTE_ID", insertable = false, updatable = false)
     private String attributeId;
 
     @Column(name = "VALUE")
