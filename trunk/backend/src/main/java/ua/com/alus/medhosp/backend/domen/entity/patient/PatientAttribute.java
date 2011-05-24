@@ -15,13 +15,6 @@ import java.util.List;
 @Table(name = "PATIENT_ATTRIBUTE")
 public class PatientAttribute extends EntityObject {
 
-    public List<PatientAttributeValue> getPatientAttributeValues() {
-        return patientAttributeValues;
-    }
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientAttribute", targetEntity = PatientAttributeValue.class, fetch = FetchType.LAZY)
-    private List<PatientAttributeValue> patientAttributeValues;
-
     @Column(name = "NAME", nullable = false)
     private String name;
 
