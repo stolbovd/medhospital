@@ -6,12 +6,14 @@ import org.axonframework.eventsourcing.annotation.AbstractAnnotatedAggregateRoot
 import ua.com.alus.medhosp.backend.axon.api.patient.event.RemovePatientEvent;
 import ua.com.alus.medhosp.backend.axon.api.patient.event.SavePatientEvent;
 
+import java.io.Serializable;
+
 /**
  * Created by Usatov Alexey
  * Date: 19.05.11
  * Time: 11:49
  */
-public class PatientAggregate extends AbstractAnnotatedAggregateRoot {
+public class PatientAggregate extends AbstractAnnotatedAggregateRoot implements Serializable{
 
     public PatientAggregate(AggregateIdentifier identifier) {
         super(identifier);
