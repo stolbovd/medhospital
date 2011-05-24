@@ -46,7 +46,7 @@ public class PatientAxonSpringTest extends AbstractTransactionalJUnit4SpringCont
         commandBus.dispatch(new RemovePatientCommand(uuid, null));
     }
 
-    //@Ignore
+    @Ignore
     @Test
     public void saveAttributeValue(){
         String entityId = "12C6A3D7-5EDD-4508-AD3D-C0CBAE131ABD";
