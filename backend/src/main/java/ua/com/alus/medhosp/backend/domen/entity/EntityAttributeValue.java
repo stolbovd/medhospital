@@ -14,7 +14,7 @@ import java.io.Serializable;
 public abstract class EntityAttributeValue implements Serializable {
 
     @Id
-    @Column(name = "FK_ENTITY_ID")
+    @Column(name = "FK_ENTITY_ID", insertable = false, updatable = false)
     private String entityId;
 
     @Column(name = "FK_ATTRIBUTE_ID", insertable = false, updatable = false)

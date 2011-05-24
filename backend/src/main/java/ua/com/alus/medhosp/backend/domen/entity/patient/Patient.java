@@ -2,10 +2,8 @@ package ua.com.alus.medhosp.backend.domen.entity.patient;
 
 import ua.com.alus.medhosp.backend.domen.entity.EntityObject;
 
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Usatov Alexey
