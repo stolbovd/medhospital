@@ -82,7 +82,7 @@ public class PatientService {
     public void removePatientAttributeValue(String entityId, String attributeId) {
         PatientAttributeValue patientAttributeValue = getPatientAttributeValue(entityId, attributeId);
         if (patientAttributeValue == null) {
-           return;
+            return;
         }
         getPatientAttributeValueDao().remove(patientAttributeValue);
     }

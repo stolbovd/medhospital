@@ -13,7 +13,7 @@ import org.axonframework.repository.LockingStrategy;
  */
 public class AttributeValueEventSource<T extends EventSourcedAggregateRoot> extends EventSourcingRepository {
 
-    protected AttributeValueGenericFactory<T> aggregateFactory;
+    protected AttributeGenericFactory<T> aggregateFactory;
 
     public AttributeValueEventSource(Class<T> aggregateType) {
         this(aggregateType, LockingStrategy.PESSIMISTIC);
@@ -22,7 +22,7 @@ public class AttributeValueEventSource<T extends EventSourcedAggregateRoot> exte
 
     public AttributeValueEventSource(Class<T> aggregateType, LockingStrategy lockingStrategy) {
         super(lockingStrategy);
-        aggregateFactory = new AttributeValueGenericFactory<T>(aggregateType);
+        aggregateFactory = new AttributeGenericFactory<T>(aggregateType);
     }
 
     @Override

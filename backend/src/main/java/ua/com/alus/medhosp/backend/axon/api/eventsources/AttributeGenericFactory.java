@@ -10,9 +10,9 @@ import org.axonframework.eventsourcing.GenericAggregateFactory;
  * Date: 23.05.11
  * Time: 17:29
  */
-public class AttributeValueGenericFactory<T extends EventSourcedAggregateRoot> extends GenericAggregateFactory<T> {
+public class AttributeGenericFactory<T extends EventSourcedAggregateRoot> extends GenericAggregateFactory<T> {
 
-    public AttributeValueGenericFactory(Class<T> aggregateType) {
+    public AttributeGenericFactory(Class<T> aggregateType) {
         super(aggregateType);
     }
 

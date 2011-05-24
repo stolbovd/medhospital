@@ -1,10 +1,10 @@
 package ua.com.alus.medhosp.backend.domen.entity.patient;
 
-import org.hibernate.engine.Cascade;
 import ua.com.alus.medhosp.backend.domen.entity.EntityObject;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Created by Usatov Alexey

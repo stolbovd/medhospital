@@ -7,7 +7,7 @@ import ua.com.alus.medhosp.backend.axon.api.base.AbstractEntityEvent;
  * Date: 23.05.11
  * Time: 16:52
  */
-public class AttributeValueEvent extends AbstractEntityEvent{
+public class AttributeValueEvent extends AbstractEntityEvent {
     private String attributeId;
 
     public AttributeValueEvent(String entityId, String messageId) {

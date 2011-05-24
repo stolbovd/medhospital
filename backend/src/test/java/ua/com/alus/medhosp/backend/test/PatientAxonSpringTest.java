@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import ua.com.alus.medhosp.backend.axon.api.patient.command.RemovePatientCommand;
+import ua.com.alus.medhosp.backend.axon.api.patient.command.SaveAttributeCommand;
 import ua.com.alus.medhosp.backend.axon.api.patient.command.SaveAttributeValueCommand;
 import ua.com.alus.medhosp.backend.axon.api.patient.command.SavePatientCommand;
 import ua.com.alus.medhosp.backend.domen.utils.UUID;
@@ -55,6 +56,13 @@ public class PatientAxonSpringTest extends AbstractTransactionalJUnit4SpringCont
 
         //commandBus.dispatch(new SavePatientCommand(entityId,null));
         commandBus.dispatch(new SaveAttributeValueCommand(entityId, null, attributeId, value));
+    }
+
+    @Test
+    public void saveAttribute() {
+        String entityId = "2CA5D151-0A7A-44F1-B3EF-7BAAF79BDEA9";
+        String name = "hhhhh";
+        commandBus.dispatch(new SaveAttributeCommand(entityId, null, name));
     }
 
 }
