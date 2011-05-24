@@ -48,13 +48,13 @@ public class PatientAxonSpringTest extends AbstractTransactionalJUnit4SpringCont
 
     @Ignore
     @Test
-    public void saveAttributeValue(){
+    public void saveAttributeValue() {
         String entityId = "12C6A3D7-5EDD-4508-AD3D-C0CBAE131ABD";
         String attributeId = "F9C308D7-8629-46F6-89DA-990DBE1E4CA8";
         String value = "hello1";
 
         //commandBus.dispatch(new SavePatientCommand(entityId,null));
-        commandBus.dispatch(new SaveAttributeValueCommand(entityId,null,attributeId, value));
+        commandBus.dispatch(new SaveAttributeValueCommand(entityId, null, attributeId, value));
     }
 
 }

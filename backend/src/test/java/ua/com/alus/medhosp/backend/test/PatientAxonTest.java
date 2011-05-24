@@ -1,17 +1,10 @@
 package ua.com.alus.medhosp.backend.test;
 
-import org.axonframework.domain.StringAggregateIdentifier;
 import org.axonframework.test.FixtureConfiguration;
 import org.axonframework.test.Fixtures;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 import ua.com.alus.medhosp.backend.axon.api.patient.PatientAggregate;
 import ua.com.alus.medhosp.backend.axon.api.patient.PatientAttributeValueAggregate;
 import ua.com.alus.medhosp.backend.axon.api.patient.command.RemoveAttributeValueCommand;
