@@ -13,7 +13,7 @@ import java.io.Serializable;
  * Date: 19.05.11
  * Time: 11:49
  */
-public class PatientAggregate extends AbstractAnnotatedAggregateRoot implements Serializable{
+public class PatientAggregate extends AbstractAnnotatedAggregateRoot implements Serializable {
 
     public PatientAggregate(AggregateIdentifier identifier) {
         super(identifier);

@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Date: 19.05.11
  * Time: 12:09
  */
-public class PatientEventHandler{
+public class PatientEventHandler {
 
     private Logger logger = Logger.getLogger(PatientEventHandler.class);
 
