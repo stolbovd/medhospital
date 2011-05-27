@@ -37,7 +37,7 @@ public class PatientAxonSpringTest extends AbstractTransactionalJUnit4SpringCont
     @Test
     public void savePatient() {
         String uuid = UUID.uuid();
-        commandBus.dispatch(new SavePatientCommand(uuid, null));
+        commandBus.dispatch(new SavePatientCommand(uuid, "213231"));
     }
 
     @Test

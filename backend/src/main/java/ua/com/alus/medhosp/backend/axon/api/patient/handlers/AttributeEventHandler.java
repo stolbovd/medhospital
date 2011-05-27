@@ -11,7 +11,7 @@ import ua.com.alus.medhosp.backend.service.PatientService;
  * Date: 24.05.11
  * Time: 14:34
  */
-public class AttributeEventHandler {
+public class AttributeEventHandler{
 
     private Logger logger = Logger.getLogger(PatientEventHandler.class);
 
