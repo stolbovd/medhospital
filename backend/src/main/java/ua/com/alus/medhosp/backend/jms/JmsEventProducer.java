@@ -10,7 +10,6 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.Session;
 import javax.jms.TextMessage;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
