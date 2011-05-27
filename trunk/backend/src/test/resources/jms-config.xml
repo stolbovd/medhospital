@@ -49,7 +49,6 @@
           class="org.springframework.jms.connection.SingleConnectionFactory"
           p:targetConnectionFactory-ref="jmsProducerFactory"/>
 
-    <!-- JMS Producer Configuration -->
     <bean id="jmsProducerTemplate" class="org.springframework.jms.core.JmsTemplate"
           p:connectionFactory-ref="jmsProducerConnectionFactory"
           p:defaultDestination-ref="clientListenerDestination"/>
