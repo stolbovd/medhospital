@@ -44,7 +44,7 @@ public class PatientServiceTest extends AbstractTransactionalJUnit4SpringContext
 
         PatientAttribute patientAttribute = new PatientAttribute();
         patientAttribute.setEntityId(UUID.uuid());
-        patientAttribute.setName("name");
+        patientAttribute.setName(UUID.uuid());
         patientService.savePatientAttribute(patientAttribute);
 
 
