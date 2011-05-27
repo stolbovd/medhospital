@@ -11,18 +11,18 @@ import ua.com.alus.medhosp.backend.service.PatientService;
  * Date: 23.05.11
  * Time: 12:02
  */
-public class AttributeValueEventHandler {
+public class AttributeValueEventHandler{
     private Logger logger = Logger.getLogger(PatientEventHandler.class);
 
     private PatientService patientService;
 
     @EventHandler
-    public void saveAttributeValueHandler(SaveAttributeValueEvent event) {
+    public void saveAttributeValueEventHandler(SaveAttributeValueEvent event) {
         patientService.savePatientAttributeValue(event.getEntityId(), event.getAttributeId(), event.getAttributeValue());
     }
 
     @EventHandler
-    public void removeAttributeValueHandler(RemoveAttributeValueEvent event) {
+    public void removeAttributeValueEventHandler(RemoveAttributeValueEvent event) {
         patientService.removePatientAttributeValue(event.getEntityId(), event.getAttributeId());
     }
 

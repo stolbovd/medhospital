@@ -41,8 +41,15 @@
 
 
     <!-- JMS Producer Configuration -->
+
+    <amq:connectionFactory id="jmsProducerFactory" brokerURL="tcp://localhost:9092"/>
+
+    <bean id="jmsProducerConnectionFactory"
+          class="org.springframework.jms.connection.SingleConnectionFactory"
+          p:targetConnectionFactory-ref="jmsProducerFactory"/>
+
     <bean id="jmsProducerTemplate" class="org.springframework.jms.core.JmsTemplate"
-          p:connectionFactory-ref="jmsConnectionFactory"
+          p:connectionFactory-ref="jmsProducerConnectionFactory"
           p:defaultDestination-ref="clientListenerDestination"/>
 
     <bean id="jmsEventProducer" class="ua.com.alus.medhosp.backend.jms.JmsEventProducer">

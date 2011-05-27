@@ -54,4 +54,5 @@
     <import resource="axon-config.xml"/>
     <import resource="jms-config.xml"/>
     <import resource="spring-config-test.xml"/>
+    <import resource="aspects-config.xml"/>
 </beans>

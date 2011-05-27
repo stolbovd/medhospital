@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Date: 19.05.11
  * Time: 12:09
  */
-public class PatientEventHandler {
+public class PatientEventHandler{
 
     private Logger logger = Logger.getLogger(PatientEventHandler.class);
 
@@ -27,14 +27,14 @@ public class PatientEventHandler {
 
 
     @EventHandler
-    public void savePatient(final SavePatientEvent savePatientEvent) {
+    public void savePatientEventHandler(final SavePatientEvent savePatientEvent) {
         Patient patient = new Patient();
         patient.setEntityId(savePatientEvent.getEntityId());
         patientService.savePatient(patient);
     }
 
     @EventHandler
-    public void removePatient(final RemovePatientEvent removePatientEvent) {
+    public void removePatientEventHandler(final RemovePatientEvent removePatientEvent) {
         ArrayList<String> ids = new ArrayList<String>();
         ids.add(removePatientEvent.getEntityId());
         patientService.removeSelected(ids);
