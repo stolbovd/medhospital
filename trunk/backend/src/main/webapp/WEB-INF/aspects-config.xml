@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
     <aop:aspectj-autoproxy proxy-target-class="true"/>
-    <bean id="eventHandlerAspect" class="ua.com.alus.medhosp.backend.axon.api.patient.handlers.EventHandlerAspect">
+    <bean id="eventHandlerAspect" class="ua.com.alus.medhosp.backend.axon.api.base.EventHandlerAspect">
         <property name="iJmsEventProducer" ref="jmsEventProducer"/>
     </bean>
 </beans>
