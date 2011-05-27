@@ -1,10 +1,9 @@
-package ua.com.alus.medhosp.backend.axon.api.patient.handlers;
+package ua.com.alus.medhosp.backend.axon.api.base;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import ua.com.alus.medhosp.backend.axon.api.base.AbstractEntityEvent;
 import ua.com.alus.medhosp.backend.jms.IJmsEventProducer;
 
 /**
