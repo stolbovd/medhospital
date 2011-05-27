@@ -1,5 +1,7 @@
 package ua.com.alus.medhosp.backend.jms;
 
+import org.springframework.jms.JmsException;
+
 import java.util.Map;
 
 /**
@@ -8,5 +10,5 @@ import java.util.Map;
  * Time: 11:26
  */
 public interface IJmsEventProducer {
-    void sendResult(final Map<String, String> map);
+    void sendResult(final Map<String, String> map) throws JmsException;
 }

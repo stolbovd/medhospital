@@ -32,8 +32,7 @@ public class JmsEventProducer implements IJmsEventProducer {
      *
      * @throws javax.jms.JMSException if error
      */
-    public void sendResult(final Map<String, String> map) {
-        try {
+    public void sendResult(final Map<String, String> map) throws JmsException{
             MessageCreator messageCreator = new MessageCreator() {
                 public Message createMessage(Session session) throws JMSException {
                     TextMessage message = session.createTextMessage();
@@ -50,8 +49,5 @@ public class JmsEventProducer implements IJmsEventProducer {
                 }
             };
             template.send(messageCreator);
-        } catch (JmsException jmse) {
-            logger.error(jmse);
-        }
     }
 }
