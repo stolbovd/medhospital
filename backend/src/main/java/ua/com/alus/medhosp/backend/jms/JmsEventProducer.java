@@ -11,6 +11,7 @@ import javax.jms.Message;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Usatov Alexey.
@@ -32,13 +33,11 @@ public class JmsEventProducer implements IJmsEventProducer {
      *
      * @throws javax.jms.JMSException if error
      */
-    public void sendResult(final String messageId, final String result) {
+    public void sendResult(final Map<String, String> map) {
         try {
             MessageCreator messageCreator = new MessageCreator() {
                 public Message createMessage(Session session) throws JMSException {
                     TextMessage message = session.createTextMessage();
-                    HashMap<String, String> map = new HashMap<String, String>();
-                    map.put(messageId, result);
                     ObjectMapper mapper = new ObjectMapper();
                     try {
                         String json = mapper.writeValueAsString(map);
