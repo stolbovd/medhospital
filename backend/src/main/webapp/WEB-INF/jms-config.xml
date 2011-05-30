@@ -42,7 +42,7 @@
 
     <!-- JMS Producer Configuration -->
 
-    <amq:connectionFactory id="jmsProducerFactory" brokerURL="tcp://localhost:9092"/>
+    <amq:connectionFactory id="jmsProducerFactory" brokerURL="tcp://localhost:9091"/>
 
     <bean id="jmsProducerConnectionFactory"
           class="org.springframework.jms.connection.SingleConnectionFactory"

@@ -17,7 +17,7 @@
         </amq:transportConnectors>
     </amq:broker>
 
-    <amq:queue id="destination" physicalName="ua.com.alus.medhosp.commandprocessor"/>
+    <amq:queue id="commandProcessorDestination" physicalName="ua.com.alus.medhosp.commandprocessor"/>
 
     <amq:queue id="clientListenerDestination" physicalName="ua.com.alus.medhosp.clientListener"/>
 
@@ -33,7 +33,6 @@
         <property name="commandProcessor" ref="commandProcessor"/>
     </bean>
 
-
     <jms:listener-container container-type="default"
                             connection-factory="jmsConnectionFactory"
                             acknowledge="auto">
@@ -43,7 +42,7 @@
 
     <!-- JMS Producer Configuration -->
 
-    <amq:connectionFactory id="jmsProducerFactory" brokerURL="tcp://localhost:9092"/>
+    <amq:connectionFactory id="jmsProducerFactory" brokerURL="tcp://localhost:9091"/>
 
     <bean id="jmsProducerConnectionFactory"
           class="org.springframework.jms.connection.SingleConnectionFactory"
