@@ -21,20 +21,22 @@
 
     <amq:queue id="clientListenerDestination" physicalName="ua.com.alus.medhosp.clientListener"/>
 
-    <amq:connectionFactory id="jmsFactory" brokerURL="tcp://localhost:9091"/>
-
     <!-- JMS Listener Configuration -->
-    <bean id="jmsConnectionFactory"
-          class="org.springframework.jms.connection.SingleConnectionFactory"
-          depends-on="broker"
-          p:targetConnectionFactory-ref="jmsFactory"/>
+    <bean id="jmsFactory" class="org.apache.activemq.pool.PooledConnectionFactory"
+          destroy-method="stop" depends-on="broker">
+        <property name="connectionFactory">
+            <bean class="org.apache.activemq.ActiveMQConnectionFactory">
+                <property name="brokerURL" value="tcp://localhost:9091"/>
+            </bean>
+        </property>
+    </bean>
 
     <bean id="jmsCommandListener" class="ua.com.alus.medhosp.backend.jms.JmsCommandListener">
         <property name="commandProcessor" ref="commandProcessor"/>
     </bean>
 
     <jms:listener-container container-type="default"
-                            connection-factory="jmsConnectionFactory"
+                            connection-factory="jmsFactory"
                             acknowledge="auto">
         <jms:listener destination="ua.com.alus.medhosp.commandprocessor" ref="jmsCommandListener"/>
     </jms:listener-container>
@@ -42,7 +44,7 @@
 
     <!-- JMS Producer Configuration -->
     <bean id="jmsProducerTemplate" class="org.springframework.jms.core.JmsTemplate"
-          p:connectionFactory-ref="jmsConnectionFactory"
+          p:connectionFactory-ref="jmsFactory"
           p:defaultDestination-ref="clientListenerDestination"/>
 
     <bean id="jmsEventProducer" class="ua.com.alus.medhosp.backend.jms.JmsEventProducer">
