@@ -69,10 +69,6 @@ public class PatientsTable extends ListGrid implements ITable {
 
     }
 
-    private native String getJLabel(JavaScriptObject object)/*-{
-        return object['attributeValue'];
-    }-*/;
-
     private HashSet<String> selectedPatients = new HashSet<String>();
 
     public HashSet<String> getSelectedPatients() {
