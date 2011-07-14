@@ -4,6 +4,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import ua.com.alus.medhosp.backend.axon.api.patient.event.SaveAttributeValueEvent;
+import ua.com.alus.medhosp.backend.axon.api.patient.event.SavePatientEvent;
 import ua.com.alus.medhosp.backend.jms.IJmsEventProducer;
 
 import java.util.HashMap;
@@ -20,6 +22,15 @@ public class EventHandlerAspect {
     public static final String MESSAGE_ID = "messageId";
     public static final String RESULT = "result";
 
+    public static final String KEY = "key";
+    public static final String ENTITY_ID = "entityId";
+    public static final String ATTRIBUTE_ID = "attributeId";
+    public static final String ATTRIBUTE_TYPE = "attributeType";
+    public static final String ATTRIBUTE_VALUE = "attributeValue";
+    public static final String ATTRIBUTE_LABEL = "attributeLabel";
+    public static final String CLASS = "class";
+    String SUPER_KEY_NAME = "superKeyName";
+
     private IJmsEventProducer iJmsEventProducer;
 
     @Around(value = "execution(* *EventHandler(..)) && args(event))", argNames = "pjp,event")
@@ -27,6 +38,7 @@ public class EventHandlerAspect {
         Object result = pjp.proceed();
         Map<String, String> answer = new HashMap<String, String>();
         answer.put(MESSAGE_ID, event.getMessageId());
+        fillAllParams(event, answer);
         getiJmsEventProducer().sendResult(answer);
         return result;
     }
@@ -36,6 +48,7 @@ public class EventHandlerAspect {
         Map<String, String> answer = new HashMap<String, String>();
         answer.put(MESSAGE_ID, event.getMessageId());
         answer.put(ERROR, e.getMessage());
+        fillAllParams(event, answer);
         getiJmsEventProducer().sendResult(answer);
     }
 
@@ -45,5 +58,17 @@ public class EventHandlerAspect {
 
     public void setiJmsEventProducer(IJmsEventProducer iJmsEventProducer) {
         this.iJmsEventProducer = iJmsEventProducer;
+    }
+
+    private void fillAllParams(AbstractEntityEvent event, Map<String, String> answer) {
+        answer.put(KEY, event.getEntityId());
+        if (event instanceof SaveAttributeValueEvent) {
+            answer.put(ATTRIBUTE_VALUE, ((SaveAttributeValueEvent) event).getAttributeValue());
+            answer.put(ATTRIBUTE_ID, ((SaveAttributeValueEvent) event).getAttributeId());
+            answer.put(CLASS, "PatientAttributeValue");
+            answer.put(SUPER_KEY_NAME, ((SaveAttributeValueEvent) event).getAttributeId());
+        } else if (event instanceof SavePatientEvent) {
+            answer.put(CLASS, "PatientDTO");
+        }
     }
 }
