@@ -1,5 +1,7 @@
 package ua.com.alus.medhosp.frontend.shared;
 
+import ua.com.alus.medhosp.shared.data.Constants;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,7 @@ public class PatientDTO extends AbstractDTO {
 
     private List<PatientAttributeValue> patientAttributeValues;
 
-    public static final String[] COLUMNS = {KEY};
+    public static final String[] COLUMNS = {Constants.KEY};
 
     @Override
     public String[] getColumns() {

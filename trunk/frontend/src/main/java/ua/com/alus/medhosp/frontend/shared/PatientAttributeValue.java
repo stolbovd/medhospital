@@ -1,6 +1,8 @@
 package ua.com.alus.medhosp.frontend.shared;
 
 
+import ua.com.alus.medhosp.shared.data.Constants;
+
 /**
  * Created by Usatov Alexey
  * Date: 02.05.11
@@ -9,15 +11,9 @@ package ua.com.alus.medhosp.frontend.shared;
 
 public class PatientAttributeValue extends AbstractDTO implements SuperColumn {
 
-    public static final String ENTITY_ID = "entityId";
-    public static final String ATTRIBUTE_ID = "attributeId";
-    public static final String ATTRIBUTE_TYPE = "attributeType";
-    public static final String ATTRIBUTE_VALUE = "attributeValue";
-    public static final String ATTRIBUTE_LABEL = "attributeLabel";
 
-
-    public static final String[] COLUMNS = {KEY, ENTITY_ID, ATTRIBUTE_ID,
-            ATTRIBUTE_TYPE, ATTRIBUTE_VALUE, ATTRIBUTE_LABEL, SUPER_KEY_NAME};
+    public static final String[] COLUMNS = {Constants.KEY, Constants.ENTITY_ID, Constants.ATTRIBUTE_ID,
+            Constants.ATTRIBUTE_TYPE, Constants.ATTRIBUTE_VALUE, Constants.ATTRIBUTE_LABEL, Constants.SUPER_KEY_NAME};
 
     @Override
     public String[] getColumns() {
@@ -25,10 +21,10 @@ public class PatientAttributeValue extends AbstractDTO implements SuperColumn {
     }
 
     public void setSuperKeyName(String superKeyName) {
-        put(SUPER_KEY_NAME, superKeyName);
+        put(Constants.SUPER_KEY_NAME, superKeyName);
     }
 
     public String getSuperKeyName() {
-        return String.valueOf(get(SUPER_KEY_NAME));
+        return String.valueOf(get(Constants.SUPER_KEY_NAME));
     }
 }
