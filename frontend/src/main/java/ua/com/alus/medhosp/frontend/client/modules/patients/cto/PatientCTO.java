@@ -4,7 +4,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import ua.com.alus.medhosp.frontend.client.main.domen.ObjectCTO;
 import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
-import ua.com.alus.medhosp.shared.data.Constants;
+import ua.com.alus.medhosp.prototype.data.Constants;
 
 import java.util.HashMap;
 import java.util.Map;

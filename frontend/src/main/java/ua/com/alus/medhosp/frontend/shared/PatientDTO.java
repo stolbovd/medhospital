@@ -1,6 +1,6 @@
 package ua.com.alus.medhosp.frontend.shared;
 
-import ua.com.alus.medhosp.shared.data.Constants;
+import ua.com.alus.medhosp.prototype.data.Constants;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,4 @@
 package ua.com.alus.medhosp.frontend.shared;
-
-import ua.com.alus.medhosp.shared.data.Constants;
-
 import java.util.HashMap;
 
 /**
