@@ -1,4 +1,4 @@
-package ua.com.alus.medhosp.shared.data;
+package ua.com.alus.medhosp.prototype.data;
 
 /**
  * This is class with main constants
