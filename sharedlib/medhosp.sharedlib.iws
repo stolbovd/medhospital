@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list id="b6c0df64-66a7-4a97-a5fd-8dcdf1cff810" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/medhosp.sharedlib.iml" afterPath="$PROJECT_DIR$/medhosp.sharedlib.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/medhosp.sharedlib.iws" afterPath="$PROJECT_DIR$/medhosp.sharedlib.iws" />
-    </list>
-    <list default="true" id="c7817e39-ec9f-4be1-950b-6cf8f8374273" name="currentChanges&#10;" comment="currentChanges&#10;">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/ua/com/alus/medhosp/shared" afterPath="" />
-    </list>
+    <list id="b6c0df64-66a7-4a97-a5fd-8dcdf1cff810" name="Default" comment="" />
+    <list default="true" id="c7817e39-ec9f-4be1-950b-6cf8f8374273" name="currentChanges&#10;" comment="currentChanges&#10;" />
     <ignored path="medhosp.sharedlib.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -104,7 +99,7 @@
       <file leaf-file-name="medhosp.gwt.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ua/com/alus/medhosp/medhosp.gwt.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="24" selection-start="136" selection-end="136" vertical-scroll-proportion="0.12208258">
+            <state line="4" column="17" selection-start="136" selection-end="136" vertical-scroll-proportion="0.12208258">
               <folding />
             </state>
           </provider>
@@ -476,7 +471,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295063" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -488,7 +483,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23925385" sideWeight="0.67049366" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23925385" sideWeight="0.67049366" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -561,7 +556,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ua/com/alus/medhosp/medhosp.gwt.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="24" selection-start="136" selection-end="136" vertical-scroll-proportion="0.12208258">
+        <state line="4" column="17" selection-start="136" selection-end="136" vertical-scroll-proportion="0.12208258">
           <folding />
         </state>
       </provider>
