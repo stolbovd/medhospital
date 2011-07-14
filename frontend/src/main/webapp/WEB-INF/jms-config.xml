@@ -28,7 +28,17 @@
     </bean>
 
     <!-- JMS Listener Configuration -->
-    <bean id="jmsCommandListener" class="ua.com.alus.medhosp.frontend.server.jms.JmsCommandListener"/>
+    <bean id="jmsCommandListener" class="ua.com.alus.medhosp.frontend.server.jms.JmsCommandListener">
+        <property name="command2Class">
+            <map>
+                <entry key="PatientAttributeValue"
+                       value="ua.com.alus.medhosp.frontend.shared.PatientAttributeValue"/>
+                <entry key="PatientDTO"
+                       value="ua.com.alus.medhosp.frontend.shared.PatientDTO"/>
+            </map>
+        </property>
+        <property name="patientService" ref="personService"/>
+    </bean>
 
     <jms:listener-container container-type="default"
                             connection-factory="jmsFactory"
