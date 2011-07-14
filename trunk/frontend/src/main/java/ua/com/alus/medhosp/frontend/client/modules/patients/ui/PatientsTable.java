@@ -8,7 +8,7 @@ import com.smartgwt.client.widgets.grid.events.CellSavedHandler;
 import ua.com.alus.medhosp.frontend.client.modules.patients.cto.PatientCTO;
 import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientConstants;
 import ua.com.alus.medhosp.frontend.client.utils.ConstantsBundle;
-import ua.com.alus.medhosp.shared.data.Constants;
+import ua.com.alus.medhosp.prototype.data.Constants;
 
 import java.util.HashSet;
 

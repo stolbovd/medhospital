@@ -14,7 +14,7 @@ import com.smartgwt.client.widgets.layout.VLayout;
 import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientConstants;
 import ua.com.alus.medhosp.frontend.client.utils.ConstantsBundle;
 import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
-import ua.com.alus.medhosp.shared.data.Constants;
+import ua.com.alus.medhosp.prototype.data.Constants;
 
 
 /**
