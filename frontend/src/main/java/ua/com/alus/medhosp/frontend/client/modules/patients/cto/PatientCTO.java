@@ -4,6 +4,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import ua.com.alus.medhosp.frontend.client.main.domen.ObjectCTO;
 import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
+import ua.com.alus.medhosp.shared.data.Constants;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +41,7 @@ public class PatientCTO extends ObjectCTO<PatientDTO, PatientCTO> {
         String[] attributes = abstractCTO.getAttributes();
         PatientAttributeValue pav;
         for (String attribute : attributes) {
-            if (attribute.equals(PatientDTO.KEY)) {
+            if (attribute.equals(Constants.KEY)) {
                 continue;
             }
             Object attrObject;

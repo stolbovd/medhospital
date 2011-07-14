@@ -1,6 +1,5 @@
 package ua.com.alus.medhosp.frontend.client.modules.patients.ui;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.smartgwt.client.types.ListGridFieldType;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
@@ -9,7 +8,7 @@ import com.smartgwt.client.widgets.grid.events.CellSavedHandler;
 import ua.com.alus.medhosp.frontend.client.modules.patients.cto.PatientCTO;
 import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientConstants;
 import ua.com.alus.medhosp.frontend.client.utils.ConstantsBundle;
-import ua.com.alus.medhosp.frontend.shared.PatientDTO;
+import ua.com.alus.medhosp.shared.data.Constants;
 
 import java.util.HashSet;
 
@@ -45,9 +44,9 @@ public class PatientsTable extends ListGrid implements ITable {
                 Boolean value = (Boolean) event.getNewValue();
                 event.getRecord().setAttribute(SELECTED, value);
                 if (value) {
-                    getSelectedPatients().add(getSelectedRecord().getAttributeAsString(PatientDTO.KEY));
+                    getSelectedPatients().add(getSelectedRecord().getAttributeAsString(Constants.KEY));
                 } else {
-                    getSelectedPatients().remove(getSelectedRecord().getAttributeAsString(PatientDTO.KEY));
+                    getSelectedPatients().remove(getSelectedRecord().getAttributeAsString(Constants.KEY));
                 }
 
             }
