@@ -3,8 +3,8 @@ package ua.com.alus.medhosp.backend.processor;
 import org.apache.log4j.Logger;
 import org.axonframework.commandhandling.CommandBus;
 import org.codehaus.jackson.map.ObjectMapper;
-import ua.com.alus.medhosp.backend.processor.json.CommandJson;
-import ua.com.alus.medhosp.backend.processor.json.CommandsListJson;
+import ua.com.alus.medhosp.prototype.json.CommandJson;
+import ua.com.alus.medhosp.prototype.json.CommandsListJson;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
