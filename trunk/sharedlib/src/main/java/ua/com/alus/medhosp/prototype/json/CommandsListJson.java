@@ -1,4 +1,4 @@
-package ua.com.alus.medhosp.backend.processor.json;
+package ua.com.alus.medhosp.prototype.json;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
