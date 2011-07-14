@@ -1,5 +1,7 @@
 package ua.com.alus.medhosp.frontend.shared;
 
+import ua.com.alus.medhosp.shared.data.Constants;
+
 import java.util.HashMap;
 
 /**
@@ -8,7 +10,5 @@ import java.util.HashMap;
  * Time: 23:21
  */
 public abstract class AbstractDTO extends HashMap<String, String> {
-    public static final String KEY = "key";
-
     public abstract String[] getColumns();
 }

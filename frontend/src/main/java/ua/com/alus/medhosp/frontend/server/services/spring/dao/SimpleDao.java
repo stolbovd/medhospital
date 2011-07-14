@@ -8,6 +8,7 @@ import me.prettyprint.hector.api.query.RangeSlicesQuery;
 import me.prettyprint.hector.api.query.RangeSuperSlicesQuery;
 import ua.com.alus.medhosp.frontend.shared.AbstractDTO;
 import ua.com.alus.medhosp.frontend.shared.SuperColumn;
+import ua.com.alus.medhosp.shared.data.Constants;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
@@ -62,21 +63,21 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
             columns = abstractDTO.getColumns();
         }
         Mutator<String> m1 = createMutator();
-        if (abstractDTO.get(AbstractDTO.KEY) == null) {
-            abstractDTO.put(AbstractDTO.KEY, String.valueOf(keyspace.createClock()));
+        if (abstractDTO.get(Constants.KEY) == null) {
+            abstractDTO.put(Constants.KEY, String.valueOf(keyspace.createClock()));
         }
         //adding all sent columns
         for (String column : columns) {
             if (abstractDTO.get(column) == null) {
                 continue;
             }
-            m1.addInsertion(abstractDTO.get(AbstractDTO.KEY),
+            m1.addInsertion(abstractDTO.get(Constants.KEY),
                     cFamilyName, HFactory.createStringColumn(column, abstractDTO.get(column)));
         }
 
         //adding key also
-        m1.addInsertion(abstractDTO.get(AbstractDTO.KEY),
-                cFamilyName, HFactory.createStringColumn(AbstractDTO.KEY, abstractDTO.get(AbstractDTO.KEY)));
+        m1.addInsertion(abstractDTO.get(Constants.KEY),
+                cFamilyName, HFactory.createStringColumn(Constants.KEY, abstractDTO.get(Constants.KEY)));
 
         m1.execute();
     }
@@ -86,8 +87,8 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
             columns = abstractDTO.getColumns();
         }
         Mutator<String> m1 = createMutator();
-        if (abstractDTO.get(AbstractDTO.KEY) == null) {
-            abstractDTO.put(AbstractDTO.KEY, String.valueOf(keyspace.createClock()));
+        if (abstractDTO.get(Constants.KEY) == null) {
+            abstractDTO.put(Constants.KEY, String.valueOf(keyspace.createClock()));
         }
         //adding all sent columns
         ArrayList<HColumn<String, String>> columnArrayList = new ArrayList<HColumn<String, String>>();
@@ -98,11 +99,11 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
             columnArrayList.add(HFactory.createStringColumn(column, abstractDTO.get(column)));
         }
         //adding key too
-        columnArrayList.add(HFactory.createStringColumn(AbstractDTO.KEY, abstractDTO.get(AbstractDTO.KEY)));
+        columnArrayList.add(HFactory.createStringColumn(Constants.KEY, abstractDTO.get(Constants.KEY)));
 
         HSuperColumn<String, String, String> superColumn =
                 HFactory.createSuperColumn(((SuperColumn) abstractDTO).getSuperKeyName(), columnArrayList, ss, ss, ss);
-        m1.addInsertion(abstractDTO.get(AbstractDTO.KEY), cFamilyName, superColumn);
+        m1.addInsertion(abstractDTO.get(Constants.KEY), cFamilyName, superColumn);
         m1.execute();
     }
 
