@@ -7,7 +7,7 @@ import org.aspectj.lang.annotation.Aspect;
 import ua.com.alus.medhosp.backend.axon.api.patient.event.SaveAttributeValueEvent;
 import ua.com.alus.medhosp.backend.axon.api.patient.event.SavePatientEvent;
 import ua.com.alus.medhosp.backend.jms.IJmsEventProducer;
-import ua.com.alus.medhosp.shared.data.Constants;
+import ua.com.alus.medhosp.prototype.data.Constants;
 
 import java.util.HashMap;
 import java.util.Map;
