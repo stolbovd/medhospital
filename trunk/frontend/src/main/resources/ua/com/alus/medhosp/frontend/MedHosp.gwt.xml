@@ -17,9 +17,9 @@
   <!-- Specify the app entry point class.                         -->
   <entry-point class='ua.com.alus.medhosp.frontend.client.GwtApp'/>
 
+  <inherits name="ua.com.alus.medhosp"/>
 
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
   <source path='shared'/>
-
 </module>

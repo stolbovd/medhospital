@@ -13,8 +13,8 @@ import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
 import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientConstants;
 import ua.com.alus.medhosp.frontend.client.utils.ConstantsBundle;
-import ua.com.alus.medhosp.frontend.shared.AbstractDTO;
 import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
+import ua.com.alus.medhosp.shared.data.Constants;
 
 
 /**
@@ -63,9 +63,9 @@ public class PatientDialog extends Window {
 
                 PatientAttributeValue patientAttributeValue = new PatientAttributeValue();
                 patientAttributeValue.setSuperKeyName("name");
-                patientAttributeValue.put(AbstractDTO.KEY, "1305841537281000");
-                patientAttributeValue.put(PatientAttributeValue.ATTRIBUTE_VALUE, lastNameItem.getValueAsString());
-                getController().savePatient(patientAttributeValue, PatientAttributeValue.ATTRIBUTE_VALUE);
+                patientAttributeValue.put(Constants.KEY, "1305841537281000");
+                patientAttributeValue.put(Constants.ATTRIBUTE_VALUE, lastNameItem.getValueAsString());
+                getController().savePatient(patientAttributeValue, Constants.ATTRIBUTE_VALUE);
                 destroy();
             }
         });

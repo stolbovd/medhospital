@@ -3,9 +3,9 @@ package ua.com.alus.medhosp.frontend.server.services.spring;
 import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientService;
 import ua.com.alus.medhosp.frontend.server.services.spring.dao.PatientAttributeValueDao;
 import ua.com.alus.medhosp.frontend.server.services.spring.dao.PatientDao;
-import ua.com.alus.medhosp.frontend.shared.AbstractDTO;
 import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
+import ua.com.alus.medhosp.shared.data.Constants;
 
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class PatientServiceImpl implements IPatientService {
     public List<PatientDTO> getAllPatients() {
         List<PatientDTO> patients = getPatientDao().find("", "");
         for (PatientDTO patientDTO : patients) {
-            String key = patientDTO.get(AbstractDTO.KEY);
+            String key = patientDTO.get(Constants.KEY);
             patientDTO.setPatientAttributeValues(
                     getPatientAttributeValueDao().find(key, key));
         }

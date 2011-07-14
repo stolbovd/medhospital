@@ -2,8 +2,7 @@ package ua.com.alus.medhosp.frontend.client.main.domen;
 
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import ua.com.alus.medhosp.frontend.shared.AbstractDTO;
-
-import static ua.com.alus.medhosp.frontend.shared.AbstractDTO.KEY;
+import ua.com.alus.medhosp.shared.data.Constants;
 
 
 /**
@@ -17,7 +16,7 @@ public abstract class ObjectCTO<D extends AbstractDTO, E extends ObjectCTO> exte
         for (String column : abstractDTO.getColumns()) {
             abstractCTO.setAttribute(column, abstractDTO.get(column));
         }
-        abstractCTO.setAttribute(KEY, abstractDTO.get(KEY));
+        abstractCTO.setAttribute(Constants.KEY, abstractDTO.get(Constants.KEY));
         return abstractCTO;
     }
 
@@ -25,7 +24,7 @@ public abstract class ObjectCTO<D extends AbstractDTO, E extends ObjectCTO> exte
         for (String column : abstractDTO.getColumns()) {
             abstractDTO.put(column, abstractCTO.getAttributeAsString(column));
         }
-        abstractDTO.put(KEY, abstractCTO.getAttributeAsString(KEY));
+        abstractDTO.put(Constants.KEY, abstractCTO.getAttributeAsString(Constants.KEY));
         return abstractDTO;
     }
 }
