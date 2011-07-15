@@ -5,6 +5,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.jms.JmsException;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
+import ua.com.alus.medhosp.prototype.data.Constants;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -40,7 +41,7 @@ public class JmsEventProducer implements IJmsEventProducer {
                     try {
                         String json = mapper.writeValueAsString(map);
 
-                        message.setStringProperty(JmsCommandListener.COMMAND, json);
+                        message.setStringProperty(Constants.COMMAND, json);
                         logger.info("Sending message: " + json);
                     } catch (Exception ex) {
                         logger.error(ex);

@@ -3,6 +3,7 @@ package ua.com.alus.medhosp.backend.jms;
 
 import org.apache.log4j.Logger;
 import ua.com.alus.medhosp.backend.processor.ICommandProcessor;
+import ua.com.alus.medhosp.prototype.data.Constants;
 
 import javax.jms.Message;
 import javax.jms.MessageListener;
@@ -16,8 +17,6 @@ import javax.jms.MessageListener;
 public class JmsCommandListener implements MessageListener {
     private Logger logger = Logger.getLogger(JmsCommandListener.class);
 
-    public final static String COMMAND = "command";
-
     private ICommandProcessor commandProcessor;
 
     public void setCommandProcessor(ICommandProcessor commandProcessor) {
@@ -28,7 +27,7 @@ public class JmsCommandListener implements MessageListener {
     @SuppressWarnings("unchecked")
     public void onMessage(Message message) {
         try {
-            commandProcessor.processCommand(message.getStringProperty(COMMAND));
+            commandProcessor.processCommand(message.getStringProperty(Constants.COMMAND));
         } catch (Exception e) {
             logger.trace(e);
         }

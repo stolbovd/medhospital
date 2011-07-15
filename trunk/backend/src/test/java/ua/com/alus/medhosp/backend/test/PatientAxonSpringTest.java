@@ -72,4 +72,13 @@ public class PatientAxonSpringTest extends AbstractTransactionalJUnit4SpringCont
         commandBus.dispatch(new SaveAttributeCommand(entityId, null, name));
     }
 
+    @Test
+    public void waitTest() {
+        try {
+            Thread.sleep(480000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
