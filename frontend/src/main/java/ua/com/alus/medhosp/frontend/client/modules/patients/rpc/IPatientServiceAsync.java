@@ -16,7 +16,7 @@ public interface IPatientServiceAsync {
 
     void getAllPatients(AsyncCallback<List<PatientDTO>> callback);
 
-    void removeSelected(final List<String> ids, AsyncCallback<Integer> async);
+    void removeSelected(final List<String> ids, AsyncCallback<Void> async);
 
-    void savePatient(PatientAttributeValue patientAttributeValue, String[] columns, AsyncCallback<Void> async);
+    void savePatientAttributeValue(PatientAttributeValue patientAttributeValue, String[] columns, AsyncCallback<Void> async);
 }

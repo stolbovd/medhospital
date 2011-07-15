@@ -13,7 +13,9 @@ import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
 import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientConstants;
 import ua.com.alus.medhosp.frontend.client.utils.ConstantsBundle;
+import ua.com.alus.medhosp.frontend.client.utils.UUID;
 import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
+import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 import ua.com.alus.medhosp.prototype.data.Constants;
 
 
@@ -60,12 +62,9 @@ public class PatientDialog extends Window {
                     SC.say(constants.nameCannotBeEmpty());
                     return;
                 }
-
-                PatientAttributeValue patientAttributeValue = new PatientAttributeValue();
-                patientAttributeValue.setSuperKeyName("name");
-                patientAttributeValue.put(Constants.KEY, "1305841537281000");
-                patientAttributeValue.put(Constants.ATTRIBUTE_VALUE, lastNameItem.getValueAsString());
-                getController().savePatient(patientAttributeValue, Constants.ATTRIBUTE_VALUE);
+                PatientDTO patientDTO = new PatientDTO();
+                patientDTO.put(Constants.KEY, UUID.uuid());
+                getController().createPatient(patientDTO);
                 destroy();
             }
         });

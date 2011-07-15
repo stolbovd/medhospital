@@ -50,11 +50,11 @@ public class PatientServiceImpl implements IPatientService {
         return patients;
     }
 
-    public Integer removeSelected(List<String> ids) {
-        return getPatientDao().removeSelected(ids);
+    public void removeSelected(List<String> ids) {
+        getPatientDao().removeSelected(ids);
     }
 
-    public void savePatient(PatientAttributeValue patientAttributeValue, String... columns) {
+    public void savePatientAttributeValue(PatientAttributeValue patientAttributeValue, String... columns) {
         getPatientAttributeValueDao().save(patientAttributeValue, columns);
     }
 }

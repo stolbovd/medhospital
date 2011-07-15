@@ -2,6 +2,7 @@ package ua.com.alus.medhosp.frontend.client.modules.patients.ui;
 
 
 import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
+import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 
 /**
  * Created by Usatov Alexey
@@ -13,5 +14,7 @@ public interface IController {
 
     void refreshTable();
 
-    void savePatient(PatientAttributeValue patientDTO, String... column);
+    void savePatientAttributeValue(PatientAttributeValue patientDTO, String... column);
+
+    void createPatient(PatientDTO patientDTO);
 }

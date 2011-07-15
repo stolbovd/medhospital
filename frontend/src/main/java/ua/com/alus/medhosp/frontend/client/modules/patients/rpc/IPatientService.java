@@ -12,13 +12,13 @@ import java.util.List;
  * Date: 02.05.11
  * Time: 11:02
  */
-@RemoteServiceRelativePath("springGwtServices/personService")
+@RemoteServiceRelativePath("springGwtServices/patientService")
 public interface IPatientService extends RemoteService {
     void createPatient(PatientDTO patientDTO);
 
     List<PatientDTO> getAllPatients();
 
-    Integer removeSelected(final List<String> ids);
+    void removeSelected(final List<String> ids);
 
-    void savePatient(PatientAttributeValue patientAttributeValue, String[] columns);
+    void savePatientAttributeValue(PatientAttributeValue patientAttributeValue, String[] columns);
 }

@@ -36,13 +36,14 @@
         <property name="cFamilyName" value="PatientView"/>
     </bean>
 
-    <bean id="personService" class="ua.com.alus.medhosp.frontend.server.services.spring.PatientServiceImpl">
+    <bean id="patientJmsProducerService" class="ua.com.alus.medhosp.frontend.server.services.spring.PatientJmsProducerService">
+        <property name="jmsCommandProducer" ref="jmsClientProducer"/>
+    </bean>
+
+    <bean id="patientService" class="ua.com.alus.medhosp.frontend.server.services.spring.PatientServiceImpl">
         <property name="patientDao" ref="patientDao"/>
         <property name="patientAttributeValueDao" ref="patientAttributeValueDao"/>
     </bean>
 
-    <bean id="patientJmsProducerService" class="ua.com.alus.medhosp.frontend.server.services.spring.PatientJmsProducerService">
-        <property name="jmsCommandProducer" ref="jmsClientProducer"/>
-    </bean>
     <import resource="jms-config.xml"/>
 </beans>
