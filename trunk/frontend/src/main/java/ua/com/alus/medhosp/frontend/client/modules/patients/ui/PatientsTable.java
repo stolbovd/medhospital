@@ -52,19 +52,11 @@ public class PatientsTable extends ListGrid implements ITable {
             }
         });
 
-        SimpleField entityIdColumn = new SimpleField(BaseColumns.ENTITY_ID.getColumnName(), "ID");
+        SimpleField entityIdColumn = new SimpleField(BaseColumns.ENTITY_ID.getColumnName(), constants.id());
         entityIdColumn.setType(ListGridFieldType.TEXT);
         entityIdColumn.setCanEdit(false);
 
-        AttributeValueField firstNameColumn = new AttributeValueField(NAME_ATTRIBUTE, constants.firstName());
-        firstNameColumn.setType(ListGridFieldType.TEXT);
-        firstNameColumn.setCanEdit(false);
-
-        AttributeValueField lastNameColumn = new AttributeValueField(LAST_NAME_ATTRIBUTE, constants.lastName());
-        lastNameColumn.setType(ListGridFieldType.TEXT);
-        lastNameColumn.setCanEdit(false);
-
-        setFields(checkBoxColumn, entityIdColumn, lastNameColumn, firstNameColumn);
+        setFields(checkBoxColumn, entityIdColumn);
 
         setAutoFetchData(true);
         setWidth100();
