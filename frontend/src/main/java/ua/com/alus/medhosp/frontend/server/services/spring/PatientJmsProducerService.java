@@ -8,6 +8,7 @@ import ua.com.alus.medhosp.prototype.commands.Command;
 import ua.com.alus.medhosp.prototype.data.Constants;
 import ua.com.alus.medhosp.prototype.json.CommandJson;
 import ua.com.alus.medhosp.prototype.json.CommandsListJson;
+import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
 
 import javax.jms.JMSException;
 
@@ -33,7 +34,7 @@ public class PatientJmsProducerService implements IPatientJmsService {
         CommandsListJson commandsListJson = new CommandsListJson();
         CommandJson savePatientCommand = new CommandJson();
         savePatientCommand.setCommand(Command.SAVE_PATIENT.getCommandName());
-        savePatientCommand.getProperties().put(Constants.ENTITY_ID, patientDTO.get(Constants.ENTITY_ID));
+        savePatientCommand.getProperties().put(BaseColumns.ENTITY_ID.getColumnName(), patientDTO.get(BaseColumns.ENTITY_ID.getColumnName()));
         savePatientCommand.getProperties().put(Constants.MESSAGE_ID, patientDTO.get(Constants.MESSAGE_ID));
         commandsListJson.getCommands().add(savePatientCommand);
         try {

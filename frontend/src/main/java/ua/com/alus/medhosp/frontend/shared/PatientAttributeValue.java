@@ -1,6 +1,7 @@
 package ua.com.alus.medhosp.frontend.shared;
 
 
+import ua.com.alus.medhosp.prototype.cassandra.dto.AttributeValueColumns;
 import ua.com.alus.medhosp.prototype.data.Constants;
 
 /**
@@ -12,8 +13,15 @@ import ua.com.alus.medhosp.prototype.data.Constants;
 public class PatientAttributeValue extends AbstractDTO implements SuperColumn {
 
 
-    public static final String[] COLUMNS = {Constants.ENTITY_ID, Constants.ATTRIBUTE_ID,
-            Constants.ATTRIBUTE_TYPE, Constants.ATTRIBUTE_VALUE, Constants.ATTRIBUTE_LABEL, Constants.SUPER_KEY_NAME};
+    public static final String[] COLUMNS;
+
+    static{
+        AttributeValueColumns [] values = AttributeValueColumns.values();
+        COLUMNS = new String[values.length];
+        for(int i=0; i< values.length; i++){
+            COLUMNS[i] = values[i].getColumnName();
+        }
+    }
 
     @Override
     public String[] getColumns() {
@@ -21,10 +29,10 @@ public class PatientAttributeValue extends AbstractDTO implements SuperColumn {
     }
 
     public void setSuperKeyName(String superKeyName) {
-        put(Constants.SUPER_KEY_NAME, superKeyName);
+        put(AttributeValueColumns.SUPER_KEY_NAME.getColumnName(), superKeyName);
     }
 
     public String getSuperKeyName() {
-        return String.valueOf(get(Constants.SUPER_KEY_NAME));
+        return String.valueOf(get(AttributeValueColumns.SUPER_KEY_NAME.getColumnName()));
     }
 }
