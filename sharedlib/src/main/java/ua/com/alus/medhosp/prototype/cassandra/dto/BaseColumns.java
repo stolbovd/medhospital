@@ -1,12 +1,14 @@
 package ua.com.alus.medhosp.prototype.cassandra.dto;
 
 /**
- * Columns of Patient entity
+ * Base Columns
+ * <p/>
+ * Created by Usatov Alexey
  */
-public enum PatientColumns {
+public enum BaseColumns {
     ENTITY_ID("entityId");
 
-    PatientColumns(String columnName) {
+    BaseColumns(String columnName) {
         this.columnName = columnName;
     }
 
