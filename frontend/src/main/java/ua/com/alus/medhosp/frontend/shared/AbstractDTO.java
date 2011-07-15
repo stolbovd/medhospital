@@ -1,4 +1,5 @@
 package ua.com.alus.medhosp.frontend.shared;
+
 import java.util.HashMap;
 
 /**

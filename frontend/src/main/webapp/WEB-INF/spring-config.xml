@@ -38,11 +38,20 @@
 
     <bean id="patientJmsProducerService" class="ua.com.alus.medhosp.frontend.server.services.spring.PatientJmsProducerService">
         <property name="jmsCommandProducer" ref="jmsClientProducer"/>
+        <property name="taskService" ref="taskService"/>
     </bean>
 
     <bean id="patientService" class="ua.com.alus.medhosp.frontend.server.services.spring.PatientServiceImpl">
         <property name="patientDao" ref="patientDao"/>
         <property name="patientAttributeValueDao" ref="patientAttributeValueDao"/>
+    </bean>
+
+    <bean id="taskDao" class="ua.com.alus.medhosp.frontend.server.services.spring.dao.TaskDao" parent="simpleDao">
+        <property name="cFamilyName" value="TasksView"/>
+    </bean>
+
+    <bean id="taskService" class="ua.com.alus.medhosp.frontend.server.services.spring.TaskService">
+        <property name="taskDao" ref="taskDao"/>
     </bean>
 
     <import resource="jms-config.xml"/>

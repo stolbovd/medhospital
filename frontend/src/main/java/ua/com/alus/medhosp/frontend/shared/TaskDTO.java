@@ -1,21 +1,18 @@
 package ua.com.alus.medhosp.frontend.shared;
 
-
-import ua.com.alus.medhosp.prototype.cassandra.dto.AttributeValueColumns;
+import ua.com.alus.medhosp.prototype.cassandra.dto.TaskColumns;
 
 /**
- * Created by Usatov Alexey
- * Date: 02.05.11
- * Time: 1:21
+ * DTO of Task(command)
+ * <p/>
+ * Created by Usatov
  */
-
-public class PatientAttributeValue extends AbstractDTO implements SuperColumn {
-
+public class TaskDTO extends AbstractDTO implements SuperColumn {
 
     public static final String[] COLUMNS;
 
     static {
-        AttributeValueColumns[] values = AttributeValueColumns.values();
+        TaskColumns[] values = TaskColumns.values();
         COLUMNS = new String[values.length];
         for (int i = 0; i < values.length; i++) {
             COLUMNS[i] = values[i].getColumnName();
@@ -28,10 +25,11 @@ public class PatientAttributeValue extends AbstractDTO implements SuperColumn {
     }
 
     public void setSuperKeyName(String superKeyName) {
-        put(AttributeValueColumns.SUPER_KEY_NAME.getColumnName(), superKeyName);
+        put(TaskColumns.SUPER_KEY_NAME.getColumnName(), superKeyName);
     }
 
     public String getSuperKeyName() {
-        return String.valueOf(get(AttributeValueColumns.SUPER_KEY_NAME.getColumnName()));
+        return String.valueOf(get(TaskColumns.SUPER_KEY_NAME.getColumnName()));
     }
+
 }
