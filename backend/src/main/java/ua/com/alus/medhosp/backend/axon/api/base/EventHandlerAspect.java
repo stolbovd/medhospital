@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.Aspect;
 import ua.com.alus.medhosp.backend.axon.api.patient.event.SaveAttributeValueEvent;
 import ua.com.alus.medhosp.backend.axon.api.patient.event.SavePatientEvent;
 import ua.com.alus.medhosp.backend.jms.IJmsEventProducer;
+import ua.com.alus.medhosp.prototype.cassandra.dto.Dto;
 import ua.com.alus.medhosp.prototype.data.Constants;
 
 import java.util.HashMap;
@@ -55,10 +56,10 @@ public class EventHandlerAspect {
         if (event instanceof SaveAttributeValueEvent) {
             answer.put(Constants.ATTRIBUTE_VALUE, ((SaveAttributeValueEvent) event).getAttributeValue());
             answer.put(Constants.ATTRIBUTE_ID, ((SaveAttributeValueEvent) event).getAttributeId());
-            answer.put(Constants.CLASS, "PatientAttributeValue");
+            answer.put(Constants.CLASS, Dto.PATIENT_ATTRIBUTE_VALUE.getDtoName());
             answer.put(Constants.SUPER_KEY_NAME, ((SaveAttributeValueEvent) event).getAttributeId());
         } else if (event instanceof SavePatientEvent) {
-            answer.put(Constants.CLASS, "PatientDTO");
+            answer.put(Constants.CLASS, Dto.PATIENT.getDtoName());
         }
     }
 }
