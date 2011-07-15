@@ -10,7 +10,6 @@ public interface Constants {
     String MESSAGE_ID = "messageId";
     String RESULT = "result";
 
-    String KEY = "key";
     String ENTITY_ID = "entityId";
     String ATTRIBUTE_ID = "attributeId";
     String ATTRIBUTE_TYPE = "attributeType";
