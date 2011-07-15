@@ -113,15 +113,15 @@
         <property name="commandBus" ref="commandBus"/>
         <property name="command2Class">
             <map>
-                <entry key="SavePatientCommand"
+                <entry key="#{T(ua.com.alus.medhosp.prototype.commands.Command).SAVE_PATIENT.getCommandName()}"
                        value="ua.com.alus.medhosp.backend.axon.api.patient.command.SavePatientCommand"/>
-                <entry key="SaveAttributeValueCommand"
+                <entry key="#{T(ua.com.alus.medhosp.prototype.commands.Command).SAVE_ATTRIBUTE_VALUE.getCommandName()}"
                        value="ua.com.alus.medhosp.backend.axon.api.patient.command.SaveAttributeValueCommand"/>
-                <entry key="SaveAttributeCommand"
+                <entry key="#{T(ua.com.alus.medhosp.prototype.commands.Command).SAVE_ATTRIBUTE.getCommandName()}"
                        value="ua.com.alus.medhosp.backend.axon.api.patient.command.SaveAttributeCommand"/>
-                <entry key="RemovePatientCommand"
+                <entry key="#{T(ua.com.alus.medhosp.prototype.commands.Command).REMOVE_PATIENT.getCommandName()}"
                        value="ua.com.alus.medhosp.backend.axon.api.patient.command.RemovePatientCommand"/>
-                <entry key="RemoveAttributeValueCommand"
+                <entry key="#{T(ua.com.alus.medhosp.prototype.commands.Command).REMOVE_ATTRIBUTE_VALUE.getCommandName()}"
                        value="ua.com.alus.medhosp.backend.axon.api.patient.command.RemoveAttributeValueCommand"/>
             </map>
         </property>
