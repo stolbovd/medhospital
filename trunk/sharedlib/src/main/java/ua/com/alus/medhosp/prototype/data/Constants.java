@@ -18,4 +18,6 @@ public interface Constants {
     String ATTRIBUTE_LABEL = "attributeLabel";
     String CLASS = "class";
     String SUPER_KEY_NAME = "superKeyName";
+
+    String COMMAND = "command";
 }
