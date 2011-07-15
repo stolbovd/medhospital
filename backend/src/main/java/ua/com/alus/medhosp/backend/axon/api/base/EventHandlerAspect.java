@@ -52,7 +52,7 @@ public class EventHandlerAspect {
     }
 
     private void fillAllParams(AbstractEntityEvent event, Map<String, String> answer) {
-        answer.put(Constants.KEY, event.getEntityId());
+        answer.put(Constants.ENTITY_ID, event.getEntityId());
         if (event instanceof SaveAttributeValueEvent) {
             answer.put(Constants.ATTRIBUTE_VALUE, ((SaveAttributeValueEvent) event).getAttributeValue());
             answer.put(Constants.ATTRIBUTE_ID, ((SaveAttributeValueEvent) event).getAttributeId());
