@@ -31,9 +31,9 @@
     <bean id="jmsCommandListener" class="ua.com.alus.medhosp.frontend.server.jms.JmsCommandListener">
         <property name="command2Class">
             <map>
-                <entry key="PatientAttributeValue"
+                <entry key="#{T(ua.com.alus.medhosp.prototype.cassandra.dto.Dto).PATIENT_ATTRIBUTE_VALUE.getDtoName()}"
                        value="ua.com.alus.medhosp.frontend.shared.PatientAttributeValue"/>
-                <entry key="PatientDTO"
+                <entry key="#{T(ua.com.alus.medhosp.prototype.cassandra.dto.Dto).PATIENT.getDtoName()}"
                        value="ua.com.alus.medhosp.frontend.shared.PatientDTO"/>
             </map>
         </property>
