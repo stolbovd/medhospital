@@ -16,7 +16,7 @@ public abstract class ObjectCTO<D extends AbstractDTO, E extends ObjectCTO> exte
         for (String column : abstractDTO.getColumns()) {
             abstractCTO.setAttribute(column, abstractDTO.get(column));
         }
-        abstractCTO.setAttribute(Constants.KEY, abstractDTO.get(Constants.KEY));
+        abstractCTO.setAttribute(Constants.ENTITY_ID, abstractDTO.get(Constants.ENTITY_ID));
         return abstractCTO;
     }
 
@@ -24,7 +24,7 @@ public abstract class ObjectCTO<D extends AbstractDTO, E extends ObjectCTO> exte
         for (String column : abstractDTO.getColumns()) {
             abstractDTO.put(column, abstractCTO.getAttributeAsString(column));
         }
-        abstractDTO.put(Constants.KEY, abstractCTO.getAttributeAsString(Constants.KEY));
+        abstractDTO.put(Constants.ENTITY_ID, abstractCTO.getAttributeAsString(Constants.ENTITY_ID));
         return abstractDTO;
     }
 }

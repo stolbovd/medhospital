@@ -44,9 +44,9 @@ public class PatientsTable extends ListGrid implements ITable {
                 Boolean value = (Boolean) event.getNewValue();
                 event.getRecord().setAttribute(SELECTED, value);
                 if (value) {
-                    getSelectedPatients().add(getSelectedRecord().getAttributeAsString(Constants.KEY));
+                    getSelectedPatients().add(getSelectedRecord().getAttributeAsString(Constants.ENTITY_ID));
                 } else {
-                    getSelectedPatients().remove(getSelectedRecord().getAttributeAsString(Constants.KEY));
+                    getSelectedPatients().remove(getSelectedRecord().getAttributeAsString(Constants.ENTITY_ID));
                 }
 
             }
