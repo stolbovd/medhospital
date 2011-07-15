@@ -1,13 +1,17 @@
 package ua.com.alus.medhosp.frontend.server.jms;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
+import ua.com.alus.medhosp.prototype.data.Constants;
+import ua.com.alus.medhosp.prototype.json.CommandsListJson;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.Session;
 import javax.jms.TextMessage;
+import java.io.IOException;
 
 /**
  * Created by Usatov Alexey
@@ -19,18 +23,24 @@ public class JmsCommandProducer {
 
     private JmsTemplate template = null;
 
-    public static final String COMMAND = "command";
-
     public void setTemplate(JmsTemplate template) {
         this.template = template;
     }
 
-    public void generateMessages() throws JMSException {
+    public void generateCommands(final CommandsListJson commandsListJson) throws JMSException {
         MessageCreator messageCreator = new MessageCreator() {
             public Message createMessage(Session session) throws JMSException {
+                ObjectMapper mapper = new ObjectMapper();
                 TextMessage message = session.createTextMessage();
-                message.setStringProperty(COMMAND, "");
-                logger.info("Sending message: " + "");
+                String command = "";
+                try {
+                    command = mapper.writeValueAsString(commandsListJson);
+                    message.setStringProperty(Constants.COMMAND, command);
+                } catch (IOException e) {
+                    logger.error("Cannot serialize to json:", e);
+                    return null;
+                }
+                logger.info("Sending message: " + command);
                 return message;
             }
         };
