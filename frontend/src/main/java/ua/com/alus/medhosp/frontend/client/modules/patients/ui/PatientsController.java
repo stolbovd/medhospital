@@ -7,7 +7,6 @@ import ua.com.alus.medhosp.frontend.client.modules.patients.cto.PatientCTO;
 import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

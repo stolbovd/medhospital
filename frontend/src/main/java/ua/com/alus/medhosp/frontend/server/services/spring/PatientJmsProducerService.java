@@ -4,11 +4,11 @@ import org.apache.log4j.Logger;
 import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientJmsService;
 import ua.com.alus.medhosp.frontend.server.jms.JmsCommandProducer;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
+import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
 import ua.com.alus.medhosp.prototype.commands.Command;
 import ua.com.alus.medhosp.prototype.data.Constants;
 import ua.com.alus.medhosp.prototype.json.CommandJson;
 import ua.com.alus.medhosp.prototype.json.CommandsListJson;
-import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
 
 import javax.jms.JMSException;
 
