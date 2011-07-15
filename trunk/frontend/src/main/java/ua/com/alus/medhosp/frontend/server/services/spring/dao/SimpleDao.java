@@ -63,21 +63,21 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
             columns = abstractDTO.getColumns();
         }
         Mutator<String> m1 = createMutator();
-        if (abstractDTO.get(Constants.KEY) == null) {
-            abstractDTO.put(Constants.KEY, String.valueOf(keyspace.createClock()));
+        if (abstractDTO.get(Constants.ENTITY_ID) == null) {
+            abstractDTO.put(Constants.ENTITY_ID, String.valueOf(keyspace.createClock()));
         }
         //adding all sent columns
         for (String column : columns) {
             if (abstractDTO.get(column) == null) {
                 continue;
             }
-            m1.addInsertion(abstractDTO.get(Constants.KEY),
+            m1.addInsertion(abstractDTO.get(Constants.ENTITY_ID),
                     cFamilyName, HFactory.createStringColumn(column, abstractDTO.get(column)));
         }
 
         //adding key also
-        m1.addInsertion(abstractDTO.get(Constants.KEY),
-                cFamilyName, HFactory.createStringColumn(Constants.KEY, abstractDTO.get(Constants.KEY)));
+        m1.addInsertion(abstractDTO.get(Constants.ENTITY_ID),
+                cFamilyName, HFactory.createStringColumn(Constants.ENTITY_ID, abstractDTO.get(Constants.ENTITY_ID)));
 
         m1.execute();
     }
@@ -87,8 +87,8 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
             columns = abstractDTO.getColumns();
         }
         Mutator<String> m1 = createMutator();
-        if (abstractDTO.get(Constants.KEY) == null) {
-            abstractDTO.put(Constants.KEY, String.valueOf(keyspace.createClock()));
+        if (abstractDTO.get(Constants.ENTITY_ID) == null) {
+            abstractDTO.put(Constants.ENTITY_ID, String.valueOf(keyspace.createClock()));
         }
         //adding all sent columns
         ArrayList<HColumn<String, String>> columnArrayList = new ArrayList<HColumn<String, String>>();
@@ -99,11 +99,11 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
             columnArrayList.add(HFactory.createStringColumn(column, abstractDTO.get(column)));
         }
         //adding key too
-        columnArrayList.add(HFactory.createStringColumn(Constants.KEY, abstractDTO.get(Constants.KEY)));
+        columnArrayList.add(HFactory.createStringColumn(Constants.ENTITY_ID, abstractDTO.get(Constants.ENTITY_ID)));
 
         HSuperColumn<String, String, String> superColumn =
                 HFactory.createSuperColumn(((SuperColumn) abstractDTO).getSuperKeyName(), columnArrayList, ss, ss, ss);
-        m1.addInsertion(abstractDTO.get(Constants.KEY), cFamilyName, superColumn);
+        m1.addInsertion(abstractDTO.get(Constants.ENTITY_ID), cFamilyName, superColumn);
         m1.execute();
     }
 

@@ -33,7 +33,7 @@ public class PatientJmsProducerService implements IPatientJmsService {
         CommandsListJson commandsListJson = new CommandsListJson();
         CommandJson savePatientCommand = new CommandJson();
         savePatientCommand.setCommand(Command.SAVE_PATIENT.getCommandName());
-        savePatientCommand.getProperties().put(Constants.ENTITY_ID, patientDTO.get(Constants.KEY));
+        savePatientCommand.getProperties().put(Constants.ENTITY_ID, patientDTO.get(Constants.ENTITY_ID));
         savePatientCommand.getProperties().put(Constants.MESSAGE_ID, patientDTO.get(Constants.MESSAGE_ID));
         commandsListJson.getCommands().add(savePatientCommand);
         try {

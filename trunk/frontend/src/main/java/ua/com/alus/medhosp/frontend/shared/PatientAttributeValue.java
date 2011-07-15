@@ -12,7 +12,7 @@ import ua.com.alus.medhosp.prototype.data.Constants;
 public class PatientAttributeValue extends AbstractDTO implements SuperColumn {
 
 
-    public static final String[] COLUMNS = {Constants.KEY, Constants.ENTITY_ID, Constants.ATTRIBUTE_ID,
+    public static final String[] COLUMNS = {Constants.ENTITY_ID, Constants.ATTRIBUTE_ID,
             Constants.ATTRIBUTE_TYPE, Constants.ATTRIBUTE_VALUE, Constants.ATTRIBUTE_LABEL, Constants.SUPER_KEY_NAME};
 
     @Override

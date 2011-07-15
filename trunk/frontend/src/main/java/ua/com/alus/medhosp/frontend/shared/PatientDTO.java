@@ -14,7 +14,7 @@ public class PatientDTO extends AbstractDTO {
 
     private List<PatientAttributeValue> patientAttributeValues;
 
-    public static final String[] COLUMNS = {Constants.KEY};
+    public static final String[] COLUMNS = {Constants.ENTITY_ID};
 
     @Override
     public String[] getColumns() {

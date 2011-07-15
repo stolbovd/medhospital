@@ -41,7 +41,7 @@ public class PatientCTO extends ObjectCTO<PatientDTO, PatientCTO> {
         String[] attributes = abstractCTO.getAttributes();
         PatientAttributeValue pav;
         for (String attribute : attributes) {
-            if (attribute.equals(Constants.KEY)) {
+            if (attribute.equals(Constants.ENTITY_ID)) {
                 continue;
             }
             Object attrObject;
