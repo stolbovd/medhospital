@@ -20,8 +20,8 @@ public class AttributeValueField extends ListGridField {
         setCellFormatter(getAttributeFormatter());
     }
 
-    private AttributeCellFormatter getAttributeFormatter(){
-        if(attributeFormatter == null){
+    private AttributeCellFormatter getAttributeFormatter() {
+        if (attributeFormatter == null) {
             attributeFormatter = new AttributeCellFormatter();
         }
         return attributeFormatter;

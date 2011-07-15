@@ -5,6 +5,8 @@ import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientJmsServi
 import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientJmsServiceAsync;
 import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientService;
 import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientServiceAsync;
+import ua.com.alus.medhosp.frontend.client.modules.tasks.rpc.ITasksService;
+import ua.com.alus.medhosp.frontend.client.modules.tasks.rpc.ITasksServiceAsync;
 
 /**
  * Created by Usatov Alexey
@@ -35,5 +37,14 @@ public class ServiceStorage {
             patientJmsServiceAsync = GWT.create(IPatientJmsService.class);
         }
         return patientJmsServiceAsync;
+    }
+
+    private ITasksServiceAsync tasksServiceAsync;
+
+    public ITasksServiceAsync getTasksServiceAsync() {
+        if (tasksServiceAsync == null) {
+            tasksServiceAsync = GWT.create(ITasksService.class);
+        }
+        return tasksServiceAsync;
     }
 }

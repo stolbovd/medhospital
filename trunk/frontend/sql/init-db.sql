@@ -12,3 +12,9 @@ create column family PatientView with
 create column family Patients with
   comparator='BytesType'
 ;
+
+create column family TasksView with
+  column_type='Super' and
+  comparator='BytesType' and
+  subcomparator='BytesType'
+;

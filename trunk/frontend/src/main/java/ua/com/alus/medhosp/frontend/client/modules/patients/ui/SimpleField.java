@@ -4,10 +4,10 @@ import com.smartgwt.client.widgets.grid.ListGridField;
 
 /**
  * Simple field for patient entity
- *
+ * <p/>
  * Created By Usatov Alexey
  */
-public class SimpleField extends ListGridField{
+public class SimpleField extends ListGridField {
 
     public SimpleField(String name, String title) {
         super(name, title);

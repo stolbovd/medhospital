@@ -152,7 +152,7 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
                     HFactory.createRangeSuperSlicesQuery(keyspace, ss, ss, ss, ss);
             rangeSliceQuery.setColumnFamily(cFamilyName);
             rangeSliceQuery.setColumnNames(superColumnNames);
-            rangeSliceQuery.setRange("", "", false, 1);
+            rangeSliceQuery.setRange("", "", false, 100);
             rangeSliceQuery.setKeys(keyFirst, keyLast);
             QueryResult<OrderedSuperRows<String, String, String, String>> result = rangeSliceQuery.execute();
             OrderedSuperRows<String, String, String, String> orderedSuperRows = result.get();
