@@ -1,5 +1,6 @@
 package ua.com.alus.medhosp.frontend.server.services.spring;
 
+import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientJmsService;
 import ua.com.alus.medhosp.frontend.server.jms.JmsCommandProducer;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 import ua.com.alus.medhosp.prototype.commands.Command;
@@ -14,7 +15,7 @@ import javax.jms.JMSException;
  *
  * Created by Usatov Alexey.
  */
-public class PatientJmsProducerService {
+public class PatientJmsProducerService implements IPatientJmsService {
 
     private JmsCommandProducer jmsCommandProducer;
 

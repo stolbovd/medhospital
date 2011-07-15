@@ -44,8 +44,12 @@ public class PatientsController implements IController {
         });
     }
 
-    public void savePatient(PatientAttributeValue patientDTO, String... column) {
-        ServiceStorage.getInstance().getPatientServiceAsync().savePatient(patientDTO, column, new AsyncCallback<Void>() {
+    public void savePatientAttributeValue(PatientAttributeValue patientDTO, String... column) {
+
+    }
+
+    public void createPatient(PatientDTO patientDTO) {
+        ServiceStorage.getInstance().getPatientJmsServiceAsync().savePatient(patientDTO, new AsyncCallback<Void>() {
             public void onFailure(Throwable caught) {
                 SC.say("Error:" + caught);
             }
@@ -57,7 +61,7 @@ public class PatientsController implements IController {
     }
 
     public void removeSelected() {
-        final List<String> ids = new ArrayList<String>();
+      /*  final List<String> ids = new ArrayList<String>();
         for (String key : getPatientsTable().getSelectedPatients()) {
             ids.add(String.valueOf(key));
         }
@@ -65,14 +69,14 @@ public class PatientsController implements IController {
             SC.say("Nothing is selected!");
             return;
         }
-        ServiceStorage.getInstance().getPatientServiceAsync().removeSelected(ids, new AsyncCallback<Integer>() {
+        ServiceStorage.getInstance().getPatientServiceAsync().removeSelected(ids, new AsyncCallback<Void>() {
             public void onFailure(Throwable caught) {
                 SC.say("Error:" + caught);
             }
 
-            public void onSuccess(Integer result) {
+            public void onSuccess(Void v) {
                 refreshTable();
             }
-        });
+        });   */
     }
 }

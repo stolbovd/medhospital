@@ -1,6 +1,8 @@
 package ua.com.alus.medhosp.frontend.client;
 
 import com.google.gwt.core.client.GWT;
+import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientJmsService;
+import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientJmsServiceAsync;
 import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientService;
 import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientServiceAsync;
 
@@ -24,5 +26,14 @@ public class ServiceStorage {
             patientServiceAsync = GWT.create(IPatientService.class);
         }
         return patientServiceAsync;
+    }
+
+    private IPatientJmsServiceAsync patientJmsServiceAsync;
+
+    public IPatientJmsServiceAsync getPatientJmsServiceAsync() {
+        if (patientJmsServiceAsync == null) {
+            patientJmsServiceAsync = GWT.create(IPatientJmsService.class);
+        }
+        return patientJmsServiceAsync;
     }
 }

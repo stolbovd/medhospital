@@ -91,7 +91,7 @@ public class JmsCommandListener implements MessageListener {
         if (object instanceof PatientDTO) {
             getPatientService().createPatient((PatientDTO) object);
         } else if (object instanceof PatientAttributeValue) {
-            getPatientService().savePatient((PatientAttributeValue) object, object.getColumns());
+            getPatientService().savePatientAttributeValue((PatientAttributeValue) object, object.getColumns());
         }
     }
 

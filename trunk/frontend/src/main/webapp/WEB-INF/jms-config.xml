@@ -37,7 +37,7 @@
                        value="ua.com.alus.medhosp.frontend.shared.PatientDTO"/>
             </map>
         </property>
-        <property name="patientService" ref="personService"/>
+        <property name="patientService" ref="patientService"/>
     </bean>
 
     <jms:listener-container container-type="default"
