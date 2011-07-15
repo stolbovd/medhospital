@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import ua.com.alus.medhosp.backend.jms.JmsCommandListener;
+import ua.com.alus.medhosp.prototype.data.Constants;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -47,7 +48,7 @@ public class JmsClientMessageProducer {
         MessageCreator messageCreator = new MessageCreator() {
             public Message createMessage(Session session) throws JMSException {
                 TextMessage message = session.createTextMessage();
-                message.setStringProperty(JmsCommandListener.COMMAND, commandJson);
+                message.setStringProperty(Constants.COMMAND, commandJson);
                 logger.info("Sending message: " + commandJson);
                 return message;
             }
