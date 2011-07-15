@@ -20,7 +20,7 @@ public class CommandJson {
     private String command;
 
 
-    private HashMap<String, String> properties;
+    private HashMap<String, String> properties = new HashMap<String, String>();
 
     public String getCommand() {
         return command;
