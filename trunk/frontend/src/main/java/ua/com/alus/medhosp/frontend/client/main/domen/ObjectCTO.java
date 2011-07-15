@@ -2,7 +2,7 @@ package ua.com.alus.medhosp.frontend.client.main.domen;
 
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import ua.com.alus.medhosp.frontend.shared.AbstractDTO;
-import ua.com.alus.medhosp.prototype.data.Constants;
+import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
 
 
 /**
@@ -16,7 +16,7 @@ public abstract class ObjectCTO<D extends AbstractDTO, E extends ObjectCTO> exte
         for (String column : abstractDTO.getColumns()) {
             abstractCTO.setAttribute(column, abstractDTO.get(column));
         }
-        abstractCTO.setAttribute(Constants.ENTITY_ID, abstractDTO.get(Constants.ENTITY_ID));
+        abstractCTO.setAttribute(BaseColumns.ENTITY_ID.getColumnName(), abstractDTO.get(BaseColumns.ENTITY_ID.getColumnName()));
         return abstractCTO;
     }
 
@@ -24,7 +24,7 @@ public abstract class ObjectCTO<D extends AbstractDTO, E extends ObjectCTO> exte
         for (String column : abstractDTO.getColumns()) {
             abstractDTO.put(column, abstractCTO.getAttributeAsString(column));
         }
-        abstractDTO.put(Constants.ENTITY_ID, abstractCTO.getAttributeAsString(Constants.ENTITY_ID));
+        abstractDTO.put(BaseColumns.ENTITY_ID.getColumnName(), abstractCTO.getAttributeAsString(BaseColumns.ENTITY_ID.getColumnName()));
         return abstractDTO;
     }
 }

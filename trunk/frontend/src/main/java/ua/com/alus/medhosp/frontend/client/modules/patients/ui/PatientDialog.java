@@ -16,6 +16,8 @@ import ua.com.alus.medhosp.frontend.client.utils.ConstantsBundle;
 import ua.com.alus.medhosp.frontend.client.utils.UUID;
 import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
+import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
+import ua.com.alus.medhosp.prototype.cassandra.dto.PatientColumns;
 import ua.com.alus.medhosp.prototype.data.Constants;
 
 
@@ -63,7 +65,7 @@ public class PatientDialog extends Window {
                     return;
                 }
                 PatientDTO patientDTO = new PatientDTO();
-                patientDTO.put(Constants.ENTITY_ID, UUID.uuid());
+                patientDTO.put(BaseColumns.ENTITY_ID.getColumnName(), UUID.uuid());
                 patientDTO.put(Constants.MESSAGE_ID, UUID.uuid());
                 getController().createPatient(patientDTO);
                 destroy();
