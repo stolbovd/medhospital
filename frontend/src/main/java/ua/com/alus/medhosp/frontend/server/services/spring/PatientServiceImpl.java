@@ -40,7 +40,7 @@ public class PatientServiceImpl implements IPatientService {
     }
 
     public List<PatientDTO> getAllPatients() {
-        List<PatientDTO> patients = getPatientDao().find("", "");
+        List<PatientDTO> patients = getPatientDao().find("", "", new String[]{});
         /*for (PatientDTO patientDTO : patients) {
             String key = patientDTO.get(BaseColumns.ENTITY_ID.getColumnName());
             patientDTO.setPatientAttributeValues(

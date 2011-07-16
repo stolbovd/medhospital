@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Service for tasks
  */
-public class TaskService implements ITasksService{
+public class TaskService implements ITasksService {
     private TaskDao taskDao;
 
     public TaskDao getTaskDao() {
@@ -26,5 +26,13 @@ public class TaskService implements ITasksService{
 
     public List<TaskDTO> getTasks(String key) {
         return getTaskDao().find(key, key);
+    }
+
+    public void removeTask(String messageId) {
+        getTaskDao().removeSelectedSuperBySuperKeyName("FAKE_user_id", messageId);
+    }
+
+    public TaskDTO findTask(String messageId){
+        return getTaskDao().find("FAKE_user_id", "FAKE_user_id", messageId).get(0);
     }
 }

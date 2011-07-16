@@ -3,12 +3,17 @@ package ua.com.alus.medhosp.frontend.server.jms;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientService;
+import ua.com.alus.medhosp.frontend.server.services.spring.TaskService;
 import ua.com.alus.medhosp.frontend.shared.AbstractDTO;
 import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
+import ua.com.alus.medhosp.frontend.shared.TaskDTO;
+import ua.com.alus.medhosp.prototype.cassandra.dto.TaskColumns;
+import ua.com.alus.medhosp.prototype.data.Constants;
 
 import javax.jms.Message;
 import javax.jms.MessageListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,6 +45,16 @@ public class JmsCommandListener implements MessageListener {
         return command2Class;
     }
 
+    private TaskService taskService;
+
+    public TaskService getTaskService() {
+        return taskService;
+    }
+
+    public void setTaskService(TaskService taskService) {
+        this.taskService = taskService;
+    }
+
     public static final String COMMAND = "command";
     public static final String CLASS = "class";
 
@@ -59,8 +74,11 @@ public class JmsCommandListener implements MessageListener {
             logger.info("Recieved message:" + message.getStringProperty(COMMAND));
             ObjectMapper mapper = new ObjectMapper();
             Map<String, String> properties = mapper.readValue(message.getStringProperty(COMMAND), HashMap.class);
-            AbstractDTO object = createObject(properties.get(CLASS), properties);
-            executeUpdate(object);
+            if (properties.get(Constants.ERROR) == null) {
+                AbstractDTO object = createObject(properties.get(CLASS), properties);
+                executeUpdate(object);
+            }
+            updateTask(properties.get(TaskColumns.MESSAGE_ID.getColumnName()), properties.get(Constants.ERROR));
         } catch (Exception e) {
             logger.trace(e);
         }
@@ -92,6 +110,16 @@ public class JmsCommandListener implements MessageListener {
             getPatientService().createPatient((PatientDTO) object);
         } else if (object instanceof PatientAttributeValue) {
             getPatientService().savePatientAttributeValue((PatientAttributeValue) object, object.getColumns());
+        }
+    }
+
+    public void updateTask(String messageId, String result) {
+        if (result == null) {
+            getTaskService().removeTask(messageId);
+        } else {
+            TaskDTO taskDTO = getTaskService().findTask(messageId);
+            taskDTO.put(TaskColumns.RESULT.getColumnName(), result);
+            getTaskService().saveTask(taskDTO);
         }
     }
 

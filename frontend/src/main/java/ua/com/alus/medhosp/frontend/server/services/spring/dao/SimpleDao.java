@@ -107,9 +107,9 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
         m1.execute();
     }
 
-    public List<D> find(String keyFirst, String keyLast) {
+    public List<D> find(String keyFirst, String keyLast, String ... superColumnNames) {
         if (dtoObject instanceof SuperColumn) {
-            return findSuper(keyFirst, keyLast, new String[]{});
+            return findSuper(keyFirst, keyLast, superColumnNames);
         } else {
             return findSimple(keyFirst, keyLast);
         }
@@ -152,7 +152,7 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
                     HFactory.createRangeSuperSlicesQuery(keyspace, ss, ss, ss, ss);
             rangeSliceQuery.setColumnFamily(cFamilyName);
             rangeSliceQuery.setColumnNames(superColumnNames);
-            rangeSliceQuery.setRange("", "", false, 100);
+            rangeSliceQuery.setRange("", "", false, dtoObject.getColumns().length);
             rangeSliceQuery.setKeys(keyFirst, keyLast);
             QueryResult<OrderedSuperRows<String, String, String, String>> result = rangeSliceQuery.execute();
             OrderedSuperRows<String, String, String, String> orderedSuperRows = result.get();
@@ -199,7 +199,7 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
         }
     }
 
-    public Integer removeSelectedSuper(List<String> keys) {
+    private Integer removeSelectedSuper(List<String> keys) {
         Mutator<String> mutator = createMutator();
         for (String key : keys) {
             mutator.addSuperDelete(key, cFamilyName, ((SuperColumn) dtoObject).getSuperKeyName(), ss);
@@ -208,7 +208,14 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
         return keys.size();
     }
 
-    public Integer removeSelectedSimple(List<String> keys) {
+    public Integer removeSelectedSuperBySuperKeyName(String key, String superKeyName){
+        Mutator<String> mutator = createMutator();
+        mutator.addSuperDelete(key, cFamilyName, superKeyName, ss);
+        mutator.execute();
+        return 1;
+    }
+
+    private Integer removeSelectedSimple(List<String> keys) {
         Mutator<String> mutator = createMutator();
         for (String key : keys) {
             mutator.addDeletion(key, cFamilyName);

@@ -38,6 +38,7 @@
             </map>
         </property>
         <property name="patientService" ref="patientService"/>
+        <property name="taskService" ref="taskService"/>
     </bean>
 
     <jms:listener-container container-type="default"
