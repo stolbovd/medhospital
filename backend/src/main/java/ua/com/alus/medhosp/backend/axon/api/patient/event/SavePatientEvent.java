@@ -1,7 +1,7 @@
 package ua.com.alus.medhosp.backend.axon.api.patient.event;
 
 import ua.com.alus.medhosp.backend.axon.api.base.AbstractEntityEvent;
-import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoals;
+import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoal;
 
 /**
  * Created by Usatov Alexey
@@ -9,8 +9,12 @@ import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoals;
  * Time: 11:47
  */
 public class SavePatientEvent extends AbstractEntityEvent {
-    public static final String GOAL = DtoGoals.SAVE.name();
     public SavePatientEvent(String entityId, String messageId) {
         super(entityId, messageId);
+    }
+
+    @Override
+    public DtoGoal getGoal() {
+        return DtoGoal.SAVE;
     }
 }

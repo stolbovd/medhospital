@@ -1,6 +1,7 @@
 package ua.com.alus.medhosp.backend.axon.api.patient.event;
 
-import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoals;
+
+import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoal;
 
 /**
  * Created Usatov Alexey
@@ -9,10 +10,13 @@ import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoals;
  */
 public class RemoveAttributeValueEvent extends AttributeValueEvent {
 
-    public static final String GOAL = DtoGoals.REMOVE.name();
-
     public RemoveAttributeValueEvent(String entityId, String messageId) {
         super(entityId, messageId);
+    }
+
+    @Override
+    public DtoGoal getGoal() {
+        return DtoGoal.REMOVE;
     }
 
     public RemoveAttributeValueEvent(String entityId, String messageId, String attributeId) {
