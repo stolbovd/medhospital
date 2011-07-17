@@ -1,8 +1,11 @@
 package ua.com.alus.medhosp.frontend.client.modules.tasks.ui;
 
+import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.ListGridFieldType;
+import com.smartgwt.client.widgets.grid.HoverCustomizer;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
+import com.smartgwt.client.widgets.grid.ListGridRecord;
 import ua.com.alus.medhosp.frontend.client.modules.patients.ui.SimpleField;
 import ua.com.alus.medhosp.frontend.client.modules.tasks.cto.TaskCTO;
 import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
@@ -31,10 +34,24 @@ public class TasksTable extends ListGrid {
         resultColumn.setType(ListGridFieldType.TEXT);
         resultColumn.setCanEdit(false);
 
+        resultColumn.setAlign(Alignment.CENTER);
+        resultColumn.setType(ListGridFieldType.IMAGE);
+        resultColumn.setImageSize(20);
+        resultColumn.setWidth(30);
+        resultColumn.setImageURLPrefix("icons/tasks/");
+        resultColumn.setImageURLSuffix(".png");
+
 
         SimpleField messageBody = new SimpleField(TaskColumns.MESSAGE_BODY.getColumnName(), "messageBody");
         messageBody.setType(ListGridFieldType.TEXT);
         messageBody.setCanEdit(false);
+
+        messageBody.setHoverCustomizer(new HoverCustomizer() {
+            public String hoverHTML(Object o, ListGridRecord listGridRecord, int i, int i1) {
+                return listGridRecord.getAttributeAsString(TaskColumns.MESSAGE_BODY.getColumnName());
+            }
+        });
+        messageBody.setShowHover(true);
 
         setFields(resultColumn, messageBody);
 
