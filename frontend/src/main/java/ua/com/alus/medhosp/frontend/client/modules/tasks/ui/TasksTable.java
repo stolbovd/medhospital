@@ -27,19 +27,16 @@ public class TasksTable extends ListGrid {
 
     private void initTable() {
 
-        SimpleField entityIdColumn = new SimpleField(TaskColumns.ENTITY_ID.getColumnName(), "id");
-        entityIdColumn.setType(ListGridFieldType.TEXT);
-        entityIdColumn.setCanEdit(false);
+        SimpleField resultColumn = new SimpleField(TaskColumns.RESULT.getColumnName(), "result");
+        resultColumn.setType(ListGridFieldType.TEXT);
+        resultColumn.setCanEdit(false);
 
-        SimpleField messageId = new SimpleField(TaskColumns.MESSAGE_ID.getColumnName(), "messageId");
-        messageId.setType(ListGridFieldType.TEXT);
-        messageId.setCanEdit(false);
 
         SimpleField messageBody = new SimpleField(TaskColumns.MESSAGE_BODY.getColumnName(), "messageBody");
         messageBody.setType(ListGridFieldType.TEXT);
         messageBody.setCanEdit(false);
 
-        setFields(entityIdColumn, messageId, messageBody);
+        setFields(resultColumn, messageBody);
 
         setAutoFetchData(true);
         setTop(30);
