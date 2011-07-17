@@ -1,6 +1,7 @@
 package ua.com.alus.medhosp.backend.axon.api.base;
 
 import org.axonframework.domain.DomainEvent;
+import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoal;
 
 /**
  * Created by Usatov Alexey
@@ -31,4 +32,6 @@ public abstract class AbstractEntityEvent extends DomainEvent {
     public void setMessageId(String messageId) {
         this.messageId = messageId;
     }
+
+    public abstract DtoGoal getGoal();
 }

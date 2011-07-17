@@ -1,6 +1,6 @@
 package ua.com.alus.medhosp.backend.axon.api.patient.event;
 
-import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoals;
+import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoal;
 
 import java.io.Serializable;
 
@@ -11,9 +11,12 @@ import java.io.Serializable;
  */
 public class SaveAttributeEvent extends AttributeEvent implements Serializable {
 
-    public static final String GOAL = DtoGoals.SAVE.name();
-
     public SaveAttributeEvent(String entityId, String messageId, String name) {
         super(entityId, messageId, name);
+    }
+
+    @Override
+    public DtoGoal getGoal() {
+        return DtoGoal.SAVE;
     }
 }

@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Date: 24.05.11
  * Time: 14:44
  */
-public class AttributeEvent extends AbstractEntityEvent implements Serializable {
+public abstract class AttributeEvent extends AbstractEntityEvent implements Serializable {
     private String type;
     private String name;
     private String valueType;
