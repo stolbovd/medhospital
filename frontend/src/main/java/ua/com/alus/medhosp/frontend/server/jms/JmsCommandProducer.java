@@ -18,7 +18,7 @@ import java.io.IOException;
  * Date: 19.05.11
  * Time: 23:51
  */
-public class JmsCommandProducer {
+public class JmsCommandProducer implements ICommandProducer {
     private static final Logger logger = Logger.getLogger(JmsCommandProducer.class);
 
     private JmsTemplate template = null;
@@ -27,7 +27,7 @@ public class JmsCommandProducer {
         this.template = template;
     }
 
-    public void generateCommands(final CommandsListJson commandsListJson) throws JMSException {
+    public void generateCommands(final CommandsListJson commandsListJson) throws RuntimeException {
         MessageCreator messageCreator = new MessageCreator() {
             public Message createMessage(Session session) throws JMSException {
                 ObjectMapper mapper = new ObjectMapper();

@@ -36,9 +36,9 @@
         <property name="cFamilyName" value="PatientView"/>
     </bean>
 
-    <bean id="patientJmsProducerService" class="ua.com.alus.medhosp.frontend.server.services.spring.PatientJmsProducerService">
+    <bean id="patientJmsProducerService"
+          class="ua.com.alus.medhosp.frontend.server.services.spring.PatientJmsProducerService">
         <property name="jmsCommandProducer" ref="jmsClientProducer"/>
-        <property name="taskService" ref="taskService"/>
     </bean>
 
     <bean id="patientService" class="ua.com.alus.medhosp.frontend.server.services.spring.PatientServiceImpl">
@@ -55,4 +55,5 @@
     </bean>
 
     <import resource="jms-config.xml"/>
+    <import resource="aspects-config.xml"/>
 </beans>
