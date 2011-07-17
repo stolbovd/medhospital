@@ -7,7 +7,7 @@ package ua.com.alus.medhosp.prototype.cassandra.dto;
  */
 public enum TaskColumns {
     ENTITY_ID("entityId"), MESSAGE_ID("messageId"), MESSAGE_BODY("messageBody"),
-    SUPER_KEY_NAME("superKeyName"), RESULT("result");
+    SUPER_KEY_NAME("superKeyName"), RESULT("result"), ERROR_MESSAGE("errorMessage");
 
     TaskColumns(String columnName) {
         this.columnName = columnName;
