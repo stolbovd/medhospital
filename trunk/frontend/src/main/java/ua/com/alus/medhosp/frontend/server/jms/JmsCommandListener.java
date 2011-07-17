@@ -9,7 +9,7 @@ import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 import ua.com.alus.medhosp.frontend.shared.TaskDTO;
 import ua.com.alus.medhosp.prototype.cassandra.dto.TaskColumns;
-import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoals;
+import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoal;
 import ua.com.alus.medhosp.prototype.data.Constants;
 
 import javax.jms.Message;
@@ -105,7 +105,7 @@ public class JmsCommandListener implements MessageListener {
 
     //TODO check if it can be simplified with good usability
     private void executeUpdate(AbstractDTO object, String goal) {
-        DtoGoals dtoGoal = DtoGoals.valueOf(goal);
+        DtoGoal dtoGoal = DtoGoal.valueOf(goal);
         switch (dtoGoal){
             case SAVE:
                 if (object instanceof PatientDTO) {
