@@ -10,6 +10,7 @@ import ua.com.alus.medhosp.backend.jms.IJmsEventProducer;
 import ua.com.alus.medhosp.prototype.cassandra.dto.AttributeValueColumns;
 import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
 import ua.com.alus.medhosp.prototype.cassandra.dto.Dto;
+import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoals;
 import ua.com.alus.medhosp.prototype.data.Constants;
 
 import java.util.HashMap;
@@ -60,8 +61,10 @@ public class EventHandlerAspect {
             answer.put(AttributeValueColumns.ATTRIBUTE_ID.getColumnName(), ((SaveAttributeValueEvent) event).getAttributeId());
             answer.put(Constants.CLASS, Dto.PATIENT_ATTRIBUTE_VALUE.getDtoName());
             answer.put(AttributeValueColumns.SUPER_KEY_NAME.getColumnName(), ((SaveAttributeValueEvent) event).getAttributeId());
+            answer.put(Constants.GOAL, SaveAttributeValueEvent.GOAL);
         } else if (event instanceof SavePatientEvent) {
             answer.put(Constants.CLASS, Dto.PATIENT.getDtoName());
+            answer.put(Constants.GOAL, SavePatientEvent.GOAL);
         }
     }
 }
