@@ -15,8 +15,6 @@ import ua.com.alus.medhosp.prototype.json.CommandJson;
 import ua.com.alus.medhosp.prototype.json.CommandsListJson;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Aspect on JMSProducer
