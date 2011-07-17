@@ -122,7 +122,7 @@ public class JmsCommandListener implements MessageListener {
         TaskDTO taskDTO = getTaskService().findTask(messageId);
         if (result == null) {
             taskDTO.put(TaskColumns.RESULT.getColumnName(), CommandResult.OK.name());
-            getTaskService().removeTask(messageId);
+            getTaskService().saveTask(taskDTO);
         } else {
             taskDTO.put(TaskColumns.RESULT.getColumnName(), CommandResult.FAIL.name());
             taskDTO.put(TaskColumns.ERROR_MESSAGE.getColumnName(), result);

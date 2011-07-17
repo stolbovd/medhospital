@@ -122,7 +122,8 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
                     HFactory.createRangeSlicesQuery(keyspace, ss, ss, ss);
             rangeSlicesQuery.setColumnFamily(cFamilyName);
             rangeSlicesQuery.setColumnNames(dtoObject.getColumns());
-            rangeSlicesQuery.setRange("", "", false, dtoObject.getColumns().length);
+            //100 rows by default
+            rangeSlicesQuery.setRange("", "", false, 100);
             rangeSlicesQuery.setKeys(keyFirst, keyLast);
             QueryResult<OrderedRows<String, String, String>> result = rangeSlicesQuery.execute();
             OrderedRows<String, String, String> orderedRows = result.get();
@@ -152,7 +153,8 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
                     HFactory.createRangeSuperSlicesQuery(keyspace, ss, ss, ss, ss);
             rangeSliceQuery.setColumnFamily(cFamilyName);
             rangeSliceQuery.setColumnNames(superColumnNames);
-            rangeSliceQuery.setRange("", "", false, dtoObject.getColumns().length);
+            //100 row by default
+            rangeSliceQuery.setRange("", "", false, 100);
             rangeSliceQuery.setKeys(keyFirst, keyLast);
             QueryResult<OrderedSuperRows<String, String, String, String>> result = rangeSliceQuery.execute();
             OrderedSuperRows<String, String, String, String> orderedSuperRows = result.get();
