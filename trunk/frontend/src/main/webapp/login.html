@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>Please login</title>
+</head>
+<body>
+<div style="width:100%;">
+    <div style="width: 300px; margin: 200px auto;">
+        For entering application in test mode please enter:<br/>
+        <br/>
+        <b>login</b>: testuser<br/>
+        <b>password</b>: testuser<br/>
+        <br/>
+        <br/>
+
+        <form method="post" action="/j_spring_security_check" style="border:blue 1px">
+
+            <table>
+                <tr>
+                    <td>User</td>
+                    <td><input type="text" name="j_username">
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" name="j_password">
+                </tr>
+            </table>
+            <div align="center">
+                <input type="submit" value="Login"/>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

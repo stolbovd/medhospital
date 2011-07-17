@@ -56,4 +56,5 @@
 
     <import resource="jms-config.xml"/>
     <import resource="aspects-config.xml"/>
+    <import resource="asegi-security.xml"/>
 </beans>
