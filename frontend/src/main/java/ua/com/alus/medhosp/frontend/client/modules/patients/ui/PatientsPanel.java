@@ -26,6 +26,7 @@ import ua.com.alus.medhosp.prototype.data.Constants;
  */
 public class PatientsPanel extends HLayout {
     private ToolBarPanel patientsToolbar;
+    private ToolBarPanel tasksToolbar;
     PatientConstants constants = ConstantsBundle.getInstance().getPsConst();
     Icons icons = ConstantsBundle.getInstance().getIcons();
 
@@ -38,7 +39,7 @@ public class PatientsPanel extends HLayout {
         LeftToolPanel leftToolPanel = new LeftToolPanel();
         leftToolPanel.setWidth(200);
         leftToolPanel.setHeight100();
-        leftToolPanel.setMembers(getTasksTable());
+        leftToolPanel.setMembers(getTasksToolbar(), getTasksTable());
 
         setMembers(leftToolPanel, mainPanel);
 
@@ -93,6 +94,27 @@ public class PatientsPanel extends HLayout {
             patientsToolbar.setHeight(30);
         }
         return patientsToolbar;
+    }
+
+
+    private ToolBarPanel getTasksToolbar() {
+        if (tasksToolbar == null) {
+            tasksToolbar = new ToolBarPanel();
+
+            final ToolbarButton refreshButton = new ToolbarButton(icons.refresh(),
+                    constants.getAllPatients());
+
+
+            refreshButton.addClickHandler(new ClickHandler() {
+                public void onClick(ClickEvent event) {
+                    getTasksTable().getController().refreshTable();
+                }
+            });
+
+            tasksToolbar.setMembers(refreshButton);
+            tasksToolbar.setHeight(30);
+        }
+        return tasksToolbar;
     }
 
 
