@@ -6,5 +6,5 @@ package ua.com.alus.medhosp.prototype.commands;
  * Created by Usatov Alexey
  */
 public enum CommandResult {
-    OK, FAIL
+    OK, FAIL, PENDING
 }
