@@ -9,11 +9,11 @@ import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 import ua.com.alus.medhosp.frontend.shared.TaskDTO;
 import ua.com.alus.medhosp.prototype.cassandra.dto.TaskColumns;
+import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoals;
 import ua.com.alus.medhosp.prototype.data.Constants;
 
 import javax.jms.Message;
 import javax.jms.MessageListener;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,9 +55,6 @@ public class JmsCommandListener implements MessageListener {
         this.taskService = taskService;
     }
 
-    public static final String COMMAND = "command";
-    public static final String CLASS = "class";
-
     /*
     The structure of message:
     {
@@ -71,12 +68,12 @@ public class JmsCommandListener implements MessageListener {
     @SuppressWarnings("unchecked")
     public void onMessage(Message message) {
         try {
-            logger.info("Recieved message:" + message.getStringProperty(COMMAND));
+            logger.info("Recieved message:" + message.getStringProperty(Constants.COMMAND));
             ObjectMapper mapper = new ObjectMapper();
-            Map<String, String> properties = mapper.readValue(message.getStringProperty(COMMAND), HashMap.class);
+            Map<String, String> properties = mapper.readValue(message.getStringProperty(Constants.COMMAND), HashMap.class);
             if (properties.get(Constants.ERROR) == null) {
-                AbstractDTO object = createObject(properties.get(CLASS), properties);
-                executeUpdate(object);
+                AbstractDTO object = createObject(properties.get(Constants.CLASS), properties);
+                executeUpdate(object, object.get(Constants.GOAL));
             }
             updateTask(properties.get(TaskColumns.MESSAGE_ID.getColumnName()), properties.get(Constants.ERROR));
         } catch (Exception e) {
@@ -105,11 +102,18 @@ public class JmsCommandListener implements MessageListener {
         object.putAll(properties);
     }
 
-    public void executeUpdate(AbstractDTO object) {
-        if (object instanceof PatientDTO) {
-            getPatientService().createPatient((PatientDTO) object);
-        } else if (object instanceof PatientAttributeValue) {
-            getPatientService().savePatientAttributeValue((PatientAttributeValue) object, object.getColumns());
+
+    //TODO check if it can be simplified with good usability
+    private void executeUpdate(AbstractDTO object, String goal) {
+        DtoGoals dtoGoal = DtoGoals.valueOf(goal);
+        switch (dtoGoal){
+            case SAVE:
+                if (object instanceof PatientDTO) {
+                    getPatientService().createPatient((PatientDTO) object);
+                } else if (object instanceof PatientAttributeValue) {
+                    getPatientService().savePatientAttributeValue((PatientAttributeValue) object, object.getColumns());
+                }
+                break;
         }
     }
 
