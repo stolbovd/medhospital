@@ -76,7 +76,9 @@ public class JmsCommandListener implements MessageListener {
                 AbstractDTO object = createObject(properties.get(Constants.CLASS), properties);
                 executeUpdate(object, object.get(Constants.GOAL));
             }
-            updateTask(properties.get(TaskColumns.MESSAGE_ID.getColumnName()), properties.get(Constants.ERROR));
+            updateTask(properties.get(Constants.USER_ID),
+                    properties.get(TaskColumns.MESSAGE_ID.getColumnName()),
+                    properties.get(Constants.ERROR));
         } catch (Exception e) {
             logger.trace(e);
         }
@@ -107,7 +109,7 @@ public class JmsCommandListener implements MessageListener {
     //TODO check if it can be simplified with good usability
     private void executeUpdate(AbstractDTO object, String goal) {
         DtoGoal dtoGoal = DtoGoal.valueOf(goal);
-        switch (dtoGoal){
+        switch (dtoGoal) {
             case SAVE:
                 if (object instanceof PatientDTO) {
                     getPatientService().createPatient((PatientDTO) object);
@@ -118,8 +120,8 @@ public class JmsCommandListener implements MessageListener {
         }
     }
 
-    public void updateTask(String messageId, String errorMessage) {
-        TaskDTO taskDTO = getTaskService().findTask(messageId);
+    public void updateTask(String userId, String messageId, String errorMessage) {
+        TaskDTO taskDTO = getTaskService().findTask(userId, messageId);
         if (errorMessage == null) {
             taskDTO.put(TaskColumns.RESULT.getColumnName(), CommandResult.OK.name());
             getTaskService().saveTask(taskDTO);

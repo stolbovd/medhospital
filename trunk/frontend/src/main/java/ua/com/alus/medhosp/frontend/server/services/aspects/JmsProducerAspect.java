@@ -56,10 +56,11 @@ public class JmsProducerAspect {
         for (CommandJson commandJson : commandsListJson.getCommands()) {
             TaskDTO taskDTO = new TaskDTO();
             //TODO when autorization will be done here must be real user_id.
-            taskDTO.put(TaskColumns.ENTITY_ID.getColumnName(), "FAKE_user_id");
             taskDTO.put(TaskColumns.SUPER_KEY_NAME.getColumnName(), commandJson.getProperties().get(Constants.MESSAGE_ID));
             taskDTO.put(TaskColumns.MESSAGE_ID.getColumnName(), commandJson.getProperties().get(Constants.MESSAGE_ID));
             taskDTO.put(TaskColumns.RESULT.getColumnName(), CommandResult.PENDING.name());
+            taskDTO.put(TaskColumns.ENTITY_ID.getColumnName(), getTaskService().getUserId());
+            commandJson.getProperties().put(Constants.USER_ID, getTaskService().getUserId());
             try {
                 taskDTO.put(TaskColumns.MESSAGE_BODY.getColumnName(), getMapper().writeValueAsString(commandJson));
             } catch (IOException e) {
@@ -71,7 +72,8 @@ public class JmsProducerAspect {
 
     private void failTasks(CommandsListJson commandsListJson, String errorMessage) {
         for (CommandJson commandJson : commandsListJson.getCommands()) {
-            TaskDTO taskDTO = getTaskService().findTask(commandJson.getProperties().get(Constants.MESSAGE_ID));
+            TaskDTO taskDTO = getTaskService().findTask(commandJson.getProperties().get(Constants.USER_ID),
+                    commandJson.getProperties().get(Constants.MESSAGE_ID));
             taskDTO.put(TaskColumns.RESULT.getColumnName(), CommandResult.FAIL.name());
             taskDTO.put(TaskColumns.ERROR_MESSAGE.getColumnName(), errorMessage);
             getTaskService().saveTask(taskDTO);

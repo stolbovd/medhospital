@@ -24,7 +24,10 @@ public class TaskService implements ITasksService {
     }
 
     public void saveTask(TaskDTO taskDTO) {
-        taskDTO.put(TaskColumns.ENTITY_ID.getColumnName(), getUserId());
+        //if userId is not specified - set current user
+        if (taskDTO.get(TaskColumns.ENTITY_ID.getColumnName()) == null) {
+            taskDTO.put(TaskColumns.ENTITY_ID.getColumnName(), getUserId());
+        }
         getTaskDao().save(taskDTO);
     }
 
@@ -36,12 +39,18 @@ public class TaskService implements ITasksService {
         getTaskDao().removeSelectedSuperBySuperKeyName(getUserId(), messageId);
     }
 
-    public TaskDTO findTask(String messageId) {
-        return getTaskDao().find(getUserId(), getUserId(), messageId).get(0);
+    public TaskDTO findTask(String userId, String messageId) {
+        if(userId == null){
+            userId = getUserId();
+        }
+        return getTaskDao().find(userId, userId, messageId).get(0);
     }
 
-    private String getUserId() {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return user.getUsername();
+    public String getUserId() {
+        User user;
+        if((user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal())!=null){
+            return user.getUsername();
+        }
+        return ua.com.alus.medhosp.prototype.user.User.ANONYMOUS.name();
     }
 }
