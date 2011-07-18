@@ -8,8 +8,8 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
-import ua.com.alus.medhosp.backend.domen.utils.UUID;
 import ua.com.alus.medhosp.backend.processor.CommandProcessorImpl;
+import ua.com.alus.medhosp.prototype.util.UUID;
 
 /**
  * Created by Usatov Alexey

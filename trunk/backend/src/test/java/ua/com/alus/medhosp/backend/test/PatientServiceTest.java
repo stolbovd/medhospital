@@ -12,8 +12,8 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import ua.com.alus.medhosp.backend.domen.entity.patient.Patient;
 import ua.com.alus.medhosp.backend.domen.entity.patient.PatientAttribute;
 import ua.com.alus.medhosp.backend.domen.entity.patient.PatientAttributeValue;
-import ua.com.alus.medhosp.backend.domen.utils.UUID;
 import ua.com.alus.medhosp.backend.service.PatientService;
+import ua.com.alus.medhosp.prototype.util.UUID;
 
 /**
  * Created by Usatov Alexey<br/>

@@ -17,7 +17,7 @@ import ua.com.alus.medhosp.backend.axon.api.patient.event.SaveAttributeValueEven
 import ua.com.alus.medhosp.backend.axon.api.patient.event.SavePatientEvent;
 import ua.com.alus.medhosp.backend.axon.api.patient.handlers.AttributeValueCommandHandler;
 import ua.com.alus.medhosp.backend.axon.api.patient.handlers.PatientCommandHandler;
-import ua.com.alus.medhosp.backend.domen.utils.UUID;
+import ua.com.alus.medhosp.prototype.util.UUID;
 
 /**
  * Created by Usatov Alexey
