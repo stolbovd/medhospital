@@ -6,15 +6,18 @@ use Hospital;
 create column family PatientView with
   column_type='Super' and
   comparator='BytesType' and
-  subcomparator='BytesType'
+  subcomparator='BytesType' and
+  gc_grace=0
 ;
 
 create column family Patients with
-  comparator='BytesType'
+  comparator='BytesType' and
+  gc_grace=0
 ;
 
 create column family TasksView with
   column_type='Super' and
   comparator='BytesType' and
-  subcomparator='BytesType'
+  subcomparator='BytesType' and
+  gc_grace=0
 ;
