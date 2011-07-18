@@ -5,7 +5,7 @@
        xmlns:p="http://www.springframework.org/schema/p" xmlns:jms="http://www.springframework.org/schema/jms"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-3.0.xsd">
 
-    <amq:queue id="destination" physicalName="${JMS_PRODUCER_QUEUE}"/>
+    <amq:queue id="producerDestination" physicalName="${JMS_PRODUCER_QUEUE}"/>
 
     <!-- JMS Listener Configuration -->
     <bean id="jmsFactory" class="org.apache.activemq.pool.PooledConnectionFactory"
@@ -19,7 +19,7 @@
 
     <bean id="jmsProducerTemplate" class="org.springframework.jms.core.JmsTemplate"
           p:connectionFactory-ref="jmsFactory"
-          p:defaultDestination-ref="destination"/>
+          p:defaultDestination-ref="producerDestination"/>
 
     <bean id="jmsClientProducer" class="ua.com.alus.medhosp.frontend.server.jms.JmsCommandProducer">
         <property name="template" ref="jmsProducerTemplate"/>
