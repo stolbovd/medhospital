@@ -36,7 +36,7 @@ public class MainUILoader {
     private TabSet getMainTabset() {
         if (mainTabSet == null) {
             mainTabSet = new TabSet();
-            mainTabSet.setMargin(5);
+            mainTabSet.setMargin(20);
             mainTabSet.setTabBarPosition(Side.TOP);
             mainTabSet.setTabBarAlign(Side.LEFT);
             mainTabSet.setWidth100();
