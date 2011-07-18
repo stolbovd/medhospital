@@ -31,7 +31,7 @@ public class JmsEventProducer implements IJmsEventProducer {
     /**
      * Generates JMS messages
      *
-     * @throws javax.jms.JMSException if error
+     * @throws org.springframework.jms if error
      */
     public void sendResult(final Map<String, String> map) throws JmsException{
             MessageCreator messageCreator = new MessageCreator() {
