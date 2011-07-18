@@ -10,7 +10,6 @@ import ua.com.alus.medhosp.backend.jms.IJmsEventProducer;
 import ua.com.alus.medhosp.prototype.cassandra.dto.AttributeValueColumns;
 import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
 import ua.com.alus.medhosp.prototype.cassandra.dto.Dto;
-import ua.com.alus.medhosp.prototype.cassandra.dto.TaskColumns;
 import ua.com.alus.medhosp.prototype.data.Constants;
 
 import java.util.HashMap;
