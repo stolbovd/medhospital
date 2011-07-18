@@ -30,7 +30,7 @@ public class PatientCommandHandler {
             patientAggregate = new PatientAggregate(savePatientCommand.getEntityId());
             repository.add(patientAggregate);
         }
-        patientAggregate.save(savePatientCommand.getMessageId());
+        patientAggregate.save(savePatientCommand.getMessageId(), savePatientCommand.getUserId());
         logger.debug("Handling savePatient command");
     }
 
@@ -39,7 +39,7 @@ public class PatientCommandHandler {
         logger.debug("Handling removePatient command");
         PatientAggregate patientAggregate;
         patientAggregate = repository.load(new StringAggregateIdentifier(removePatientCommand.getEntityId()));
-        patientAggregate.remove(removePatientCommand.getMessageId());
+        patientAggregate.remove(removePatientCommand.getMessageId(), removePatientCommand.getUserId());
     }
 
     public void setRepository(Repository<PatientAggregate> repository) {

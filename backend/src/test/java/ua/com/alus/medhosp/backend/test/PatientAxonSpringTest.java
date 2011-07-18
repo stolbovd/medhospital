@@ -37,11 +37,11 @@ public class PatientAxonSpringTest extends AbstractTransactionalJUnit4SpringCont
     @Test
     public void savePatient() {
         String uuid = UUID.uuid();
-        commandBus.dispatch(new SavePatientCommand(uuid, "99965656565"));
+        commandBus.dispatch(new SavePatientCommand(uuid, "99965656565", "fake"));
         try {
             Thread.sleep(25000);
             uuid = UUID.uuid();
-            commandBus.dispatch(new SavePatientCommand(uuid, "1231321"));
+            commandBus.dispatch(new SavePatientCommand(uuid, "1231321","fake"));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -50,8 +50,8 @@ public class PatientAxonSpringTest extends AbstractTransactionalJUnit4SpringCont
     @Test
     public void removePatient() {
         String uuid = UUID.uuid();
-        commandBus.dispatch(new SavePatientCommand(uuid, null));
-        commandBus.dispatch(new RemovePatientCommand(uuid, null));
+        commandBus.dispatch(new SavePatientCommand(uuid, null,"fake"));
+        commandBus.dispatch(new RemovePatientCommand(uuid, null,"fake"));
     }
 
     @Ignore
@@ -62,14 +62,14 @@ public class PatientAxonSpringTest extends AbstractTransactionalJUnit4SpringCont
         String value = "hello1";
 
         //commandBus.dispatch(new SavePatientCommand(entityId,null));
-        commandBus.dispatch(new SaveAttributeValueCommand(entityId, null, attributeId, value));
+        commandBus.dispatch(new SaveAttributeValueCommand(entityId, null,"fake", attributeId, value));
     }
 
     @Test
     public void saveAttribute() {
         String entityId = "2CA5D151-0A7A-44F1-B3EF-7BAAF79BDEA9";
         String name = "hhhhh";
-        commandBus.dispatch(new SaveAttributeCommand(entityId, null, name));
+        commandBus.dispatch(new SaveAttributeCommand(entityId, null,"fake", name));
     }
 
     @Test

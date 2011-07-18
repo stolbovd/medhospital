@@ -47,16 +47,16 @@ public class PatientAxonTest {
     public void savePatient() {
         String uuid = UUID.uuid();
         fixture.given()
-                .when(new SavePatientCommand(uuid, ""))
-                .expectEvents(new SavePatientEvent(uuid, ""));
+                .when(new SavePatientCommand(uuid, "",""))
+                .expectEvents(new SavePatientEvent(uuid, "",""));
     }
 
     @Test
     public void removePatient() {
         String uuid = UUID.uuid();
-        fixture.given(new SavePatientEvent(uuid, ""))
-                .when(new RemovePatientCommand(fixture.getAggregateIdentifier().asString(), ""))
-                .expectEvents(new RemovePatientEvent(fixture.getAggregateIdentifier().asString(), ""));
+        fixture.given(new SavePatientEvent(uuid, "",""))
+                .when(new RemovePatientCommand(fixture.getAggregateIdentifier().asString(), "",""))
+                .expectEvents(new RemovePatientEvent(fixture.getAggregateIdentifier().asString(), "",""));
     }
 
     @Test
@@ -64,17 +64,17 @@ public class PatientAxonTest {
         String entityId = UUID.uuid();
         String attributeId = UUID.uuid();
         String attributeValue = "value";
-        fixture.given().when(new SaveAttributeValueCommand(entityId, "", attributeId, attributeValue))
-                .expectEvents(new SaveAttributeValueEvent(entityId, "", attributeId, attributeValue));
+        fixture.given().when(new SaveAttributeValueCommand(entityId, "","", attributeId, attributeValue))
+                .expectEvents(new SaveAttributeValueEvent(entityId, "","", attributeId, attributeValue));
     }
 
     @Test
     public void removeAttributeValue() {
         String entityId = UUID.uuid();
         String attributeId = UUID.uuid();
-        fixture.given().when(new SaveAttributeValueCommand(entityId, "", attributeId, ""))
-                .expectEvents(new SaveAttributeValueEvent(entityId, "", attributeId, ""));
-        fixture.given().when(new RemoveAttributeValueCommand(entityId, "", attributeId))
-                .expectEvents(new RemoveAttributeValueEvent(entityId, "", attributeId));
+        fixture.given().when(new SaveAttributeValueCommand(entityId, "","", attributeId, ""))
+                .expectEvents(new SaveAttributeValueEvent(entityId, "", "", attributeId, ""));
+        fixture.given().when(new RemoveAttributeValueCommand(entityId, "","", attributeId))
+                .expectEvents(new RemoveAttributeValueEvent(entityId, "","", attributeId));
     }
 }

@@ -9,6 +9,8 @@ public abstract class AbstractEntityCommand {
     private String messageId;
     private String entityId;
 
+    private String userId;
+
     /**
      * Needed for CommandProcessor
      */
@@ -16,9 +18,10 @@ public abstract class AbstractEntityCommand {
 
     }
 
-    public AbstractEntityCommand(String entityId, String messageId) {
+    public AbstractEntityCommand(String entityId, String messageId, String userId) {
         this.entityId = entityId;
         this.messageId = messageId;
+        this.userId = userId;
     }
 
     public String getEntityId() {
@@ -35,6 +38,14 @@ public abstract class AbstractEntityCommand {
 
     public void setMessageId(String messageId) {
         this.messageId = messageId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
 }

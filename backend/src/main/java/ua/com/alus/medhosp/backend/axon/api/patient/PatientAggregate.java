@@ -23,11 +23,11 @@ public class PatientAggregate extends AbstractAnnotatedAggregateRoot implements 
         super(new StringAggregateIdentifier(entityId));
     }
 
-    public void remove(String messageId) {
-        apply(new RemovePatientEvent(getIdentifier().asString(), messageId));
+    public void remove(String messageId, String userId) {
+        apply(new RemovePatientEvent(getIdentifier().asString(), messageId, userId));
     }
 
-    public void save(String messageId) {
-        apply(new SavePatientEvent(getIdentifier().asString(), messageId));
+    public void save(String messageId, String userId) {
+        apply(new SavePatientEvent(getIdentifier().asString(), messageId, userId));
     }
 }

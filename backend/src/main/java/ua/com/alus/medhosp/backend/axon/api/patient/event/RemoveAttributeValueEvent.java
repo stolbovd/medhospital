@@ -10,8 +10,8 @@ import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoal;
  */
 public class RemoveAttributeValueEvent extends AttributeValueEvent {
 
-    public RemoveAttributeValueEvent(String entityId, String messageId) {
-        super(entityId, messageId);
+    public RemoveAttributeValueEvent(String entityId, String messageId, String userId) {
+        super(entityId, messageId, userId);
     }
 
     @Override
@@ -19,8 +19,8 @@ public class RemoveAttributeValueEvent extends AttributeValueEvent {
         return DtoGoal.REMOVE;
     }
 
-    public RemoveAttributeValueEvent(String entityId, String messageId, String attributeId) {
-        super(entityId, messageId);
+    public RemoveAttributeValueEvent(String entityId, String messageId, String userId, String attributeId) {
+        super(entityId, messageId, userId);
         setAttributeId(attributeId);
     }
 }

@@ -11,8 +11,8 @@ import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoal;
 public class RemovePatientEvent extends AbstractEntityEvent {
 
 
-    public RemovePatientEvent(String entityId, String messageId) {
-        super(entityId, messageId);
+    public RemovePatientEvent(String entityId, String messageId, String userId) {
+        super(entityId, messageId, userId);
     }
 
     @Override

@@ -17,8 +17,8 @@ public class SaveAttributeValueCommand extends AbstractEntityCommand {
 
     }
 
-    public SaveAttributeValueCommand(String entityId, String messageId, String attributeId, String attributeValue) {
-        super(entityId, messageId);
+    public SaveAttributeValueCommand(String entityId, String messageId, String userId, String attributeId, String attributeValue) {
+        super(entityId, messageId, userId);
         this.attributeId = attributeId;
         this.attributeValue = attributeValue;
     }

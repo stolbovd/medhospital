@@ -11,8 +11,8 @@ import java.io.Serializable;
  */
 public class SaveAttributeEvent extends AttributeEvent implements Serializable {
 
-    public SaveAttributeEvent(String entityId, String messageId, String name) {
-        super(entityId, messageId, name);
+    public SaveAttributeEvent(String entityId, String messageId, String userId, String name) {
+        super(entityId, messageId, userId, name);
     }
 
     @Override

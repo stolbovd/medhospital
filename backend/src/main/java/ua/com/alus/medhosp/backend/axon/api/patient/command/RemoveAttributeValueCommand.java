@@ -15,8 +15,8 @@ public class RemoveAttributeValueCommand extends AbstractEntityCommand {
 
     }
 
-    public RemoveAttributeValueCommand(String entityId, String messageId, String attributeId) {
-        super(entityId, messageId);
+    public RemoveAttributeValueCommand(String entityId, String messageId, String userId, String attributeId) {
+        super(entityId, messageId, userId);
         this.attributeId = attributeId;
     }
 
