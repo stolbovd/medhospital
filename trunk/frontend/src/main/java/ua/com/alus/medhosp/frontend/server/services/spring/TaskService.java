@@ -5,8 +5,6 @@ import org.springframework.security.core.userdetails.User;
 import ua.com.alus.medhosp.frontend.client.modules.tasks.rpc.ITasksService;
 import ua.com.alus.medhosp.frontend.server.services.spring.dao.TaskDao;
 import ua.com.alus.medhosp.frontend.shared.TaskDTO;
-import ua.com.alus.medhosp.prototype.cassandra.dto.TaskColumns;
-import ua.com.alus.medhosp.prototype.data.Constants;
 
 import java.util.List;
 
@@ -51,7 +49,7 @@ public class TaskService implements ITasksService {
         return ua.com.alus.medhosp.prototype.user.User.ANONYMOUS.name();
     }
 
-    public String getClock(){
+    public String getClock() {
         return String.valueOf(getTaskDao().getKeyspace().createClock());
     }
 }

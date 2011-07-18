@@ -15,7 +15,6 @@ import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientCon
 import ua.com.alus.medhosp.frontend.client.utils.ConstantsBundle;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
-import ua.com.alus.medhosp.prototype.data.Constants;
 import ua.com.alus.medhosp.prototype.util.UUID;
 
 

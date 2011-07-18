@@ -5,16 +5,10 @@ import org.codehaus.jackson.map.ObjectMapper;
 import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientJmsService;
 import ua.com.alus.medhosp.frontend.server.jms.JmsCommandProducer;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
-import ua.com.alus.medhosp.frontend.shared.TaskDTO;
 import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
-import ua.com.alus.medhosp.prototype.cassandra.dto.TaskColumns;
 import ua.com.alus.medhosp.prototype.commands.Command;
-import ua.com.alus.medhosp.prototype.commands.CommandResult;
-import ua.com.alus.medhosp.prototype.data.Constants;
 import ua.com.alus.medhosp.prototype.json.CommandJson;
 import ua.com.alus.medhosp.prototype.json.CommandsListJson;
-
-import java.io.IOException;
 
 /**
  * Class that generate JMS-message for creating patient, attributes and attributeValues.

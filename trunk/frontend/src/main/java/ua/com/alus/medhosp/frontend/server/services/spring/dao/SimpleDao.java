@@ -107,7 +107,7 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
         m1.execute();
     }
 
-    public List<D> find(String keyFirst, String keyLast, String ... superColumnNames) {
+    public List<D> find(String keyFirst, String keyLast, String... superColumnNames) {
         if (dtoObject instanceof SuperColumn) {
             return findSuper(keyFirst, keyLast, superColumnNames);
         } else {
@@ -210,7 +210,7 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
         return keys.size();
     }
 
-    public Integer removeSelectedSuperBySuperKeyName(String key, String superKeyName){
+    public Integer removeSelectedSuperBySuperKeyName(String key, String superKeyName) {
         Mutator<String> mutator = createMutator();
         mutator.addSuperDelete(key, cFamilyName, superKeyName, ss);
         mutator.execute();
