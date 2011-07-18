@@ -17,8 +17,6 @@
         </amq:transportConnectors>
     </amq:broker>
 
-    <amq:queue id="commandProcessorDestination" physicalName="ua.com.alus.medhosp.commandprocessor"/>
-
     <amq:queue id="clientListenerDestination" physicalName="ua.com.alus.medhosp.clientListener"/>
 
     <!-- JMS Listener Configuration -->
