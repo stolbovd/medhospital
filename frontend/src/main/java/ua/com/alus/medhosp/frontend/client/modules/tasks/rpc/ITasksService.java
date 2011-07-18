@@ -8,12 +8,13 @@ import java.util.List;
 
 /**
  * Tasks Service
- *
+ * <p/>
  * Created by Usatov Alexey
  */
 @RemoteServiceRelativePath("springGwtServices/taskService")
 public interface ITasksService extends RemoteService {
 
     public void saveTask(TaskDTO taskDTO);
+
     public List<TaskDTO> getTasks();
 }

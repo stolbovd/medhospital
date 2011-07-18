@@ -4,11 +4,9 @@ import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.ListGridFieldType;
 import com.smartgwt.client.widgets.grid.HoverCustomizer;
 import com.smartgwt.client.widgets.grid.ListGrid;
-import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import ua.com.alus.medhosp.frontend.client.modules.patients.ui.SimpleField;
 import ua.com.alus.medhosp.frontend.client.modules.tasks.cto.TaskCTO;
-import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
 import ua.com.alus.medhosp.prototype.cassandra.dto.TaskColumns;
 
 /**
@@ -20,9 +18,10 @@ public class TasksTable extends ListGrid {
     private TaskCTO taskCTO = new TaskCTO();
 
     //TODO check if it can be removed.
-    public TaskCTO getCTOSample(){
+    public TaskCTO getCTOSample() {
         return taskCTO;
     }
+
     public TasksTable() {
         initTable();
         controller = new TasksController(this);
