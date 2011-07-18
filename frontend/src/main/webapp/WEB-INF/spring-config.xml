@@ -8,15 +8,15 @@
     <context:property-placeholder location="WEB-INF/deployment.properties"/>
     <bean id="cassandraHostConfigurator"
           class="me.prettyprint.cassandra.service.CassandraHostConfigurator">
-        <constructor-arg value="localhost:9160"/>
+        <constructor-arg value="${CASSANDRA_ADDRESS}"/>
     </bean>
     <bean id="cluster" class="me.prettyprint.cassandra.service.ThriftCluster">
-        <constructor-arg value="Test Cluster"/>
+        <constructor-arg value="${CASSANDRA_CLUSTER}"/>
         <constructor-arg ref="cassandraHostConfigurator"/>
     </bean>
     <bean id="keyspace" class="me.prettyprint.hector.api.factory.HFactory"
           factory-method="createKeyspace">
-        <constructor-arg value="Hospital"/>
+        <constructor-arg value="${CASSANDRA_KEYSPACE}"/>
         <constructor-arg ref="cluster"/>
     </bean>
 
