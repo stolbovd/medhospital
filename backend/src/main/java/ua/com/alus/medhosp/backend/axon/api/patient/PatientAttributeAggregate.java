@@ -18,6 +18,7 @@ public class PatientAttributeAggregate extends AbstractAnnotatedAggregateRoot im
     private String type;
     private String name;
     private String valueType;
+    private String userId;
 
     public PatientAttributeAggregate(AggregateIdentifier identifier) {
         super(identifier);
@@ -66,5 +67,13 @@ public class PatientAttributeAggregate extends AbstractAnnotatedAggregateRoot im
 
     public void setEntityId(String entityId) {
         this.entityId = entityId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

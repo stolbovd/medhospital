@@ -21,6 +21,7 @@ public class AttributeValueAggregateFactory implements AggregateFactory<PatientA
             AttributeValueEvent event = (AttributeValueEvent) firstEvent;
             aggregate.setEntityId(event.getEntityId());
             aggregate.setAttributeId(event.getAttributeId());
+            aggregate.setUserId(event.getUserId());
         } else if (firstEvent instanceof AggregateSnapshot) {
             return ((AggregateSnapshot<PatientAttributeValueAggregate>) firstEvent).getAggregate();
         }
