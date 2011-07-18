@@ -55,7 +55,6 @@ public class JmsProducerAspect {
     private void saveTasks(CommandsListJson commandsListJson) {
         for (CommandJson commandJson : commandsListJson.getCommands()) {
             TaskDTO taskDTO = new TaskDTO();
-            //TODO when autorization will be done here must be real user_id.
             taskDTO.put(TaskColumns.SUPER_KEY_NAME.getColumnName(), commandJson.getProperties().get(Constants.MESSAGE_ID));
             taskDTO.put(TaskColumns.MESSAGE_ID.getColumnName(), commandJson.getProperties().get(Constants.MESSAGE_ID));
             taskDTO.put(TaskColumns.RESULT.getColumnName(), CommandResult.PENDING.name());
