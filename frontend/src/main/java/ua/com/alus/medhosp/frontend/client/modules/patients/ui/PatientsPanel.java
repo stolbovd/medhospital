@@ -13,10 +13,10 @@ import ua.com.alus.medhosp.frontend.client.modules.tasks.ui.TasksTable;
 import ua.com.alus.medhosp.frontend.client.resources.images.Icons;
 import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientConstants;
 import ua.com.alus.medhosp.frontend.client.utils.ConstantsBundle;
-import ua.com.alus.medhosp.frontend.client.utils.UUID;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
 import ua.com.alus.medhosp.prototype.data.Constants;
+import ua.com.alus.medhosp.prototype.util.UUID;
 
 
 /**
