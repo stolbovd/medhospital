@@ -70,7 +70,6 @@ public class PatientsPanel extends HLayout {
                             if (aBoolean) {
                                 PatientDTO patientDTO = new PatientDTO();
                                 patientDTO.put(BaseColumns.ENTITY_ID.getColumnName(), UUID.uuid());
-                                patientDTO.put(Constants.MESSAGE_ID, UUID.uuid());
                                 getPatientsTable().getController().createPatient(patientDTO);
                             }
                         }

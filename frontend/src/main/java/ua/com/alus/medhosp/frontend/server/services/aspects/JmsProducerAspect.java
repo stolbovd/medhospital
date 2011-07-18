@@ -55,11 +55,8 @@ public class JmsProducerAspect {
     private void saveTasks(CommandsListJson commandsListJson) {
         for (CommandJson commandJson : commandsListJson.getCommands()) {
             TaskDTO taskDTO = new TaskDTO();
-            taskDTO.put(TaskColumns.SUPER_KEY_NAME.getColumnName(), commandJson.getProperties().get(Constants.MESSAGE_ID));
-            taskDTO.put(TaskColumns.MESSAGE_ID.getColumnName(), commandJson.getProperties().get(Constants.MESSAGE_ID));
             taskDTO.put(TaskColumns.RESULT.getColumnName(), CommandResult.PENDING.name());
-            taskDTO.put(TaskColumns.ENTITY_ID.getColumnName(), getTaskService().getUserId());
-            commandJson.getProperties().put(Constants.USER_ID, getTaskService().getUserId());
+            putUserIdAndMessageId(taskDTO, commandJson);
             try {
                 taskDTO.put(TaskColumns.MESSAGE_BODY.getColumnName(), getMapper().writeValueAsString(commandJson));
             } catch (IOException e) {
@@ -77,6 +74,20 @@ public class JmsProducerAspect {
             taskDTO.put(TaskColumns.ERROR_MESSAGE.getColumnName(), errorMessage);
             getTaskService().saveTask(taskDTO);
         }
+    }
+
+    private void putUserIdAndMessageId(TaskDTO taskDTO, CommandJson commandJson) {
+        String userId;
+        String clock;
+        userId = getTaskService().getUserId();
+        clock = getTaskService().getClock();
+
+        taskDTO.put(TaskColumns.ENTITY_ID.getColumnName(), userId);
+        taskDTO.put(TaskColumns.MESSAGE_ID.getColumnName(), clock);
+        taskDTO.put(TaskColumns.SUPER_KEY_NAME.getColumnName(), clock);
+
+        commandJson.getProperties().put(Constants.USER_ID, userId);
+        commandJson.getProperties().put(Constants.MESSAGE_ID, clock);
     }
 
 }

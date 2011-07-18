@@ -64,7 +64,6 @@ public class PatientDialog extends Window {
                 }
                 PatientDTO patientDTO = new PatientDTO();
                 patientDTO.put(BaseColumns.ENTITY_ID.getColumnName(), UUID.uuid());
-                patientDTO.put(Constants.MESSAGE_ID, UUID.uuid());
                 getController().createPatient(patientDTO);
                 destroy();
             }
