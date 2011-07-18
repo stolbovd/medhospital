@@ -45,7 +45,6 @@ public class PatientJmsProducerService implements IPatientJmsService {
         CommandJson savePatientCommand = new CommandJson();
         savePatientCommand.setCommand(Command.SAVE_PATIENT.getCommandName());
         savePatientCommand.getProperties().put(BaseColumns.ENTITY_ID.getColumnName(), patientDTO.get(BaseColumns.ENTITY_ID.getColumnName()));
-        savePatientCommand.getProperties().put(Constants.MESSAGE_ID, patientDTO.get(Constants.MESSAGE_ID));
         commandsListJson.getCommands().add(savePatientCommand);
         sendJms(commandsListJson);
     }

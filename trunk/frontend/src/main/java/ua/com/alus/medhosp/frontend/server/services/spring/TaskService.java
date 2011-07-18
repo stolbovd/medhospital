@@ -6,6 +6,7 @@ import ua.com.alus.medhosp.frontend.client.modules.tasks.rpc.ITasksService;
 import ua.com.alus.medhosp.frontend.server.services.spring.dao.TaskDao;
 import ua.com.alus.medhosp.frontend.shared.TaskDTO;
 import ua.com.alus.medhosp.prototype.cassandra.dto.TaskColumns;
+import ua.com.alus.medhosp.prototype.data.Constants;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class TaskService implements ITasksService {
     }
 
     public TaskDTO findTask(String userId, String messageId) {
-        if(userId == null){
+        if (userId == null) {
             userId = getUserId();
         }
         return getTaskDao().find(userId, userId, messageId).get(0);
@@ -48,9 +49,13 @@ public class TaskService implements ITasksService {
 
     public String getUserId() {
         User user;
-        if((user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal())!=null){
+        if ((user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()) != null) {
             return user.getUsername();
         }
         return ua.com.alus.medhosp.prototype.user.User.ANONYMOUS.name();
+    }
+
+    public String getClock(){
+        return String.valueOf(getTaskDao().getKeyspace().createClock());
     }
 }
