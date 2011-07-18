@@ -15,5 +15,5 @@ import java.util.List;
 public interface ITasksService extends RemoteService {
 
     public void saveTask(TaskDTO taskDTO);
-    public List<TaskDTO> getTasks(String key);
+    public List<TaskDTO> getTasks();
 }

@@ -25,8 +25,7 @@ public class TasksController {
     }
 
     public void refreshTable() {
-        //TODO remove FAKE_user_id
-        ServiceStorage.getInstance().getTasksServiceAsync().getTasks("FAKE_user_id", new AsyncCallback<List<TaskDTO>>() {
+        ServiceStorage.getInstance().getTasksServiceAsync().getTasks(new AsyncCallback<List<TaskDTO>>() {
             public void onFailure(Throwable caught) {
                 SC.say("Error:" + caught);
             }

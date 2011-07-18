@@ -8,5 +8,5 @@ import java.util.List;
 public interface ITasksServiceAsync {
     void saveTask(TaskDTO taskDTO, AsyncCallback<Void> async);
 
-    void getTasks(String key, AsyncCallback<List<TaskDTO>> async);
+    void getTasks(AsyncCallback<List<TaskDTO>> async);
 }

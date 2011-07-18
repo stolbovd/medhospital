@@ -40,6 +40,8 @@
             <user-service>
                 <security:user name="testuser" password="testuser"
                                authorities="ROLE_USER,ROLE_ADMIN"/>
+                <security:user name="anotheruser" password="anotheruser"
+                               authorities="ROLE_USER,ROLE_ADMIN"/>
             </user-service>
             <!--<password-encoder hash="md5"/> -->
         </authentication-provider>
