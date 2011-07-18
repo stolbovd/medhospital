@@ -1,38 +1,50 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Please login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <title>MedHosp login page</title>
+
+    <link href="login-box.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-<div style="width:100%;">
-    <div style="width: 300px; margin: 200px auto;">
-        For entering application in test mode please enter:<br/>
-        <br/>
-        <b>login</b>: testuser<br/>
-        <b>password</b>: testuser<br/>
-        <br/>
-        <br/>
 
-        <form method="post" action="/j_spring_security_check" style="border:blue 1px">
+<form method="post" action="/j_spring_security_check" name="loginform">
+    <div style="padding: 100px 0 0 250px;">
 
-            <table>
-                <tr>
-                    <td>User</td>
-                    <td><input type="text" name="j_username">
-                </tr>
-                <tr>
-                    <td>Password</td>
-                    <td><input type="password" name="j_password">
-                </tr>
-            </table>
-            <div align="center">
-                <input type="submit" value="Login"/>
+
+        <div id="login-box">
+
+            <H2>Login</H2>
+            Please login into MedHosp system
+            <br/>
+            <br/>
+
+            <div id="login-box-name" style="margin-top:20px;">Username:</div>
+            <div id="login-box-field" style="margin-top:20px;">
+                <input name="j_username" class="form-login" title="Username" value="" size="30" maxlength="2048"/>
             </div>
+            <div id="login-box-name">Password:</div>
+            <div id="login-box-field"><input name="j_password" type="password" class="form-login" title="Password"
+                                             value="" size="30" maxlength="2048"/></div>
+            <br/>
+            <!--<span class="login-box-options"><input type="checkbox" name="1" value="1"> Remember Me <a href="#"
+                                                                                                      style="margin-left:30px;">Forgot
+                password?</a></span> -->
+            <br/>
+            <br/>
+            <a href="#" onclick="loginform.submit();"><img src="images/login-btn.png" width="103" height="42"
+                                                           style="margin-left:90px;"/></a>
 
-        </form>
+
+        </div>
+
     </div>
-</div>
+
+
+</form>
+
 
 </body>
 </html>
