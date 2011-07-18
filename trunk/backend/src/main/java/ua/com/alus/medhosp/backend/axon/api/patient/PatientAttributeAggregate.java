@@ -29,8 +29,8 @@ public class PatientAttributeAggregate extends AbstractAnnotatedAggregateRoot im
         this.name = name;
     }
 
-    public void save(String messageId) {
-        SaveAttributeEvent event = new SaveAttributeEvent(getIdentifier().asString(), messageId, name);
+    public void save(String messageId, String userId) {
+        SaveAttributeEvent event = new SaveAttributeEvent(getIdentifier().asString(), messageId, userId, name);
         event.setType(type);
         event.setValueType(valueType);
         apply(event);

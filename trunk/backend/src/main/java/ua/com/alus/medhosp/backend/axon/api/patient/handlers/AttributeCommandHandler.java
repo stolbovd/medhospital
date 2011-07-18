@@ -34,7 +34,7 @@ public class AttributeCommandHandler {
         patientAttributeAggregate.setValueType(saveAttributeCommand.getValueType());
         patientAttributeAggregate.setName(saveAttributeCommand.getName());
 
-        patientAttributeAggregate.save(saveAttributeCommand.getMessageId());
+        patientAttributeAggregate.save(saveAttributeCommand.getMessageId(), saveAttributeCommand.getUserId());
         logger.info("Handling SaveAttributeCommand");
     }
 

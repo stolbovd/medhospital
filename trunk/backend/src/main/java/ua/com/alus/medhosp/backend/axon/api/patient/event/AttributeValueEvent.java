@@ -10,8 +10,8 @@ import ua.com.alus.medhosp.backend.axon.api.base.AbstractEntityEvent;
 public abstract class AttributeValueEvent extends AbstractEntityEvent {
     private String attributeId;
 
-    public AttributeValueEvent(String entityId, String messageId) {
-        super(entityId, messageId);
+    public AttributeValueEvent(String entityId, String messageId, String userId) {
+        super(entityId, messageId, userId);
     }
 
     public String getAttributeId() {

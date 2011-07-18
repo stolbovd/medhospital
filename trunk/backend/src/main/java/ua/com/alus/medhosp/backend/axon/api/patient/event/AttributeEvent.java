@@ -15,8 +15,8 @@ public abstract class AttributeEvent extends AbstractEntityEvent implements Seri
     private String valueType;
 
 
-    public AttributeEvent(String entityId, String messageId, String name) {
-        super(entityId, messageId);
+    public AttributeEvent(String entityId, String messageId, String userId, String name) {
+        super(entityId, messageId, userId);
         this.name = name;
     }
 

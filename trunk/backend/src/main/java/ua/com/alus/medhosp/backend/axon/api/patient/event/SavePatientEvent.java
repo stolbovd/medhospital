@@ -9,8 +9,8 @@ import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoal;
  * Time: 11:47
  */
 public class SavePatientEvent extends AbstractEntityEvent {
-    public SavePatientEvent(String entityId, String messageId) {
-        super(entityId, messageId);
+    public SavePatientEvent(String entityId, String messageId, String userId) {
+        super(entityId, messageId, userId);
     }
 
     @Override

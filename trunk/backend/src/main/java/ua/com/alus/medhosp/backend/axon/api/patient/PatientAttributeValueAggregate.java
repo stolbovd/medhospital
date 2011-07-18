@@ -18,21 +18,23 @@ public class PatientAttributeValueAggregate extends AbstractAnnotatedAggregateRo
     private String attributeId;
     private String attributeValue;
     private String entityId;
+    private String userId;
 
     public PatientAttributeValueAggregate(AggregateIdentifier identifier) {
         super(identifier);
     }
 
 
-    public PatientAttributeValueAggregate(String entityId, String attributeId, String attributeValue) {
+    public PatientAttributeValueAggregate(String entityId, String attributeId, String userId, String attributeValue) {
         super(generateIdentifier(entityId, attributeId));
         this.entityId = entityId;
         this.attributeId = attributeId;
         this.attributeValue = attributeValue;
+        this.userId = userId;
     }
 
     public void save(String messageId) {
-        SaveAttributeValueEvent event = new SaveAttributeValueEvent(entityId, messageId,
+        SaveAttributeValueEvent event = new SaveAttributeValueEvent(entityId, messageId, userId,
                 attributeId, attributeValue);
         apply(event);
     }

@@ -13,7 +13,7 @@ public class SavePatientCommand extends AbstractEntityCommand {
 
     }
 
-    public SavePatientCommand(String entityId, String messageId) {
-        super(entityId, messageId);
+    public SavePatientCommand(String entityId, String messageId, String userId) {
+        super(entityId, messageId, userId);
     }
 }

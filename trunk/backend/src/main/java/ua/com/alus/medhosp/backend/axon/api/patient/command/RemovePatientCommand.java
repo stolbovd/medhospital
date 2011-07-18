@@ -12,7 +12,7 @@ public class RemovePatientCommand extends AbstractEntityCommand {
 
     }
 
-    public RemovePatientCommand(String entityId, String messageId) {
-        super(entityId, messageId);
+    public RemovePatientCommand(String entityId, String messageId, String userId) {
+        super(entityId, messageId, userId);
     }
 }

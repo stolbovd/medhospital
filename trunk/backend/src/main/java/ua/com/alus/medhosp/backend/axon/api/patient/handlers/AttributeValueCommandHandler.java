@@ -33,6 +33,7 @@ public class AttributeValueCommandHandler {
             logger.info("Aggregate PatientAttributeValueAggregate no found in repository - adding new one");
             patientAttributeValueAggregate =
                     new PatientAttributeValueAggregate(saveAttributeValueCommand.getEntityId(), saveAttributeValueCommand.getAttributeId(),
+                            saveAttributeValueCommand.getUserId(),
                             saveAttributeValueCommand.getAttributeValue());
             repository.add(patientAttributeValueAggregate);
         }

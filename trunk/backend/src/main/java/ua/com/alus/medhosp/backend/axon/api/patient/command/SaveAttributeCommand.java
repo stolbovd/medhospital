@@ -16,8 +16,8 @@ public class SaveAttributeCommand extends AbstractEntityCommand {
 
     }
 
-    public SaveAttributeCommand(String entityId, String messageId, String name) {
-        super(entityId, messageId);
+    public SaveAttributeCommand(String entityId, String messageId, String userId, String name) {
+        super(entityId, messageId, userId);
         this.name = name;
     }
 
