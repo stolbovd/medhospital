@@ -14,8 +14,8 @@ import ua.com.alus.medhosp.backend.axon.api.patient.command.RemovePatientCommand
 import ua.com.alus.medhosp.backend.axon.api.patient.command.SaveAttributeCommand;
 import ua.com.alus.medhosp.backend.axon.api.patient.command.SaveAttributeValueCommand;
 import ua.com.alus.medhosp.backend.axon.api.patient.command.SavePatientCommand;
-import ua.com.alus.medhosp.backend.domen.utils.UUID;
 import ua.com.alus.medhosp.backend.service.PatientService;
+import ua.com.alus.medhosp.prototype.util.UUID;
 
 /**
  * Created by Usatov Alexey
