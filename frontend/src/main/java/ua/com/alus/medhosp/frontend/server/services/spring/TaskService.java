@@ -25,10 +25,6 @@ public class TaskService implements ITasksService {
     }
 
     public void saveTask(TaskDTO taskDTO) {
-        //if userId is not specified - set current user
-        if (taskDTO.get(TaskColumns.ENTITY_ID.getColumnName()) == null) {
-            taskDTO.put(TaskColumns.ENTITY_ID.getColumnName(), getUserId());
-        }
         getTaskDao().save(taskDTO);
     }
 
