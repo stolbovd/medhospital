@@ -71,4 +71,12 @@ public class PatientAttributeValueAggregate extends AbstractAnnotatedAggregateRo
     public void setEntityId(String entityId) {
         this.entityId = entityId;
     }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 }
