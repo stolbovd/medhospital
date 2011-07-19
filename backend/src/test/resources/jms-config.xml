@@ -13,18 +13,18 @@
 
     <amq:broker id="broker" useJmx="false" persistent="true">
         <amq:transportConnectors>
-            <amq:transportConnector uri="tcp://localhost:9091"/>
+            <amq:transportConnector uri="${BROKER_URL}"/>
         </amq:transportConnectors>
     </amq:broker>
 
-    <amq:queue id="clientListenerDestination" physicalName="ua.com.alus.medhosp.clientListener"/>
+    <amq:queue id="clientListenerDestination" physicalName="${JMS_PRODUCER_QUEUE}"/>
 
     <!-- JMS Listener Configuration -->
     <bean id="jmsFactory" class="org.apache.activemq.pool.PooledConnectionFactory"
           destroy-method="stop" depends-on="broker">
         <property name="connectionFactory">
             <bean class="org.apache.activemq.ActiveMQConnectionFactory">
-                <property name="brokerURL" value="tcp://localhost:9091"/>
+                <property name="brokerURL" value="${BROKER_URL}"/>
             </bean>
         </property>
     </bean>
@@ -36,7 +36,7 @@
     <jms:listener-container container-type="default"
                             connection-factory="jmsFactory"
                             acknowledge="auto">
-        <jms:listener destination="ua.com.alus.medhosp.commandprocessor" ref="jmsCommandListener"/>
+        <jms:listener destination="${JMS_LISTENER_QUEUE}" ref="jmsCommandListener"/>
     </jms:listener-container>
 
 

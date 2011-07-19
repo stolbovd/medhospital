@@ -11,12 +11,12 @@
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
-        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/hospital"/>
-        <property name="user" value="root"/>
-        <property name="password" value="root"/>
-        <property name="maxPoolSize" value="50"/>
-        <property name="initialPoolSize" value="5"/>
+        <property name="driverClass" value="${DRIVER_CLASS}"/>
+        <property name="jdbcUrl" value="${JDBC_URL}"/>
+        <property name="user" value="${DB_USER}"/>
+        <property name="password" value="${DB_PASSWORD}"/>
+        <property name="maxPoolSize" value="${MAX_POOL_SIZE}"/>
+        <property name="initialPoolSize" value="${INITIAL_POOL_SIZE}"/>
     </bean>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
