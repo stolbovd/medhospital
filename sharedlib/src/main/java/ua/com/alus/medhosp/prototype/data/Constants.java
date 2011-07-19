@@ -9,6 +9,7 @@ public interface Constants {
     String ERROR = "error";
     String GOAL = "goal";
     String MESSAGE_ID = "messageId";
+    String USER_ID = "userId";
     String RESULT = "result";
 
     String CLASS = "class";
