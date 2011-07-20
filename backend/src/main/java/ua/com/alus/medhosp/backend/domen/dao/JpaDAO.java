@@ -24,8 +24,6 @@ public abstract class JpaDAO<K, E> {
 
     public void persist(E entity) {
         entityManager.persist(entity);
-        //TODO check another variants
-        //if we'll not flush entityManager - there will be no exception throwing for aspects
         flush(entity);
     }
 
