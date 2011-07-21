@@ -2,6 +2,7 @@
 
 CONNECT 'jdbc:derby:messageDB;create=true';
 
+--run 'init-derby.sql';
 
 create table qrtz_job_details (
 job_name varchar(80) not null,
