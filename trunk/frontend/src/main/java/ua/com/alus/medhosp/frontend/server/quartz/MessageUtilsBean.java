@@ -35,6 +35,7 @@ public class MessageUtilsBean {
     public void scheduleReSendCommand(final String messageId) {
         String jobName = "Message_" + messageId;
         try {
+            getScheduler().deleteJob(jobName,"Message");
             JobDetail job = new JobDetail(jobName, "Message", BaseJob.class);
             job.setRequestsRecovery(true);
             job.setDurability(false);
