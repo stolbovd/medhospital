@@ -81,10 +81,11 @@ public class JmsCommandListener implements MessageListener {
 
     @SuppressWarnings("unchecked")
     public void onMessage(Message message) {
+        Map<String, String> properties = null;
         try {
             logger.info("Recieved message:" + message.getStringProperty(Constants.COMMAND));
             ObjectMapper mapper = new ObjectMapper();
-            Map<String, String> properties = mapper.readValue(message.getStringProperty(Constants.COMMAND), HashMap.class);
+            properties = mapper.readValue(message.getStringProperty(Constants.COMMAND), HashMap.class);
             if (properties.get(Constants.ERROR) == null) {
                 AbstractDTO object = createObject(properties.get(Constants.CLASS), properties);
                 executeUpdate(object, object.get(Constants.GOAL));
@@ -92,9 +93,12 @@ public class JmsCommandListener implements MessageListener {
             updateTask(properties.get(Constants.USER_ID),
                     properties.get(TaskColumns.MESSAGE_ID.getColumnName()),
                     properties.get(Constants.ERROR));
+            throw new Exception("generae");
         } catch (Exception e) {
             logger.trace(e);
-            getCommandProducer().generateCommands(getResendCommandList(TaskColumns.MESSAGE_ID.getColumnName()));
+            if (properties != null) {
+                getCommandProducer().generateCommands(getResendCommandList(properties.get(TaskColumns.MESSAGE_ID.getColumnName())));
+            }
         }
     }
 
@@ -102,6 +106,7 @@ public class JmsCommandListener implements MessageListener {
         CommandsListJson commandsListJson = new CommandsListJson();
         CommandJson reSendMessCommand = new CommandJson();
         reSendMessCommand.setCommand(Command.RESEND_MESSAGE.getCommandName());
+        reSendMessCommand.getProperties().put(TaskColumns.MESSAGE_ID.getColumnName(), messageId);
         commandsListJson.getCommands().add(reSendMessCommand);
         return commandsListJson;
     }
