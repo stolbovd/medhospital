@@ -27,12 +27,9 @@ public class JmsCommandProducer implements ICommandProducer {
         this.template = template;
     }
 
-    private ObjectMapper jsonMapper;
+    private final ObjectMapper jsonMapper = new ObjectMapper();
 
     public ObjectMapper getJsonMapper() {
-        if (jsonMapper == null) {
-            jsonMapper = new ObjectMapper();
-        }
         return jsonMapper;
     }
 

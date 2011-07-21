@@ -85,6 +85,11 @@ public class JmsCommandListener implements MessageListener {
 
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(10);
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
+    public ObjectMapper getObjectMapper() {
+        return objectMapper;
+    }
 
     /*
    The structure of message:
@@ -101,8 +106,7 @@ public class JmsCommandListener implements MessageListener {
         Map<String, String> properties = null;
         try {
             logger.info("Recieved message:" + message.getStringProperty(Constants.COMMAND));
-            ObjectMapper mapper = new ObjectMapper();
-            properties = mapper.readValue(message.getStringProperty(Constants.COMMAND), HashMap.class);
+            properties = getObjectMapper().readValue(message.getStringProperty(Constants.COMMAND), HashMap.class);
             if (properties.get(Constants.ERROR) == null) {
                 AbstractDTO object = createObject(properties.get(Constants.CLASS), properties);
                 executeUpdate(object, object.get(Constants.GOAL));
