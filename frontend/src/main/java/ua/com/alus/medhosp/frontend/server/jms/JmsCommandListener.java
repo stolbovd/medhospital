@@ -106,7 +106,7 @@ public class JmsCommandListener implements MessageListener {
         CommandsListJson commandsListJson = new CommandsListJson();
         CommandJson reSendMessCommand = new CommandJson();
         reSendMessCommand.setCommand(Command.RESEND_MESSAGE.getCommandName());
-        reSendMessCommand.getProperties().put(TaskColumns.MESSAGE_ID.getColumnName(), messageId);
+        reSendMessCommand.getProperties().put(TaskColumns.ENTITY_ID.getColumnName(), messageId);
         commandsListJson.getCommands().add(reSendMessCommand);
         return commandsListJson;
     }
