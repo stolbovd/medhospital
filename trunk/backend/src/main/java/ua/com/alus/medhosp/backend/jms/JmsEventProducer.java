@@ -39,12 +39,9 @@ public class JmsEventProducer implements IJmsEventProducer {
         this.messageService = messageService;
     }
 
-    private ObjectMapper jsonMapper;
+    private final ObjectMapper jsonMapper = new ObjectMapper();
 
     public ObjectMapper getJsonMapper() {
-        if (jsonMapper == null) {
-            jsonMapper = new ObjectMapper();
-        }
         return jsonMapper;
     }
 
