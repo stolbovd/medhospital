@@ -10,8 +10,11 @@ import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 import ua.com.alus.medhosp.frontend.shared.TaskDTO;
 import ua.com.alus.medhosp.prototype.cassandra.dto.TaskColumns;
 import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoal;
+import ua.com.alus.medhosp.prototype.commands.Command;
 import ua.com.alus.medhosp.prototype.commands.CommandResult;
 import ua.com.alus.medhosp.prototype.data.Constants;
+import ua.com.alus.medhosp.prototype.json.CommandJson;
+import ua.com.alus.medhosp.prototype.json.CommandsListJson;
 
 import javax.jms.Message;
 import javax.jms.MessageListener;
@@ -56,15 +59,25 @@ public class JmsCommandListener implements MessageListener {
         this.taskService = taskService;
     }
 
-    /*
-    The structure of message:
-    {
-    key1:value1,
-    key2:value2,
-    key3:value3
-    ...
+    private ICommandProducer commandProducer;
+
+    public ICommandProducer getCommandProducer() {
+        return commandProducer;
     }
-     */
+
+    public void setCommandProducer(ICommandProducer commandProducer) {
+        this.commandProducer = commandProducer;
+    }
+
+    /*
+   The structure of message:
+   {
+   key1:value1,
+   key2:value2,
+   key3:value3
+   ...
+   }
+    */
 
     @SuppressWarnings("unchecked")
     public void onMessage(Message message) {
@@ -81,7 +94,14 @@ public class JmsCommandListener implements MessageListener {
                     properties.get(Constants.ERROR));
         } catch (Exception e) {
             logger.trace(e);
+            getCommandProducer().generateCommands();
         }
+    }
+
+    private CommandsListJson getResendCommandList(String messageId){
+        CommandsListJson commandsListJson = new CommandsListJson();
+        CommandJson reSendMessCommand = new CommandJson();
+        reSendMessCommand.setCommand(Command.);
     }
 
     @SuppressWarnings("unchecked")
