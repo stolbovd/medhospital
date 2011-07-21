@@ -5,6 +5,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.jms.JmsException;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
+import ua.com.alus.medhosp.backend.service.MessageService;
 import ua.com.alus.medhosp.prototype.data.Constants;
 
 import javax.jms.JMSException;
@@ -28,27 +29,55 @@ public class JmsEventProducer implements IJmsEventProducer {
         this.template = template;
     }
 
+    private MessageService messageService;
+
+    public MessageService getMessageService() {
+        return messageService;
+    }
+
+    public void setMessageService(MessageService messageService) {
+        this.messageService = messageService;
+    }
+
+    private ObjectMapper jsonMapper;
+
+    public ObjectMapper getJsonMapper() {
+        if (jsonMapper == null) {
+            jsonMapper = new ObjectMapper();
+        }
+        return jsonMapper;
+    }
+
     /**
      * Generates JMS messages
      *
      * @throws org.springframework.jms if error
      */
-    public void sendResult(final Map<String, String> map) throws JmsException{
+    public void sendResult(final Map<String, String> map) throws JmsException {
+        try {
+            final String json = getJsonMapper().writeValueAsString(map);
+            saveMessage(map, json);
             MessageCreator messageCreator = new MessageCreator() {
                 public Message createMessage(Session session) throws JMSException {
                     TextMessage message = session.createTextMessage();
-                    ObjectMapper mapper = new ObjectMapper();
-                    try {
-                        String json = mapper.writeValueAsString(map);
+                    message.setStringProperty(Constants.COMMAND, json);
+                    logger.info("Sending message: " + json);
 
-                        message.setStringProperty(Constants.COMMAND, json);
-                        logger.info("Sending message: " + json);
-                    } catch (Exception ex) {
-                        logger.error(ex);
-                    }
                     return message;
                 }
             };
+
             template.send(messageCreator);
+        } catch (Exception e) {
+            logger.error(e);
+        }
+
+    }
+
+    private void saveMessage(Map<String, String> map, String json) {
+        ua.com.alus.medhosp.backend.domen.entity.message.Message message = new ua.com.alus.medhosp.backend.domen.entity.message.Message();
+        message.setEntityId(map.get(Constants.MESSAGE_ID));
+        message.setJson(json);
+        getMessageService().saveMessage(message);
     }
 }
