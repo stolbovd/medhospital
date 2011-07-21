@@ -111,8 +111,9 @@ public class JmsCommandListener implements MessageListener {
                     properties.get(TaskColumns.MESSAGE_ID.getColumnName()),
                     properties.get(Constants.ERROR));
         } catch (Exception e) {
-            logger.trace(e);
+            logger.error(e);
             if (properties != null) {
+                logger.info("Requesting for re-send unproceceeded message...");
                 scheduleReSendCommand(properties.get(TaskColumns.MESSAGE_ID.getColumnName()));
             }
         }
