@@ -37,8 +37,7 @@
         </property>
         <property name="patientService" ref="patientService"/>
         <property name="taskService" ref="taskService"/>
-        <property name="resendDelay" value="${RESEND_COMMAND_DELAY}"/>
-        <property name="scheduler" ref="messagesScheduler"/>
+        <property name="messageUtilsBean" ref="messageUtilsBean"/>
     </bean>
 
     <jms:listener-container container-type="default"

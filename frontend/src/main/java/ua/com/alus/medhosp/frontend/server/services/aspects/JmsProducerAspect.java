@@ -9,6 +9,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import ua.com.alus.medhosp.frontend.server.services.spring.TaskService;
 import ua.com.alus.medhosp.frontend.shared.TaskDTO;
 import ua.com.alus.medhosp.prototype.cassandra.dto.TaskColumns;
+import ua.com.alus.medhosp.prototype.commands.Command;
 import ua.com.alus.medhosp.prototype.commands.CommandResult;
 import ua.com.alus.medhosp.prototype.data.Constants;
 import ua.com.alus.medhosp.prototype.json.CommandJson;
@@ -54,6 +55,10 @@ public class JmsProducerAspect {
 
     private void saveTasks(CommandsListJson commandsListJson) {
         for (CommandJson commandJson : commandsListJson.getCommands()) {
+            //We don't save task of re-send message - it is alreay saved in quartz and it is system message
+            if (Command.RESEND_MESSAGE.getCommandName().equals(commandJson.getCommand())) {
+                continue;
+            }
             TaskDTO taskDTO = new TaskDTO();
             taskDTO.put(TaskColumns.RESULT.getColumnName(), CommandResult.PENDING.name());
             putUserIdAndMessageId(taskDTO, commandJson);
@@ -68,6 +73,10 @@ public class JmsProducerAspect {
 
     private void failTasks(CommandsListJson commandsListJson, String errorMessage) {
         for (CommandJson commandJson : commandsListJson.getCommands()) {
+            //We don't save task of re-send message - it is alreay saved in quartz and it is system message
+            if (Command.RESEND_MESSAGE.getCommandName().equals(commandJson.getCommand())) {
+                continue;
+            }
             TaskDTO taskDTO = getTaskService().findTask(commandJson.getProperties().get(Constants.USER_ID),
                     commandJson.getProperties().get(Constants.MESSAGE_ID));
             taskDTO.put(TaskColumns.RESULT.getColumnName(), CommandResult.FAIL.name());

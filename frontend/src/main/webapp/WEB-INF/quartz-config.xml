@@ -30,7 +30,13 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <bean id="messageUtilsBean" class="ua.com.alus.medhosp.frontend.server.quartz.MessageUtilsBean">
+        <property name="scheduler" ref="messagesScheduler"/>
+        <property name="resendDelay" value="${RESEND_COMMAND_DELAY}"/>
+    </bean>
+
     <bean id="reSendMessageJob" class="ua.com.alus.medhosp.frontend.server.quartz.ReSendMessageJob">
         <property name="commandProducer" ref="jmsClientProducer"/>
+        <property name="messageUtilsBean" ref="messageUtilsBean"/>
     </bean>
 </beans>
