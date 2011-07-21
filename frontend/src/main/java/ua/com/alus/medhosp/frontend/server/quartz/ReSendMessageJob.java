@@ -1,5 +1,6 @@
 package ua.com.alus.medhosp.frontend.server.quartz;
 
+import org.apache.log4j.Logger;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -15,6 +16,8 @@ import ua.com.alus.medhosp.prototype.json.CommandsListJson;
  * Created by Usatov Alexey
  */
 public class ReSendMessageJob implements Job {
+    private Logger logger = Logger.getLogger(ReSendMessageJob.class);
+
     private ICommandProducer commandProducer;
 
     public ICommandProducer getCommandProducer() {
@@ -41,7 +44,9 @@ public class ReSendMessageJob implements Job {
             messageId = (String) jobExecutionContext.getJobDetail().getJobDataMap().get(TaskColumns.ENTITY_ID.getColumnName());
             getCommandProducer().generateCommands(getResendCommandList(messageId));
         } catch (Throwable e) {
+            logger.error(e);
             if (messageId != null) {
+                logger.info("Re-scheduling requesting for re-send unproceceeded message...");
                 getMessageUtilsBean().scheduleReSendCommand(messageId);
             }
         }
