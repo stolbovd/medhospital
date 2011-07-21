@@ -57,21 +57,27 @@ public class JmsEventProducer implements IJmsEventProducer {
         try {
             final String json = getJsonMapper().writeValueAsString(map);
             saveMessage(map, json);
+            sendJson(json);
+        } catch (Exception e) {
+            logger.error(e);
+        }
+
+    }
+
+    public void sendJson(final String json) throws JmsException {
+        try {
             MessageCreator messageCreator = new MessageCreator() {
                 public Message createMessage(Session session) throws JMSException {
                     TextMessage message = session.createTextMessage();
                     message.setStringProperty(Constants.COMMAND, json);
                     logger.info("Sending message: " + json);
-
                     return message;
                 }
             };
-
             template.send(messageCreator);
         } catch (Exception e) {
             logger.error(e);
         }
-
     }
 
     private void saveMessage(Map<String, String> map, String json) {

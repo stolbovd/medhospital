@@ -107,6 +107,23 @@
         <property name="patientService" ref="patientService"/>
     </bean>
 
+    <!--############################## Message axon config ############################-->
+
+    <axon:event-sourcing-repository id="messageRepository"
+                                    aggregate-type="ua.com.alus.medhosp.backend.axon.api.message.MessageAggregate"/>
+    <!--Handler of commands from client app -->
+    <bean id="messageCommandHandler"
+          class="ua.com.alus.medhosp.backend.axon.api.message.handlers.MessageCommandHandler">
+        <property name="repository" ref="messageRepository"/>
+    </bean>
+
+    <bean id="messageEventHandler" class="ua.com.alus.medhosp.backend.axon.api.message.handlers.MessageEventHandler">
+        <property name="messageService" ref="messageService"/>
+        <property name="jmsEventProducer" ref="jmsEventProducer"/>
+    </bean>
+
+    <!--############################## End of Message axon config ############################-->
+
     <!--############################ End of Attribute axon config #######################-->
 
     <bean id="commandProcessor" class="ua.com.alus.medhosp.backend.processor.CommandProcessorImpl">
@@ -123,6 +140,8 @@
                        value="ua.com.alus.medhosp.backend.axon.api.patient.command.RemovePatientCommand"/>
                 <entry key="#{T(ua.com.alus.medhosp.prototype.commands.Command).REMOVE_ATTRIBUTE_VALUE.getCommandName()}"
                        value="ua.com.alus.medhosp.backend.axon.api.patient.command.RemoveAttributeValueCommand"/>
+                <entry key="#{T(ua.com.alus.medhosp.prototype.commands.Command).RESEND_MESSAGE.getCommandName()}"
+                       value="ua.com.alus.medhosp.backend.axon.api.message.command.ReSendMessageCommand"/>
             </map>
         </property>
     </bean>

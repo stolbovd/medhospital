@@ -11,4 +11,5 @@ import java.util.Map;
  */
 public interface IJmsEventProducer {
     void sendResult(final Map<String, String> map) throws JmsException;
+    void sendJson(String json) throws JmsException;
 }
