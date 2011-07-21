@@ -27,14 +27,22 @@ public class JmsCommandProducer implements ICommandProducer {
         this.template = template;
     }
 
+    private ObjectMapper jsonMapper;
+
+    public ObjectMapper getJsonMapper() {
+        if (jsonMapper == null) {
+            jsonMapper = new ObjectMapper();
+        }
+        return jsonMapper;
+    }
+
     public void generateCommands(final CommandsListJson commandsListJson) throws RuntimeException {
         MessageCreator messageCreator = new MessageCreator() {
             public Message createMessage(Session session) throws JMSException {
-                ObjectMapper mapper = new ObjectMapper();
                 TextMessage message = session.createTextMessage();
                 String command = "";
                 try {
-                    command = mapper.writeValueAsString(commandsListJson);
+                    command = getJsonMapper().writeValueAsString(commandsListJson);
                     message.setStringProperty(Constants.COMMAND, command);
                 } catch (IOException e) {
                     logger.error("Cannot serialize to json:", e);
