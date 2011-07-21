@@ -134,7 +134,7 @@ public class JmsCommandListener implements MessageListener {
         scheduler.schedule(reSendMessage, getResendDelay(), TimeUnit.SECONDS);
     }
 
-    private synchronized CommandsListJson getResendCommandList(String messageId) {
+    private CommandsListJson getResendCommandList(String messageId) {
         CommandsListJson commandsListJson = new CommandsListJson();
         CommandJson reSendMessCommand = new CommandJson();
         reSendMessCommand.setCommand(Command.RESEND_MESSAGE.getCommandName());
