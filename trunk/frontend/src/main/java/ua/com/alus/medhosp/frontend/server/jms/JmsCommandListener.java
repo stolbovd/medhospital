@@ -125,6 +125,8 @@ public class JmsCommandListener implements MessageListener {
                 try {
                     getCommandProducer().generateCommands(getResendCommandList(messageId));
                 } catch (Throwable e) {
+                    logger.error(e);
+                    logger.info("Re-scheduling request for re-send unproceceeded message...");
                     scheduleReSendCommand(messageId);
                 }
             }
