@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <property name="driverClass" value="${DRIVER_CLASS}"/>
+        <property name="jdbcUrl" value="${JDBC_URL}"/>
+        <property name="maxPoolSize" value="${MAX_POOL_SIZE}"/>
+        <property name="initialPoolSize" value="${INITIAL_POOL_SIZE}"/>
+    </bean>
+
+
+    <!-- SCHEDULER -->
+    <bean id="messagesScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="schedulerName" value="MessagesScheduler"/>
+        <property name="applicationContextSchedulerContextKey" value="applicationContext"/>
+        <property name="quartzProperties">
+            <props>
+                <prop key="org.quartz.threadPool.threadCount">${MESSAGES_THREAD_POOL_THREAD_COUNT}</prop>
+                <prop key="org.quartz.threadPool.threadPriority">${MESSAGES_THREAD_POOL_THREAD_PRIORITY}</prop>
+                <prop key="org.quartz.jobStore.useProperties">false</prop>
+                <!--<prop key="org.quartz.jobStore.tablePrefix">SYS_M_</prop> -->
+                <prop key="org.quartz.jobStore.isClustered">${IS_CLUSTERED}</prop>
+                <prop key="org.quartz.jobStore.misfireThreshold">6000</prop>
+                <prop key="org.quartz.scheduler.instanceId">AUTO</prop>
+            </props>
+        </property>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="reSendMessageJob" class="ua.com.alus.medhosp.frontend.server.quartz.ReSendMessageJob">
+        <property name="commandProducer" ref="jmsClientProducer"/>
+    </bean>
+</beans>

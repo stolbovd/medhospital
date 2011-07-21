@@ -2,7 +2,9 @@ package ua.com.alus.medhosp.frontend.server.jms;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.quartz.*;
 import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientService;
+import ua.com.alus.medhosp.frontend.server.quartz.BaseJob;
 import ua.com.alus.medhosp.frontend.server.services.spring.TaskService;
 import ua.com.alus.medhosp.frontend.shared.AbstractDTO;
 import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
@@ -10,20 +12,14 @@ import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 import ua.com.alus.medhosp.frontend.shared.TaskDTO;
 import ua.com.alus.medhosp.prototype.cassandra.dto.TaskColumns;
 import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoal;
-import ua.com.alus.medhosp.prototype.commands.Command;
 import ua.com.alus.medhosp.prototype.commands.CommandResult;
 import ua.com.alus.medhosp.prototype.data.Constants;
-import ua.com.alus.medhosp.prototype.json.CommandJson;
-import ua.com.alus.medhosp.prototype.json.CommandsListJson;
 
 import javax.jms.Message;
 import javax.jms.MessageListener;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created Usatov Alexey
@@ -63,16 +59,6 @@ public class JmsCommandListener implements MessageListener {
         this.taskService = taskService;
     }
 
-    private ICommandProducer commandProducer;
-
-    public ICommandProducer getCommandProducer() {
-        return commandProducer;
-    }
-
-    public void setCommandProducer(ICommandProducer commandProducer) {
-        this.commandProducer = commandProducer;
-    }
-
     private int resendDelay = 10;
 
     public void setResendDelay(int resendDelay) {
@@ -83,12 +69,20 @@ public class JmsCommandListener implements MessageListener {
         return resendDelay;
     }
 
-    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(10);
-
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public ObjectMapper getObjectMapper() {
         return objectMapper;
+    }
+
+    private Scheduler scheduler;
+
+    public Scheduler getScheduler() {
+        return scheduler;
+    }
+
+    public void setScheduler(Scheduler scheduler) {
+        this.scheduler = scheduler;
     }
 
     /*
@@ -124,27 +118,22 @@ public class JmsCommandListener implements MessageListener {
     }
 
     private void scheduleReSendCommand(final String messageId) {
-        final Runnable reSendMessage = new Runnable() {
-            public void run() {
-                try {
-                    getCommandProducer().generateCommands(getResendCommandList(messageId));
-                } catch (Throwable e) {
-                    logger.error(e);
-                    logger.info("Re-scheduling request for re-send unproceceeded message...");
-                    scheduleReSendCommand(messageId);
-                }
-            }
-        };
-        scheduler.schedule(reSendMessage, getResendDelay(), TimeUnit.SECONDS);
-    }
+        String jobName = "Message_" + messageId;
+        try {
+            JobDetail job = new JobDetail(jobName, "Message", BaseJob.class);
+            job.setRequestsRecovery(true);
+            job.setDurability(false);
+            job.setVolatility(false);
+            job.getJobDataMap().put(BaseJob.BEAN_ID, "reSendMessageJob");
+            job.getJobDataMap().put(TaskColumns.ENTITY_ID.getColumnName(), messageId);
 
-    private CommandsListJson getResendCommandList(String messageId) {
-        CommandsListJson commandsListJson = new CommandsListJson();
-        CommandJson reSendMessCommand = new CommandJson();
-        reSendMessCommand.setCommand(Command.RESEND_MESSAGE.getCommandName());
-        reSendMessCommand.getProperties().put(TaskColumns.ENTITY_ID.getColumnName(), messageId);
-        commandsListJson.getCommands().add(reSendMessCommand);
-        return commandsListJson;
+            Trigger trigger = new SimpleTrigger("MESS_" + System.currentTimeMillis(), "Message");
+            trigger.setStartTime(new Date(System.currentTimeMillis() + getResendDelay() * 1000));
+            trigger.setMisfireInstruction(CronTrigger.INSTRUCTION_RE_EXECUTE_JOB);
+            getScheduler().scheduleJob(job, trigger);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @SuppressWarnings("unchecked")
