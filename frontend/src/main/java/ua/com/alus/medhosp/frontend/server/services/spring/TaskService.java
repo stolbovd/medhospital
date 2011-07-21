@@ -1,5 +1,6 @@
 package ua.com.alus.medhosp.frontend.server.services.spring;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import ua.com.alus.medhosp.frontend.client.modules.tasks.rpc.ITasksService;
@@ -42,9 +43,9 @@ public class TaskService implements ITasksService {
     }
 
     public String getUserId() {
-        User user;
-        if ((user = (User) SecurityContextHolder.getContext().getAuthentication()) != null) {
-            return user.getUsername();
+        Authentication authentication;
+        if ((authentication = SecurityContextHolder.getContext().getAuthentication()) != null) {
+            return ((User)authentication.getPrincipal()).getUsername();
         }
         return ua.com.alus.medhosp.prototype.user.User.SYSTEM.name();
     }
