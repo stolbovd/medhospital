@@ -73,7 +73,18 @@ public class JmsCommandListener implements MessageListener {
         this.commandProducer = commandProducer;
     }
 
+    private int resendDelay = 10;
+
+    public void setResendDelay(int resendDelay) {
+        this.resendDelay = resendDelay;
+    }
+
+    public int getResendDelay() {
+        return resendDelay;
+    }
+
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(10);
+
 
     /*
    The structure of message:
@@ -99,6 +110,7 @@ public class JmsCommandListener implements MessageListener {
             updateTask(properties.get(Constants.USER_ID),
                     properties.get(TaskColumns.MESSAGE_ID.getColumnName()),
                     properties.get(Constants.ERROR));
+            throw new Exception("check");
         } catch (Exception e) {
             logger.trace(e);
             if (properties != null) {
@@ -107,13 +119,13 @@ public class JmsCommandListener implements MessageListener {
         }
     }
 
-    private void scheduleReSendCommand(final String messageId){
+    private void scheduleReSendCommand(final String messageId) {
         final Runnable reSendMessage = new Runnable() {
             public void run() {
                 getCommandProducer().generateCommands(getResendCommandList(messageId));
             }
         };
-        scheduler.schedule(reSendMessage, 10, TimeUnit.SECONDS);
+        scheduler.schedule(reSendMessage, getResendDelay(), TimeUnit.SECONDS);
     }
 
     private synchronized CommandsListJson getResendCommandList(String messageId) {
