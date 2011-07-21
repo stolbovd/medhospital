@@ -94,14 +94,16 @@ public class JmsCommandListener implements MessageListener {
                     properties.get(Constants.ERROR));
         } catch (Exception e) {
             logger.trace(e);
-            getCommandProducer().generateCommands();
+            getCommandProducer().generateCommands(getResendCommandList(TaskColumns.MESSAGE_ID.getColumnName()));
         }
     }
 
-    private CommandsListJson getResendCommandList(String messageId){
+    private CommandsListJson getResendCommandList(String messageId) {
         CommandsListJson commandsListJson = new CommandsListJson();
         CommandJson reSendMessCommand = new CommandJson();
-        reSendMessCommand.setCommand(Command.);
+        reSendMessCommand.setCommand(Command.RESEND_MESSAGE.getCommandName());
+        commandsListJson.getCommands().add(reSendMessCommand);
+        return commandsListJson;
     }
 
     @SuppressWarnings("unchecked")

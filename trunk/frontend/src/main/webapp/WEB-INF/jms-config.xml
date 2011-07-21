@@ -37,6 +37,7 @@
         </property>
         <property name="patientService" ref="patientService"/>
         <property name="taskService" ref="taskService"/>
+        <property name="commandProducer" ref="jmsClientProducer"/>
     </bean>
 
     <jms:listener-container container-type="default"
