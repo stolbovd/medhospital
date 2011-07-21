@@ -110,7 +110,6 @@ public class JmsCommandListener implements MessageListener {
             updateTask(properties.get(Constants.USER_ID),
                     properties.get(TaskColumns.MESSAGE_ID.getColumnName()),
                     properties.get(Constants.ERROR));
-            throw new Exception("check");
         } catch (Exception e) {
             logger.trace(e);
             if (properties != null) {
