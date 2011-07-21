@@ -37,13 +37,21 @@ public class CommandProcessorImpl implements ICommandProcessor {
         this.commandBus = commandBus;
     }
 
+    private ObjectMapper jsonMapper;
+
+    public ObjectMapper getJsonMapper() {
+        if (jsonMapper == null) {
+            jsonMapper = new ObjectMapper();
+        }
+        return jsonMapper;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public void processCommand(String json) {
         logger.trace(String.format("Processing json: %s", json));
-        ObjectMapper mapper = new ObjectMapper();
         try {
-            CommandsListJson commandsData = mapper.readValue(json, CommandsListJson.class);
+            CommandsListJson commandsData = getJsonMapper().readValue(json, CommandsListJson.class);
 
             for (CommandJson command : commandsData.getCommands()) {
                 HashMap<String, String> properties = command.getProperties();
