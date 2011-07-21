@@ -25,9 +25,26 @@ public class ReSendMessageJob implements Job {
         this.commandProducer = commandProducer;
     }
 
+    private MessageUtilsBean messageUtilsBean;
+
+    public MessageUtilsBean getMessageUtilsBean() {
+        return messageUtilsBean;
+    }
+
+    public void setMessageUtilsBean(MessageUtilsBean messageUtilsBean) {
+        this.messageUtilsBean = messageUtilsBean;
+    }
+
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        String messageId = (String) jobExecutionContext.getJobDetail().getJobDataMap().get(TaskColumns.ENTITY_ID.getColumnName());
-        getCommandProducer().generateCommands(getResendCommandList(messageId));
+        String messageId = null;
+        try {
+            messageId = (String) jobExecutionContext.getJobDetail().getJobDataMap().get(TaskColumns.ENTITY_ID.getColumnName());
+            getCommandProducer().generateCommands(getResendCommandList(messageId));
+        } catch (Throwable e) {
+            if (messageId != null) {
+                getMessageUtilsBean().scheduleReSendCommand(messageId);
+            }
+        }
     }
 
     private CommandsListJson getResendCommandList(String messageId) {
