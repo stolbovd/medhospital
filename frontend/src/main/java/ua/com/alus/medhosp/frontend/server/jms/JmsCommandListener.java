@@ -20,6 +20,10 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created Usatov Alexey
@@ -69,6 +73,8 @@ public class JmsCommandListener implements MessageListener {
         this.commandProducer = commandProducer;
     }
 
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(10);
+
     /*
    The structure of message:
    {
@@ -96,12 +102,21 @@ public class JmsCommandListener implements MessageListener {
         } catch (Exception e) {
             logger.trace(e);
             if (properties != null) {
-                getCommandProducer().generateCommands(getResendCommandList(properties.get(TaskColumns.MESSAGE_ID.getColumnName())));
+                scheduleReSendCommand(properties.get(TaskColumns.MESSAGE_ID.getColumnName()));
             }
         }
     }
 
-    private CommandsListJson getResendCommandList(String messageId) {
+    private void scheduleReSendCommand(final String messageId){
+        final Runnable reSendMessage = new Runnable() {
+            public void run() {
+                getCommandProducer().generateCommands(getResendCommandList(messageId));
+            }
+        };
+        scheduler.schedule(reSendMessage, 10, TimeUnit.SECONDS);
+    }
+
+    private synchronized CommandsListJson getResendCommandList(String messageId) {
         CommandsListJson commandsListJson = new CommandsListJson();
         CommandJson reSendMessCommand = new CommandJson();
         reSendMessCommand.setCommand(Command.RESEND_MESSAGE.getCommandName());
