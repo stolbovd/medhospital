@@ -121,7 +121,11 @@ public class JmsCommandListener implements MessageListener {
     private void scheduleReSendCommand(final String messageId) {
         final Runnable reSendMessage = new Runnable() {
             public void run() {
-                getCommandProducer().generateCommands(getResendCommandList(messageId));
+                try {
+                    getCommandProducer().generateCommands(getResendCommandList(messageId));
+                } catch (Throwable e) {
+                    scheduleReSendCommand(messageId);
+                }
             }
         };
         scheduler.schedule(reSendMessage, getResendDelay(), TimeUnit.SECONDS);
