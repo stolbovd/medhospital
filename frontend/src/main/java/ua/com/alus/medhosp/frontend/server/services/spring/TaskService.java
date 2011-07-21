@@ -43,10 +43,10 @@ public class TaskService implements ITasksService {
 
     public String getUserId() {
         User user;
-        if ((user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()) != null) {
+        if ((user = (User) SecurityContextHolder.getContext().getAuthentication()) != null) {
             return user.getUsername();
         }
-        return ua.com.alus.medhosp.prototype.user.User.ANONYMOUS.name();
+        return ua.com.alus.medhosp.prototype.user.User.SYSTEM.name();
     }
 
     public String getClock() {
