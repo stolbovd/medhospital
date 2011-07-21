@@ -54,6 +54,13 @@
         <property name="patientAttributeDao" ref="patientAttributeDao"/>
     </bean>
 
+    <bean id="messageDao" class="ua.com.alus.medhosp.backend.domen.dao.message.MessageDao" parent="jpaDao"/>
+
+    <bean id="messageService" class="ua.com.alus.medhosp.backend.service.MessageService">
+        <property name="messageDao" ref="messageDao"/>
+    </bean>
+
+
     <context:component-scan base-package="ua.com.alus"/>
 
     <import resource="axon-config.xml"/>
