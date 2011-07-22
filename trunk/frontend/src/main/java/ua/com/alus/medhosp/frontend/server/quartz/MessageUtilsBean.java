@@ -32,18 +32,24 @@ public class MessageUtilsBean {
         return resendDelay;
     }
 
+    private static final String MESSAGE = "Message";
+    private static final String RESEND_MESS_BEAN_ID = "reSendMessageJob";
+    private static final String TRIGGER_PREFIX = "MESS_";
+    private static final String NAME_PREFIX = "Message_";
+
+
     public void scheduleReSendCommand(final String messageId) {
-        String jobName = "Message_" + messageId;
+        String jobName = NAME_PREFIX + messageId;
         try {
-            getScheduler().deleteJob(jobName,"Message");
-            JobDetail job = new JobDetail(jobName, "Message", BaseJob.class);
+            getScheduler().deleteJob(jobName, MESSAGE);
+            JobDetail job = new JobDetail(jobName, MESSAGE, BaseJob.class);
             job.setRequestsRecovery(true);
             job.setDurability(false);
             job.setVolatility(false);
-            job.getJobDataMap().put(BaseJob.BEAN_ID, "reSendMessageJob");
+            job.getJobDataMap().put(BaseJob.BEAN_ID, RESEND_MESS_BEAN_ID);
             job.getJobDataMap().put(TaskColumns.ENTITY_ID.getColumnName(), messageId);
 
-            Trigger trigger = new SimpleTrigger("MESS_" + System.currentTimeMillis(), "Message");
+            Trigger trigger = new SimpleTrigger(TRIGGER_PREFIX + System.currentTimeMillis(), MESSAGE);
             trigger.setStartTime(new Date(System.currentTimeMillis() + getResendDelay() * 1000));
             trigger.setMisfireInstruction(CronTrigger.INSTRUCTION_RE_EXECUTE_JOB);
             getScheduler().scheduleJob(job, trigger);
