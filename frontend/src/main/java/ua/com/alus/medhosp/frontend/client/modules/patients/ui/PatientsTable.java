@@ -60,7 +60,7 @@ public class PatientsTable extends ListGrid implements ITable {
 
         setAutoFetchData(true);
         setWidth100();
-        setHeight(500);
+        setHeight100();
 
     }
 
