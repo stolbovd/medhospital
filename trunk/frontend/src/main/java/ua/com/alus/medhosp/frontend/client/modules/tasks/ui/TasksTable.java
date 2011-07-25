@@ -56,8 +56,8 @@ public class TasksTable extends ListGrid {
 
         setAutoFetchData(true);
         setTop(30);
-        setWidth(200);
-        setHeight(500);
+        setWidth100();
+        setHeight100();
 
     }
 

@@ -1,9 +1,15 @@
 package ua.com.alus.medhosp.frontend.client;
 
 import com.smartgwt.client.types.Side;
+import com.smartgwt.client.widgets.IButton;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.events.ClickHandler;
+import com.smartgwt.client.widgets.layout.HLayout;
+import com.smartgwt.client.widgets.layout.VLayout;
 import com.smartgwt.client.widgets.tab.Tab;
 import com.smartgwt.client.widgets.tab.TabSet;
 import ua.com.alus.medhosp.frontend.client.modules.patients.ui.PatientsPanel;
+import ua.com.alus.medhosp.frontend.client.modules.tasks.ui.TasksDialog;
 
 /**
  * Created by Usatov Alexey
@@ -19,7 +25,7 @@ public class MainUILoader {
     }
 
     public void drawMainUI() {
-        getMainTabset().draw();
+        getMainPanel().draw();
     }
 
     public PatientsPanel getPatientsPanel() {
@@ -31,12 +37,54 @@ public class MainUILoader {
 
     private PatientsPanel patientsPanel;
 
+    private HLayout topPanel;
+
+    public HLayout getTopPanel() {
+        if(topPanel == null){
+            topPanel = new HLayout();
+
+            IButton showTasksButton = new IButton();
+            showTasksButton.addClickHandler(new ClickHandler() {
+                public void onClick(ClickEvent clickEvent) {
+                    getTasksDialog().show();
+                }
+            });
+            showTasksButton.setWidth(70);
+            showTasksButton.setHeight(20);
+            showTasksButton.setTitle("Tasks");
+            topPanel.setMembers(showTasksButton);
+            topPanel.setMargin(20);
+        }
+        return topPanel;
+    }
+
+    private TasksDialog tasksDialog;
+
+    public TasksDialog getTasksDialog() {
+        if(tasksDialog == null){
+            tasksDialog = new TasksDialog();
+        }
+        return tasksDialog;
+    }
+
+    private VLayout mainPanel;
+
+    private VLayout getMainPanel(){
+        if(mainPanel == null){
+            mainPanel = new VLayout();
+            mainPanel.setMembers(getTopPanel(), getMainTabset());
+            mainPanel.setWidth100();
+            mainPanel.setHeight100();
+        }
+        return mainPanel;
+    }
+
     private TabSet mainTabSet;
 
     private TabSet getMainTabset() {
         if (mainTabSet == null) {
             mainTabSet = new TabSet();
-            mainTabSet.setMargin(20);
+            //mainTabSet.setMargin(20);
             mainTabSet.setTabBarPosition(Side.TOP);
             mainTabSet.setTabBarAlign(Side.LEFT);
             mainTabSet.setWidth100();
