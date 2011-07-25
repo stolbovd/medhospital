@@ -72,6 +72,7 @@ public class MainUILoader {
     private VLayout getMainPanel(){
         if(mainPanel == null){
             mainPanel = new VLayout();
+            mainPanel.setMargin(10);
             mainPanel.setMembers(getTopPanel(), getMainTabset());
             mainPanel.setWidth100();
             mainPanel.setHeight100();
@@ -84,7 +85,6 @@ public class MainUILoader {
     private TabSet getMainTabset() {
         if (mainTabSet == null) {
             mainTabSet = new TabSet();
-            //mainTabSet.setMargin(20);
             mainTabSet.setTabBarPosition(Side.TOP);
             mainTabSet.setTabBarAlign(Side.LEFT);
             mainTabSet.setWidth100();
