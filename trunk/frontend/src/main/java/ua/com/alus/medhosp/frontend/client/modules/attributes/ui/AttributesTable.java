@@ -4,7 +4,6 @@ import com.smartgwt.client.types.ListGridFieldType;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
 import ua.com.alus.medhosp.frontend.client.modules.attributes.cto.AttributeCTO;
-import ua.com.alus.medhosp.frontend.client.modules.patients.ui.SimpleField;
 import ua.com.alus.medhosp.prototype.cassandra.dto.AttributeColumns;
 import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
 
