@@ -5,14 +5,13 @@ import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.layout.HLayout;
-import ua.com.alus.medhosp.frontend.client.main.ui.LeftToolPanel;
 import ua.com.alus.medhosp.frontend.client.main.ui.MainPanel;
 import ua.com.alus.medhosp.frontend.client.main.ui.ToolBarPanel;
 import ua.com.alus.medhosp.frontend.client.main.ui.ToolbarButton;
-import ua.com.alus.medhosp.frontend.client.modules.tasks.ui.TasksTable;
 import ua.com.alus.medhosp.frontend.client.resources.images.Icons;
-import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientConstants;
-import ua.com.alus.medhosp.frontend.client.utils.ConstantsBundle;
+import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientBundle;
+import ua.com.alus.medhosp.frontend.client.utils.Bundle;
+import ua.com.alus.medhosp.frontend.client.utils.Constants;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
 import ua.com.alus.medhosp.prototype.util.UUID;
@@ -25,8 +24,8 @@ import ua.com.alus.medhosp.prototype.util.UUID;
  */
 public class PatientsPanel extends HLayout {
     private ToolBarPanel patientsToolbar;
-    PatientConstants constants = ConstantsBundle.getInstance().getPsConst();
-    Icons icons = ConstantsBundle.getInstance().getIcons();
+    PatientBundle bundle = Bundle.getInstance().getPsBundle();
+    Icons icons = Constants.getInstance().getIcons();
 
     public PatientsPanel() {
 
@@ -43,22 +42,22 @@ public class PatientsPanel extends HLayout {
             patientsToolbar = new ToolBarPanel();
 
             final ToolbarButton createButton = new ToolbarButton(icons.add(),
-                    constants.createPatient());
+                    bundle.createPatient());
 
             final ToolbarButton getAllButton = new ToolbarButton(icons.refresh(),
-                    constants.getAllPatients());
+                    bundle.getAllPatients());
 
 
             final ToolbarButton deleteButton = new ToolbarButton(icons.remove(),
-                    constants.deletePatients());
-            deleteButton.setTooltip(constants.deletePatients());
+                    bundle.deletePatients());
+            deleteButton.setTooltip(bundle.deletePatients());
 
 
             createButton.addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {
                     /*PatientDialog patientDialog = new PatientDialog(getPatientsTable().getController());
                     patientDialog.show(); */
-                    SC.confirm(constants.createPatient(), constants.confirmContinute(), new BooleanCallback() {
+                    SC.confirm(bundle.createPatient(), bundle.confirmContinute(), new BooleanCallback() {
                         public void execute(Boolean aBoolean) {
                             if (aBoolean) {
                                 PatientDTO patientDTO = new PatientDTO();
