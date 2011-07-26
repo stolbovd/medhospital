@@ -11,8 +11,8 @@ import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
-import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientConstants;
-import ua.com.alus.medhosp.frontend.client.utils.ConstantsBundle;
+import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientBundle;
+import ua.com.alus.medhosp.frontend.client.utils.Bundle;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
 import ua.com.alus.medhosp.prototype.util.UUID;
@@ -24,7 +24,7 @@ import ua.com.alus.medhosp.prototype.util.UUID;
  * Time: 11:52
  */
 public class PatientDialog extends Window {
-    PatientConstants constants = ConstantsBundle.getInstance().getPsConst();
+    PatientBundle bundle = Bundle.getInstance().getPsBundle();
 
     private IController controller;
 
@@ -36,7 +36,7 @@ public class PatientDialog extends Window {
         super();
         this.controller = controller;
 
-        setTitle(constants.createPatient());
+        setTitle(bundle.createPatient());
         setWidth(400);
         setHeight(200);
         setIsModal(true);
@@ -49,16 +49,16 @@ public class PatientDialog extends Window {
         form.setWidth100();
         form.setLayoutAlign(VerticalAlignment.BOTTOM);
         final TextItem nameItem = new TextItem();
-        nameItem.setTitle(constants.name());
+        nameItem.setTitle(bundle.name());
 
         final TextItem lastNameItem = new TextItem();
-        lastNameItem.setTitle(constants.lastName());
+        lastNameItem.setTitle(bundle.lastName());
 
-        IButton saveButton = new IButton(constants.savePatient());
+        IButton saveButton = new IButton(bundle.savePatient());
         saveButton.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent clickEvent) {
                 if (lastNameItem.getValue() == null || lastNameItem.getValue().toString().trim().length() == 0) {
-                    SC.say(constants.nameCannotBeEmpty());
+                    SC.say(bundle.nameCannotBeEmpty());
                     return;
                 }
                 PatientDTO patientDTO = new PatientDTO();

@@ -7,8 +7,9 @@ import com.smartgwt.client.widgets.layout.VLayout;
 import ua.com.alus.medhosp.frontend.client.main.ui.ToolBarPanel;
 import ua.com.alus.medhosp.frontend.client.main.ui.ToolbarButton;
 import ua.com.alus.medhosp.frontend.client.resources.images.Icons;
-import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientConstants;
-import ua.com.alus.medhosp.frontend.client.utils.ConstantsBundle;
+import ua.com.alus.medhosp.frontend.client.resources.locales.tasks.TasksBundle;
+import ua.com.alus.medhosp.frontend.client.utils.Bundle;
+import ua.com.alus.medhosp.frontend.client.utils.Constants;
 
 /**
  * Dialog for task table
@@ -19,12 +20,12 @@ public class TasksDialog extends Window {
 
     private TasksTable tasksTable;
     private ToolBarPanel tasksToolbar;
-    PatientConstants constants = ConstantsBundle.getInstance().getPsConst();
-    Icons icons = ConstantsBundle.getInstance().getIcons();
+    TasksBundle bundle = Bundle.getInstance().getTasksBundle();
+    Icons icons = Constants.getInstance().getIcons();
 
     public TasksDialog() {
         super();
-        setTitle("Tasks");
+        setTitle(bundle.tasks());
         setWidth(600);
         setHeight(300);
         setIsModal(true);
@@ -44,7 +45,7 @@ public class TasksDialog extends Window {
             tasksToolbar = new ToolBarPanel();
 
             final ToolbarButton refreshButton = new ToolbarButton(icons.refresh(),
-                    constants.getAllPatients());
+                    bundle.refresh());
 
 
             refreshButton.addClickHandler(new ClickHandler() {

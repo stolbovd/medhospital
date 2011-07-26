@@ -6,8 +6,8 @@ import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.events.CellSavedEvent;
 import com.smartgwt.client.widgets.grid.events.CellSavedHandler;
 import ua.com.alus.medhosp.frontend.client.modules.patients.cto.PatientCTO;
-import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientConstants;
-import ua.com.alus.medhosp.frontend.client.utils.ConstantsBundle;
+import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientBundle;
+import ua.com.alus.medhosp.frontend.client.utils.Bundle;
 import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
 
 import java.util.HashSet;
@@ -19,7 +19,7 @@ import java.util.HashSet;
  */
 public class PatientsTable extends ListGrid implements ITable {
     private static final String SELECTED = "selected";
-    private PatientConstants constants = ConstantsBundle.getInstance().getPsConst();
+    private PatientBundle bundle = Bundle.getInstance().getPsBundle();
     private PatientCTO patCTOSample = new PatientCTO();
 
     public static final String NAME_ATTRIBUTE = "name";
@@ -52,7 +52,7 @@ public class PatientsTable extends ListGrid implements ITable {
             }
         });
 
-        SimpleField entityIdColumn = new SimpleField(BaseColumns.ENTITY_ID.getColumnName(), constants.id());
+        SimpleField entityIdColumn = new SimpleField(BaseColumns.ENTITY_ID.getColumnName(), bundle.id());
         entityIdColumn.setType(ListGridFieldType.TEXT);
         entityIdColumn.setCanEdit(false);
 
