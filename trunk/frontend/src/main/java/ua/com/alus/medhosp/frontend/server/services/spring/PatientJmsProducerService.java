@@ -4,7 +4,9 @@ import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientJmsService;
 import ua.com.alus.medhosp.frontend.server.jms.JmsCommandProducer;
+import ua.com.alus.medhosp.frontend.shared.AttributeDTO;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
+import ua.com.alus.medhosp.prototype.cassandra.dto.AttributeColumns;
 import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
 import ua.com.alus.medhosp.prototype.commands.Command;
 import ua.com.alus.medhosp.prototype.json.CommandJson;
@@ -40,6 +42,16 @@ public class PatientJmsProducerService implements IPatientJmsService {
         savePatientCommand.setCommand(Command.SAVE_PATIENT.getCommandName());
         savePatientCommand.getProperties().put(BaseColumns.ENTITY_ID.getColumnName(), patientDTO.get(BaseColumns.ENTITY_ID.getColumnName()));
         commandsListJson.getCommands().add(savePatientCommand);
+        sendJms(commandsListJson);
+    }
+
+    public void saveAttribute(AttributeDTO attributeDTO) {
+        CommandsListJson commandsListJson = new CommandsListJson();
+        CommandJson saveAttributeCommand = new CommandJson();
+        saveAttributeCommand.setCommand(Command.SAVE_ATTRIBUTE.getCommandName());
+        saveAttributeCommand.getProperties().put(AttributeColumns.ENTITY_ID.getColumnName(), attributeDTO.get(AttributeColumns.ENTITY_ID.getColumnName()));
+        saveAttributeCommand.getProperties().put(AttributeColumns.NAME.getColumnName(), attributeDTO.get(AttributeColumns.NAME.getColumnName()));
+        commandsListJson.getCommands().add(saveAttributeCommand);
         sendJms(commandsListJson);
     }
 

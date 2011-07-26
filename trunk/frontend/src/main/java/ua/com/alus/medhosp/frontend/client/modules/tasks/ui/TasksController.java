@@ -20,8 +20,6 @@ public class TasksController {
 
     public TasksController(TasksTable tasksTable) {
         this.tasksTable = tasksTable;
-        this.tasksTable.setController(this);
-        refreshTable();
     }
 
     public void refreshTable() {

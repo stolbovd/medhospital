@@ -23,8 +23,6 @@ public class PatientsController implements IController {
 
     public PatientsController(PatientsTable patientsTable) {
         this.patientsTable = patientsTable;
-        this.patientsTable.setController(this);
-        refreshTable();
     }
 
     public void refreshTable() {

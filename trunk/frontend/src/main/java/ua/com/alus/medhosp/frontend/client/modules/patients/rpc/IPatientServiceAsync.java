@@ -22,4 +22,6 @@ public interface IPatientServiceAsync {
     void savePatientAttributeValue(PatientAttributeValue patientAttributeValue, String[] columns, AsyncCallback<Void> async);
 
     void savePatientAttribute(AttributeDTO attributeDTO, AsyncCallback<Void> async);
+
+    void getAllAttributes(AsyncCallback<List<AttributeDTO>> async);
 }

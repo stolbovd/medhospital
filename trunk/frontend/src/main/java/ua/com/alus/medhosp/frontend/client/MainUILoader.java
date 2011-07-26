@@ -60,7 +60,7 @@ public class MainUILoader {
     private HLayout topPanel;
 
     public HLayout getTopPanel() {
-        if(topPanel == null){
+        if (topPanel == null) {
             topPanel = new HLayout();
 
             IButton showTasksButton = new IButton();
@@ -84,7 +84,7 @@ public class MainUILoader {
     private TasksDialog tasksDialog;
 
     public TasksDialog getTasksDialog() {
-        if(tasksDialog == null){
+        if (tasksDialog == null) {
             tasksDialog = new TasksDialog();
         }
         return tasksDialog;
@@ -92,8 +92,8 @@ public class MainUILoader {
 
     private VLayout mainPanel;
 
-    private VLayout getMainPanel(){
-        if(mainPanel == null){
+    private VLayout getMainPanel() {
+        if (mainPanel == null) {
             mainPanel = new VLayout();
             mainPanel.setMargin(10);
             mainPanel.setTop(40);
@@ -132,8 +132,9 @@ public class MainUILoader {
     private Tab attributesTab;
 
     public Tab getAttributesTab() {
-        if(attributesTab == null){
+        if (attributesTab == null) {
             attributesTab = new Tab(attributesBundle.attributes());
+            attributesTab.setPane(getAttributesPanel());
         }
         return attributesTab;
     }

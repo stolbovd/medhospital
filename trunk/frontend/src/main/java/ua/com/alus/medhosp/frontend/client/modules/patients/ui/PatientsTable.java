@@ -1,15 +1,11 @@
 package ua.com.alus.medhosp.frontend.client.modules.patients.ui;
 
-import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.ListGridFieldType;
-import com.smartgwt.client.widgets.Canvas;
-import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.grid.events.CellSavedEvent;
 import com.smartgwt.client.widgets.grid.events.CellSavedHandler;
-import com.smartgwt.client.widgets.layout.HLayout;
 import ua.com.alus.medhosp.frontend.client.modules.patients.cto.PatientCTO;
 import ua.com.alus.medhosp.frontend.client.resources.images.Icons;
 import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientBundle;
