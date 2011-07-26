@@ -72,4 +72,8 @@ public class PatientServiceImpl implements IPatientService {
     public void savePatientAttribute(AttributeDTO attributeDTO) {
         getPatientAttributeDao().save(attributeDTO);
     }
+
+    public List<AttributeDTO> getAllAttributes() {
+        return getPatientAttributeDao().find("", "", new String[]{});
+    }
 }

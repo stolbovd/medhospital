@@ -2,15 +2,10 @@ package ua.com.alus.medhosp.frontend.server.jms;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.quartz.*;
 import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientService;
-import ua.com.alus.medhosp.frontend.server.quartz.BaseJob;
 import ua.com.alus.medhosp.frontend.server.quartz.MessageUtilsBean;
 import ua.com.alus.medhosp.frontend.server.services.spring.TaskService;
-import ua.com.alus.medhosp.frontend.shared.AbstractDTO;
-import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
-import ua.com.alus.medhosp.frontend.shared.PatientDTO;
-import ua.com.alus.medhosp.frontend.shared.TaskDTO;
+import ua.com.alus.medhosp.frontend.shared.*;
 import ua.com.alus.medhosp.prototype.cassandra.dto.TaskColumns;
 import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoal;
 import ua.com.alus.medhosp.prototype.commands.CommandResult;
@@ -18,7 +13,6 @@ import ua.com.alus.medhosp.prototype.data.Constants;
 
 import javax.jms.Message;
 import javax.jms.MessageListener;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -139,6 +133,8 @@ public class JmsCommandListener implements MessageListener {
                     getPatientService().createPatient((PatientDTO) object);
                 } else if (object instanceof PatientAttributeValue) {
                     getPatientService().savePatientAttributeValue((PatientAttributeValue) object, object.getColumns());
+                } else if (object instanceof AttributeDTO) {
+                    getPatientService().savePatientAttribute((AttributeDTO) object);
                 }
                 break;
         }

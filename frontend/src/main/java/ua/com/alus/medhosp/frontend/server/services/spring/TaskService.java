@@ -45,7 +45,7 @@ public class TaskService implements ITasksService {
     public String getUserId() {
         Authentication authentication;
         if ((authentication = SecurityContextHolder.getContext().getAuthentication()) != null) {
-            return ((User)authentication.getPrincipal()).getUsername();
+            return ((User) authentication.getPrincipal()).getUsername();
         }
         return ua.com.alus.medhosp.prototype.user.User.SYSTEM.name();
     }

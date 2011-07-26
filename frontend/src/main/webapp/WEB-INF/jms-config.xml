@@ -33,6 +33,8 @@
                        value="ua.com.alus.medhosp.frontend.shared.PatientAttributeValue"/>
                 <entry key="#{T(ua.com.alus.medhosp.prototype.cassandra.dto.Dto).PATIENT.getDtoName()}"
                        value="ua.com.alus.medhosp.frontend.shared.PatientDTO"/>
+                <entry key="#{T(ua.com.alus.medhosp.prototype.cassandra.dto.Dto).ATTRIBUTE.getDtoName()}"
+                       value="ua.com.alus.medhosp.frontend.shared.AttributeDTO"/>
             </map>
         </property>
         <property name="patientService" ref="patientService"/>

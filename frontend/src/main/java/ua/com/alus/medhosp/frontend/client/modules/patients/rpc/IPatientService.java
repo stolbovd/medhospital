@@ -24,4 +24,6 @@ public interface IPatientService extends RemoteService {
     void savePatientAttributeValue(PatientAttributeValue patientAttributeValue, String[] columns);
 
     void savePatientAttribute(AttributeDTO attributeDTO);
+
+    List<AttributeDTO> getAllAttributes();
 }

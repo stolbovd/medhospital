@@ -55,8 +55,6 @@ public class PatientsPanel extends HLayout {
 
             createButton.addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {
-                    /*PatientDialog patientDialog = new PatientDialog(getPatientsTable().getController());
-                    patientDialog.show(); */
                     SC.confirm(bundle.createPatient(), bundle.confirmContinute(), new BooleanCallback() {
                         public void execute(Boolean aBoolean) {
                             if (aBoolean) {
@@ -86,7 +84,6 @@ public class PatientsPanel extends HLayout {
         }
         return patientsToolbar;
     }
-
 
 
     private PatientsTable patientsTable;
