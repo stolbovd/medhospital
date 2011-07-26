@@ -11,8 +11,9 @@ public class ToolbarButton extends IButton {
     public ToolbarButton(String icon, String tooltip) {
         super();
         setIcon(icon);
+        setIconSize(24);
         setTooltip(tooltip);
-        setHeight(25);
-        setWidth(25);
+        setHeight(30);
+        setWidth(30);
     }
 }

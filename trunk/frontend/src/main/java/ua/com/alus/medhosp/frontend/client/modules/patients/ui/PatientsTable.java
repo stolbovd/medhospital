@@ -1,13 +1,20 @@
 package ua.com.alus.medhosp.frontend.client.modules.patients.ui;
 
+import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.ListGridFieldType;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
+import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.grid.events.CellSavedEvent;
 import com.smartgwt.client.widgets.grid.events.CellSavedHandler;
+import com.smartgwt.client.widgets.layout.HLayout;
 import ua.com.alus.medhosp.frontend.client.modules.patients.cto.PatientCTO;
+import ua.com.alus.medhosp.frontend.client.resources.images.Icons;
 import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientBundle;
 import ua.com.alus.medhosp.frontend.client.utils.Bundle;
+import ua.com.alus.medhosp.frontend.client.utils.Constants;
 import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
 
 import java.util.HashSet;
@@ -20,10 +27,8 @@ import java.util.HashSet;
 public class PatientsTable extends ListGrid implements ITable {
     private static final String SELECTED = "selected";
     private PatientBundle bundle = Bundle.getInstance().getPsBundle();
+    private Icons icons = Constants.getInstance().getIcons();
     private PatientCTO patCTOSample = new PatientCTO();
-
-    public static final String NAME_ATTRIBUTE = "name";
-    public static final String LAST_NAME_ATTRIBUTE = "lastName";
 
     public PatientsTable() {
         initTable();
@@ -55,13 +60,20 @@ public class PatientsTable extends ListGrid implements ITable {
         SimpleField entityIdColumn = new SimpleField(BaseColumns.ENTITY_ID.getColumnName(), bundle.id());
         entityIdColumn.setType(ListGridFieldType.TEXT);
         entityIdColumn.setCanEdit(false);
-
+        entityIdColumn.setValueIconSize(30);
         setFields(checkBoxColumn, entityIdColumn);
-
+        setCellHeight(30);
         setAutoFetchData(true);
         setWidth100();
         setHeight100();
+    }
 
+    @Override
+    public String getValueIcon(ListGridField field, Object value, ListGridRecord record) {
+        if (BaseColumns.ENTITY_ID.getColumnName().equals(field.getName())) {
+            return icons.patient();
+        }
+        return super.getValueIcon(field, value, record);
     }
 
     private HashSet<String> selectedPatients = new HashSet<String>();
