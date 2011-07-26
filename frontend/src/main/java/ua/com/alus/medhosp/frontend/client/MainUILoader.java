@@ -10,6 +10,11 @@ import com.smartgwt.client.widgets.tab.Tab;
 import com.smartgwt.client.widgets.tab.TabSet;
 import ua.com.alus.medhosp.frontend.client.modules.patients.ui.PatientsPanel;
 import ua.com.alus.medhosp.frontend.client.modules.tasks.ui.TasksDialog;
+import ua.com.alus.medhosp.frontend.client.resources.images.Icons;
+import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientBundle;
+import ua.com.alus.medhosp.frontend.client.resources.locales.tasks.TasksBundle;
+import ua.com.alus.medhosp.frontend.client.utils.Bundle;
+import ua.com.alus.medhosp.frontend.client.utils.Constants;
 
 /**
  * Created by Usatov Alexey
@@ -19,6 +24,9 @@ import ua.com.alus.medhosp.frontend.client.modules.tasks.ui.TasksDialog;
 public class MainUILoader {
 
     private static MainUILoader instance = new MainUILoader();
+    private TasksBundle tasksBundle = Bundle.getInstance().getTasksBundle();
+    private Icons icons = Constants.getInstance().getIcons();
+    private PatientBundle patientBundle = Bundle.getInstance().getPsBundle();
 
     public static MainUILoader getInstance() {
         return instance;
@@ -49,9 +57,12 @@ public class MainUILoader {
                     getTasksDialog().show();
                 }
             });
-            showTasksButton.setWidth(70);
-            showTasksButton.setHeight(20);
-            showTasksButton.setTitle("Tasks");
+            showTasksButton.setIcon(icons.tasks());
+            showTasksButton.setWidth(50);
+            showTasksButton.setHeight(50);
+            showTasksButton.setIconSize(40);
+            showTasksButton.setTooltip(tasksBundle.tasks());
+
             topPanel.setMembers(showTasksButton);
             topPanel.setMargin(20);
         }
@@ -73,6 +84,7 @@ public class MainUILoader {
         if(mainPanel == null){
             mainPanel = new VLayout();
             mainPanel.setMargin(10);
+            mainPanel.setTop(40);
             mainPanel.setMembers(getTopPanel(), getMainTabset());
             mainPanel.setWidth100();
             mainPanel.setHeight100();
@@ -98,7 +110,7 @@ public class MainUILoader {
 
     public Tab getPatientsTab() {
         if (patientsTab == null) {
-            patientsTab = new Tab("Patients");
+            patientsTab = new Tab(patientBundle.patients());
             patientsTab.setPane(getPatientsPanel());
         }
         return patientsTab;
