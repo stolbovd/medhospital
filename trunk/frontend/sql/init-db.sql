@@ -15,6 +15,11 @@ create column family Patients with
   gc_grace=0
 ;
 
+create column family Attributes with
+  comparator='BytesType' and
+  gc_grace=0
+;
+
 create column family TasksView with
   column_type='Super' and
   comparator='BytesType' and

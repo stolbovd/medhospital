@@ -38,6 +38,11 @@
         <property name="cFamilyName" value="PatientView"/>
     </bean>
 
+    <bean id="patientAttributeDao" class="ua.com.alus.medhosp.frontend.server.services.spring.dao.PatientAttributeDao"
+          parent="simpleDao">
+        <property name="cFamilyName" value="Attributes"/>
+          </bean>
+
     <bean id="patientJmsProducerService"
           class="ua.com.alus.medhosp.frontend.server.services.spring.PatientJmsProducerService">
         <property name="jmsCommandProducer" ref="jmsClientProducer"/>
@@ -46,6 +51,7 @@
     <bean id="patientService" class="ua.com.alus.medhosp.frontend.server.services.spring.PatientServiceImpl">
         <property name="patientDao" ref="patientDao"/>
         <property name="patientAttributeValueDao" ref="patientAttributeValueDao"/>
+        <property name="patientAttributeDao" ref="patientAttributeDao"/>
     </bean>
 
     <bean id="taskDao" class="ua.com.alus.medhosp.frontend.server.services.spring.dao.TaskDao" parent="simpleDao">
