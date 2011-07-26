@@ -8,9 +8,11 @@ import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
 import com.smartgwt.client.widgets.tab.Tab;
 import com.smartgwt.client.widgets.tab.TabSet;
+import ua.com.alus.medhosp.frontend.client.modules.attributes.ui.AttributesPanel;
 import ua.com.alus.medhosp.frontend.client.modules.patients.ui.PatientsPanel;
 import ua.com.alus.medhosp.frontend.client.modules.tasks.ui.TasksDialog;
 import ua.com.alus.medhosp.frontend.client.resources.images.Icons;
+import ua.com.alus.medhosp.frontend.client.resources.locales.attributes.AttributesBundle;
 import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientBundle;
 import ua.com.alus.medhosp.frontend.client.resources.locales.tasks.TasksBundle;
 import ua.com.alus.medhosp.frontend.client.utils.Bundle;
@@ -27,6 +29,7 @@ public class MainUILoader {
     private TasksBundle tasksBundle = Bundle.getInstance().getTasksBundle();
     private Icons icons = Constants.getInstance().getIcons();
     private PatientBundle patientBundle = Bundle.getInstance().getPsBundle();
+    private AttributesBundle attributesBundle = Bundle.getInstance().getAttributesBundle();
 
     public static MainUILoader getInstance() {
         return instance;
@@ -44,6 +47,15 @@ public class MainUILoader {
     }
 
     private PatientsPanel patientsPanel;
+
+    private AttributesPanel attributesPanel;
+
+    public AttributesPanel getAttributesPanel() {
+        if (attributesPanel == null) {
+            attributesPanel = new AttributesPanel();
+        }
+        return attributesPanel;
+    }
 
     private HLayout topPanel;
 
@@ -102,6 +114,7 @@ public class MainUILoader {
             mainTabSet.setWidth100();
             mainTabSet.setHeight100();
             mainTabSet.addTab(getPatientsTab());
+            mainTabSet.addTab(getAttributesTab());
         }
         return mainTabSet;
     }
@@ -114,5 +127,14 @@ public class MainUILoader {
             patientsTab.setPane(getPatientsPanel());
         }
         return patientsTab;
+    }
+
+    private Tab attributesTab;
+
+    public Tab getAttributesTab() {
+        if(attributesTab == null){
+            attributesTab = new Tab(attributesBundle.attributes());
+        }
+        return attributesTab;
     }
 }

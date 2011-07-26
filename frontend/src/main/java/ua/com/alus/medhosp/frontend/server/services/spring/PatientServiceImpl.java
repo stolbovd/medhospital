@@ -1,8 +1,10 @@
 package ua.com.alus.medhosp.frontend.server.services.spring;
 
 import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientService;
+import ua.com.alus.medhosp.frontend.server.services.spring.dao.PatientAttributeDao;
 import ua.com.alus.medhosp.frontend.server.services.spring.dao.PatientAttributeValueDao;
 import ua.com.alus.medhosp.frontend.server.services.spring.dao.PatientDao;
+import ua.com.alus.medhosp.frontend.shared.AttributeDTO;
 import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 
@@ -35,6 +37,16 @@ public class PatientServiceImpl implements IPatientService {
         this.patientAttributeValueDao = patientAttributeValueDao;
     }
 
+    private PatientAttributeDao patientAttributeDao;
+
+    public PatientAttributeDao getPatientAttributeDao() {
+        return patientAttributeDao;
+    }
+
+    public void setPatientAttributeDao(PatientAttributeDao patientAttributeDao) {
+        this.patientAttributeDao = patientAttributeDao;
+    }
+
     public void createPatient(PatientDTO gwtPatient) {
         getPatientDao().save(gwtPatient);
     }
@@ -55,5 +67,9 @@ public class PatientServiceImpl implements IPatientService {
 
     public void savePatientAttributeValue(PatientAttributeValue patientAttributeValue, String... columns) {
         getPatientAttributeValueDao().save(patientAttributeValue, columns);
+    }
+
+    public void savePatientAttribute(AttributeDTO attributeDTO) {
+        getPatientAttributeDao().save(attributeDTO);
     }
 }

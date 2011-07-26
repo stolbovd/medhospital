@@ -231,6 +231,9 @@
                         <i18nMessagesBundle>
                             ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientBundle
                         </i18nMessagesBundle>
+                        <i18nMessagesBundle>
+                            ua.com.alus.medhosp.frontend.client.resources.locales.attributes.AttributesBundle
+                        </i18nMessagesBundle>
                     </i18nMessagesBundles>
                     <i18nConstantsBundles>
                         <i18nConstantsBundle>

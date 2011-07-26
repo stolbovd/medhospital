@@ -2,6 +2,7 @@ package ua.com.alus.medhosp.frontend.client.modules.patients.rpc;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import ua.com.alus.medhosp.frontend.shared.AttributeDTO;
 import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 
@@ -21,4 +22,6 @@ public interface IPatientService extends RemoteService {
     void removeSelected(final List<String> ids);
 
     void savePatientAttributeValue(PatientAttributeValue patientAttributeValue, String[] columns);
+
+    void savePatientAttribute(AttributeDTO attributeDTO);
 }
