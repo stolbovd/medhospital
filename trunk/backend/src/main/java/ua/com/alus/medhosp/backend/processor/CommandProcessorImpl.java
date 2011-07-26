@@ -3,7 +3,6 @@ package ua.com.alus.medhosp.backend.processor;
 import org.apache.log4j.Logger;
 import org.axonframework.commandhandling.CommandBus;
 import org.codehaus.jackson.map.ObjectMapper;
-import ua.com.alus.medhosp.backend.jms.IJmsEventProducer;
 import ua.com.alus.medhosp.prototype.json.CommandJson;
 import ua.com.alus.medhosp.prototype.json.CommandsListJson;
 
