@@ -19,6 +19,7 @@ import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientBun
 import ua.com.alus.medhosp.frontend.client.utils.Bundle;
 import ua.com.alus.medhosp.frontend.client.utils.Constants;
 import ua.com.alus.medhosp.frontend.shared.AttributeDTO;
+import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 import ua.com.alus.medhosp.prototype.cassandra.dto.AttributeColumns;
 import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
@@ -144,8 +145,15 @@ public class PatientsPanel extends HLayout {
         return searchButton;
     }
 
-    private void searchByAttribute(String attributeId, String value){
+    private void searchByAttribute(String attributeId, String value) {
+        ServiceStorage.getInstance().getPatientServiceAsync().getPatientsByAttributeValue(attributeId, value, new AsyncCallback<List<PatientAttributeValue>>() {
+            public void onFailure(Throwable throwable) {
+                SC.say("Error:" + throwable);
+            }
 
+            public void onSuccess(List<PatientAttributeValue> attributeDTOs) {
+            }
+        });
     }
 
     private void retrieveData() {
