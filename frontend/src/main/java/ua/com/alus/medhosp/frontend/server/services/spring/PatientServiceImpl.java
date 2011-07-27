@@ -52,14 +52,13 @@ public class PatientServiceImpl implements IPatientService {
         getPatientDao().save(gwtPatient);
     }
 
+    /**
+     * Search of "clean" patients - only entityId and that is all.
+     * @param entityId - entityId UUID of patient
+     * @return list of patients (must be with lenght = 1)
+     */
     public List<PatientDTO> getPatients(String entityId) {
-        List<PatientDTO> patients = getPatientDao().find(entityId, entityId, new String[]{});
-        /*for (PatientDTO patientDTO : patients) {
-            String key = patientDTO.get(BaseColumns.ENTITY_ID.getColumnName());
-            patientDTO.setPatientAttributeValues(
-                    getPatientAttributeValueDao().find(key, key));
-        } */
-        return patients;
+        return getPatientDao().find(entityId, entityId);
     }
 
     public void removeSelected(List<String> ids) {
