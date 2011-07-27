@@ -54,11 +54,11 @@ public class PatientServiceImpl implements IPatientService {
 
     public List<PatientDTO> getPatients(String entityId) {
         List<PatientDTO> patients = getPatientDao().find(entityId, entityId, new String[]{});
-        for (PatientDTO patientDTO : patients) {
+        /*for (PatientDTO patientDTO : patients) {
             String key = patientDTO.get(BaseColumns.ENTITY_ID.getColumnName());
             patientDTO.setPatientAttributeValues(
                     getPatientAttributeValueDao().find(key, key));
-        }
+        } */
         return patients;
     }
 
