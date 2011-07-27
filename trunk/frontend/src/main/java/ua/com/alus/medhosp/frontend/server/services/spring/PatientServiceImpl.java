@@ -1,14 +1,15 @@
 package ua.com.alus.medhosp.frontend.server.services.spring;
 
 import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientService;
+import ua.com.alus.medhosp.frontend.server.services.spring.dao.CassandraSearch;
 import ua.com.alus.medhosp.frontend.server.services.spring.dao.PatientAttributeDao;
 import ua.com.alus.medhosp.frontend.server.services.spring.dao.PatientAttributeValueDao;
 import ua.com.alus.medhosp.frontend.server.services.spring.dao.PatientDao;
 import ua.com.alus.medhosp.frontend.shared.AttributeDTO;
 import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
-import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -58,7 +59,10 @@ public class PatientServiceImpl implements IPatientService {
      * @return list of patients (must be with lenght = 1)
      */
     public List<PatientDTO> getPatients(String entityId) {
-        return getPatientDao().find(entityId, entityId);
+        CassandraSearch cassandraSearch = new CassandraSearch();
+        cassandraSearch.setKeyStart(entityId);
+        cassandraSearch.setKeyEnd(entityId);
+        return getPatientDao().find(cassandraSearch);
     }
 
     public void removeSelected(List<String> ids) {
@@ -74,10 +78,17 @@ public class PatientServiceImpl implements IPatientService {
     }
 
     public List<AttributeDTO> getAllAttributes() {
-        return getPatientAttributeDao().find("", "");
+        CassandraSearch cassandraSearch = new CassandraSearch();
+        cassandraSearch.setKeyStart("");
+        cassandraSearch.setKeyEnd("");
+        return getPatientAttributeDao().find(cassandraSearch);
     }
 
     public List<PatientAttributeValue> getPatientsByAttributeValue(String attributeId, String value) {
-        return getPatientAttributeValueDao().find("", "", attributeId);
+        CassandraSearch cassandraSearch = new CassandraSearch();
+        cassandraSearch.setKeyStart("");
+        cassandraSearch.setKeyEnd("");
+        cassandraSearch.getSuperNames2Values().put(attributeId, new HashMap<String,String>());
+        return getPatientAttributeValueDao().find(cassandraSearch);
     }
 }
