@@ -76,4 +76,8 @@ public class PatientServiceImpl implements IPatientService {
     public List<AttributeDTO> getAllAttributes() {
         return getPatientAttributeDao().find("", "");
     }
+
+    public List<PatientAttributeValue> getPatientsByAttributeValue(String attributeId, String value) {
+        return getPatientAttributeValueDao().find("", "", attributeId);
+    }
 }
