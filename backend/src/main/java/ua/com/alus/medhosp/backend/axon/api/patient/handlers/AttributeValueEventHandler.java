@@ -18,12 +18,12 @@ public class AttributeValueEventHandler {
 
     @EventHandler
     public void saveAttributeValueEventHandler(SaveAttributeValueEvent event) {
-        patientService.savePatientAttributeValue(event.getEntityId(), event.getAttributeId(), event.getAttributeValue());
+        patientService.savePatientAttributeValue(event.getEntityId(), event.getPatientId(), event.getAttributeValue());
     }
 
     @EventHandler
     public void removeAttributeValueEventHandler(RemoveAttributeValueEvent event) {
-        patientService.removePatientAttributeValue(event.getEntityId(), event.getAttributeId());
+        patientService.removePatientAttributeValue(event.getEntityId(), event.getEntityId());
     }
 
     public void setPatientService(PatientService patientService) {

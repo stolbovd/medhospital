@@ -15,7 +15,7 @@ import java.io.Serializable;
  */
 public class PatientAttributeValueAggregate extends AbstractAnnotatedAggregateRoot implements Serializable {
     public static final String AGGREGATE_IDENT_TEMPL = "%s-%s";
-    private String attributeId;
+    private String patientId;
     private String attributeValue;
     private String entityId;
     private String userId;
@@ -25,22 +25,22 @@ public class PatientAttributeValueAggregate extends AbstractAnnotatedAggregateRo
     }
 
 
-    public PatientAttributeValueAggregate(String entityId, String attributeId, String userId, String attributeValue) {
-        super(generateIdentifier(entityId, attributeId));
+    public PatientAttributeValueAggregate(String entityId, String patientId, String userId, String attributeValue) {
+        super(generateIdentifier(entityId, patientId));
         this.entityId = entityId;
-        this.attributeId = attributeId;
+        this.patientId = patientId;
         this.attributeValue = attributeValue;
         this.userId = userId;
     }
 
     public void save(String messageId) {
         SaveAttributeValueEvent event = new SaveAttributeValueEvent(entityId, messageId, userId,
-                attributeId, attributeValue);
+                patientId, attributeValue);
         apply(event);
     }
 
     public void remove(String messageId) {
-        RemoveAttributeValueEvent event = new RemoveAttributeValueEvent(entityId, messageId, attributeId);
+        RemoveAttributeValueEvent event = new RemoveAttributeValueEvent(entityId, messageId, patientId);
         apply(event);
     }
 
@@ -48,12 +48,12 @@ public class PatientAttributeValueAggregate extends AbstractAnnotatedAggregateRo
         return new StringAggregateIdentifier(String.format(AGGREGATE_IDENT_TEMPL, entityId, attributeId));
     }
 
-    public String getAttributeId() {
-        return attributeId;
+    public String getPatientId() {
+        return patientId;
     }
 
-    public void setAttributeId(String attributeId) {
-        this.attributeId = attributeId;
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
     }
 
     public String getAttributeValue() {

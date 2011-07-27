@@ -18,9 +18,9 @@ public class SaveAttributeValueEvent extends AttributeValueEvent implements Seri
         super(entityId, messageId, userId);
     }
 
-    public SaveAttributeValueEvent(String entityId, String messageId, String userId, String attributeId, String attributeValue) {
+    public SaveAttributeValueEvent(String entityId, String messageId, String userId, String patientId, String attributeValue) {
         super(entityId, messageId, userId);
-        setAttributeId(attributeId);
+        setPatientId(patientId);
         this.attributeValue = attributeValue;
     }
 

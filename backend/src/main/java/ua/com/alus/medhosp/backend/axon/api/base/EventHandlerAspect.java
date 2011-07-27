@@ -61,9 +61,9 @@ public class EventHandlerAspect {
         answer.put(Constants.USER_ID, event.getUserId());
         if (event instanceof SaveAttributeValueEvent) {
             answer.put(AttributeValueColumns.ATTRIBUTE_VALUE.getColumnName(), ((SaveAttributeValueEvent) event).getAttributeValue());
-            answer.put(AttributeValueColumns.ATTRIBUTE_ID.getColumnName(), ((SaveAttributeValueEvent) event).getAttributeId());
+            answer.put(AttributeValueColumns.PATIENT_ID.getColumnName(), ((SaveAttributeValueEvent) event).getPatientId());
             answer.put(Constants.CLASS, Dto.PATIENT_ATTRIBUTE_VALUE.getDtoName());
-            answer.put(AttributeValueColumns.SUPER_KEY_NAME.getColumnName(), ((SaveAttributeValueEvent) event).getAttributeId());
+            answer.put(AttributeValueColumns.SUPER_KEY_NAME.getColumnName(), event.getEntityId());
         } else if (event instanceof SavePatientEvent) {
             answer.put(Constants.CLASS, Dto.PATIENT.getDtoName());
         } else if(event instanceof SaveAttributeEvent){

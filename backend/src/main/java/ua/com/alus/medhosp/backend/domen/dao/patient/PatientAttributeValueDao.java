@@ -13,7 +13,7 @@ import java.util.List;
 public class PatientAttributeValueDao extends JpaDAO<String, PatientAttributeValue> {
 
     @SuppressWarnings("unchecked")
-    public List<PatientAttributeValue> getPatientAttributeValue(String entityId, String attributeId) {
+    public List<PatientAttributeValue> getPatientAttributeValue(String attributeId, String entityId) {
         return (List<PatientAttributeValue>) entityManager.createNamedQuery("selectAttributeValue").
                 setParameter("entityId", entityId).setParameter("attrId", attributeId).getResultList();
     }
