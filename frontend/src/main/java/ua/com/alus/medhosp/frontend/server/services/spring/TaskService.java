@@ -4,9 +4,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import ua.com.alus.medhosp.frontend.client.modules.tasks.rpc.ITasksService;
+import ua.com.alus.medhosp.frontend.server.services.spring.dao.CassandraSearch;
 import ua.com.alus.medhosp.frontend.server.services.spring.dao.TaskDao;
 import ua.com.alus.medhosp.frontend.shared.TaskDTO;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -28,7 +30,10 @@ public class TaskService implements ITasksService {
     }
 
     public List<TaskDTO> getTasks() {
-        return getTaskDao().find(getUserId(), getUserId());
+        CassandraSearch cassandraSearch = new CassandraSearch();
+        cassandraSearch.setKeyStart(getUserId());
+        cassandraSearch.setKeyEnd(getUserId());
+        return getTaskDao().find(cassandraSearch);
     }
 
     public void removeTask(String messageId) {
@@ -39,7 +44,11 @@ public class TaskService implements ITasksService {
         if (userId == null) {
             userId = getUserId();
         }
-        return getTaskDao().find(userId, userId, messageId).get(0);
+        CassandraSearch cassandraSearch = new CassandraSearch();
+        cassandraSearch.setKeyStart(userId);
+        cassandraSearch.setKeyEnd(userId);
+        cassandraSearch.getSuperNames2Values().put(messageId, new HashMap<String,String>());
+        return getTaskDao().find(cassandraSearch).get(0);
     }
 
     public String getUserId() {

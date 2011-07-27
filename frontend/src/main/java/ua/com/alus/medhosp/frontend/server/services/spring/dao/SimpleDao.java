@@ -107,15 +107,15 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
         m1.execute();
     }
 
-    public List<D> find(String keyFirst, String keyLast, String... superColumnNames) {
+    public List<D> find(CassandraSearch cassandraSearch) {
         if (dtoObject instanceof SuperColumn) {
-            return findSuper(keyFirst, keyLast, superColumnNames);
+            return findSuper(cassandraSearch);
         } else {
-            return findSimple(keyFirst, keyLast);
+            return findSimple(cassandraSearch);
         }
     }
 
-    private List<D> findSimple(String keyFirst, String keyLast) {
+    private List<D> findSimple(CassandraSearch cassandraSearch) {
         ArrayList<D> abstractDTOs = new ArrayList<D>();
         try {
             RangeSlicesQuery<String, String, String> rangeSlicesQuery =
@@ -123,8 +123,8 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
             rangeSlicesQuery.setColumnFamily(cFamilyName);
             rangeSlicesQuery.setColumnNames(dtoObject.getColumns());
             //100 rows by default
-            rangeSlicesQuery.setRange("", "", false, 100);
-            rangeSlicesQuery.setKeys(keyFirst, keyLast);
+            rangeSlicesQuery.setRange("", "", false, cassandraSearch.getCount());
+            rangeSlicesQuery.setKeys(cassandraSearch.getKeyStart(), cassandraSearch.getKeyEnd());
             QueryResult<OrderedRows<String, String, String>> result = rangeSlicesQuery.execute();
             OrderedRows<String, String, String> orderedRows = result.get();
 
@@ -146,21 +146,21 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
         return abstractDTOs;
     }
 
-    private List<D> findSuper(String keyFirst, String keyLast, String[] superColumnNames) {
+    private List<D> findSuper(CassandraSearch cassandraSearch) {
         ArrayList<D> abstractDTOs = new ArrayList<D>();
         try {
             RangeSuperSlicesQuery<String, String, String, String> rangeSliceQuery =
                     HFactory.createRangeSuperSlicesQuery(keyspace, ss, ss, ss, ss);
             rangeSliceQuery.setColumnFamily(cFamilyName);
-            rangeSliceQuery.setColumnNames(superColumnNames);
+            rangeSliceQuery.setColumnNames(cassandraSearch.getSuperColumnsName());
             //100 row by default
-            rangeSliceQuery.setRange("", "", false, 100);
-            rangeSliceQuery.setKeys(keyFirst, keyLast);
+            rangeSliceQuery.setRange("", "", false, cassandraSearch.getCount());
+            rangeSliceQuery.setKeys(cassandraSearch.getKeyStart(), cassandraSearch.getKeyEnd());
             QueryResult<OrderedSuperRows<String, String, String, String>> result = rangeSliceQuery.execute();
             OrderedSuperRows<String, String, String, String> orderedSuperRows = result.get();
             for (SuperRow<String, String, String, String> row : orderedSuperRows) {
-                if (superColumnNames.length != 0) {
-                    for (String superColumnName : superColumnNames) {
+                if (cassandraSearch.getSuperColumnsName().length != 0) {
+                    for (String superColumnName : cassandraSearch.getSuperColumnsName()) {
                         HSuperColumn<String, String, String> superColumn =
                                 row.getSuperSlice().getColumnByName(superColumnName);
                         if (superColumn == null) {
