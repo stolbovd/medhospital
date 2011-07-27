@@ -58,16 +58,16 @@ public class PatientService {
         return getPatientDao().removeSelected(ids);
     }
 
-    public PatientAttributeValue getPatientAttributeValue(String entityId, String atrtibuteId) {
+    public PatientAttributeValue getPatientAttributeValue(String atrtibuteId, String entityId) {
         List<PatientAttributeValue> result =
-                getPatientAttributeValueDao().getPatientAttributeValue(entityId, atrtibuteId);
+                getPatientAttributeValueDao().getPatientAttributeValue(atrtibuteId, entityId);
         if (result.size() == 0) return null;
         return result.get(0);
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public void savePatientAttributeValue(String entityId, String attributeId, String value) {
-        PatientAttributeValue patientAttributeValue = getPatientAttributeValue(entityId, attributeId);
+    public void savePatientAttributeValue(String attributeId, String entityId, String value) {
+        PatientAttributeValue patientAttributeValue = getPatientAttributeValue(attributeId, entityId);
         if (patientAttributeValue == null) {
             patientAttributeValue = new PatientAttributeValue();
             patientAttributeValue.setEntityId(entityId);
@@ -78,8 +78,8 @@ public class PatientService {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public void removePatientAttributeValue(String entityId, String attributeId) {
-        PatientAttributeValue patientAttributeValue = getPatientAttributeValue(entityId, attributeId);
+    public void removePatientAttributeValue(String attributeId, String entityId) {
+        PatientAttributeValue patientAttributeValue = getPatientAttributeValue(attributeId, entityId);
         if (patientAttributeValue == null) {
             return;
         }

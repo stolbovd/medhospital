@@ -8,17 +8,17 @@ import ua.com.alus.medhosp.backend.axon.api.base.AbstractEntityEvent;
  * Time: 16:52
  */
 public abstract class AttributeValueEvent extends AbstractEntityEvent {
-    private String attributeId;
+    private String patientId;
 
     public AttributeValueEvent(String entityId, String messageId, String userId) {
         super(entityId, messageId, userId);
     }
 
-    public String getAttributeId() {
-        return attributeId;
+    public String getPatientId() {
+        return patientId;
     }
 
-    public void setAttributeId(String attributeId) {
-        this.attributeId = attributeId;
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
     }
 }

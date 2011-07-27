@@ -14,11 +14,11 @@ import java.io.Serializable;
 public abstract class EntityAttributeValue implements Serializable {
 
     @Id
-    @Column(name = "FK_ENTITY_ID")
-    private String entityId;
-
     @Column(name = "FK_ATTRIBUTE_ID")
     private String attributeId;
+
+    @Column(name = "FK_ENTITY_ID")
+    private String entityId;
 
     @Column(name = "VALUE")
     private String value;
