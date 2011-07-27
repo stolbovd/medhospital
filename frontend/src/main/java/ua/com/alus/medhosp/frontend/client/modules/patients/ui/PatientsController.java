@@ -26,7 +26,7 @@ public class PatientsController implements IController {
     }
 
     public void refreshTable() {
-        ServiceStorage.getInstance().getPatientServiceAsync().getAllPatients(new AsyncCallback<List<PatientDTO>>() {
+        ServiceStorage.getInstance().getPatientServiceAsync().getPatients("", new AsyncCallback<List<PatientDTO>>() {
             public void onFailure(Throwable caught) {
                 SC.say("Error:" + caught);
             }

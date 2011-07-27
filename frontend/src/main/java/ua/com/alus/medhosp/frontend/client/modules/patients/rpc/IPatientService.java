@@ -17,7 +17,7 @@ import java.util.List;
 public interface IPatientService extends RemoteService {
     void createPatient(PatientDTO patientDTO);
 
-    List<PatientDTO> getAllPatients();
+    List<PatientDTO> getPatients(String entityId);
 
     void removeSelected(final List<String> ids);
 

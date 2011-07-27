@@ -15,7 +15,7 @@ import java.util.List;
 public interface IPatientServiceAsync {
     void createPatient(PatientDTO patientDTO, AsyncCallback<Void> callback);
 
-    void getAllPatients(AsyncCallback<List<PatientDTO>> callback);
+    void getPatients(String entityId, AsyncCallback<List<PatientDTO>> callback);
 
     void removeSelected(final List<String> ids, AsyncCallback<Void> async);
 

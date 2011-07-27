@@ -7,6 +7,7 @@ import ua.com.alus.medhosp.frontend.server.services.spring.dao.PatientDao;
 import ua.com.alus.medhosp.frontend.shared.AttributeDTO;
 import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
+import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
 
 import java.util.List;
 
@@ -51,13 +52,13 @@ public class PatientServiceImpl implements IPatientService {
         getPatientDao().save(gwtPatient);
     }
 
-    public List<PatientDTO> getAllPatients() {
-        List<PatientDTO> patients = getPatientDao().find("", "", new String[]{});
-        /*for (PatientDTO patientDTO : patients) {
+    public List<PatientDTO> getPatients(String entityId) {
+        List<PatientDTO> patients = getPatientDao().find(entityId, entityId, new String[]{});
+        for (PatientDTO patientDTO : patients) {
             String key = patientDTO.get(BaseColumns.ENTITY_ID.getColumnName());
             patientDTO.setPatientAttributeValues(
                     getPatientAttributeValueDao().find(key, key));
-        } */
+        }
         return patients;
     }
 
