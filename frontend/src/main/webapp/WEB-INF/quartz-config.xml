@@ -9,6 +9,7 @@
         <property name="jdbcUrl" value="${JDBC_URL}"/>
         <property name="maxPoolSize" value="${MAX_POOL_SIZE}"/>
         <property name="initialPoolSize" value="${INITIAL_POOL_SIZE}"/>
+        <property name="automaticTestTable" value="DERBY_TEST_TABLE"/>
     </bean>
 
 
