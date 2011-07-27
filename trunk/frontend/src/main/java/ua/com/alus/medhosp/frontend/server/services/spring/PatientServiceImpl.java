@@ -79,15 +79,11 @@ public class PatientServiceImpl implements IPatientService {
 
     public List<AttributeDTO> getAllAttributes() {
         CassandraSearch cassandraSearch = new CassandraSearch();
-        cassandraSearch.setKeyStart("");
-        cassandraSearch.setKeyEnd("");
         return getPatientAttributeDao().find(cassandraSearch);
     }
 
     public List<PatientAttributeValue> getPatientsByAttributeValue(String attributeId, String value) {
         CassandraSearch cassandraSearch = new CassandraSearch();
-        cassandraSearch.setKeyStart("");
-        cassandraSearch.setKeyEnd("");
         cassandraSearch.getSuperNames2Values().put(attributeId, new HashMap<String,String>());
         return getPatientAttributeValueDao().find(cassandraSearch);
     }
