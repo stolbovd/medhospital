@@ -35,7 +35,7 @@
     <bean id="patientAttributeValueDao"
           class="ua.com.alus.medhosp.frontend.server.services.spring.dao.PatientAttributeValueDao"
           parent="simpleDao">
-        <property name="cFamilyName" value="PatientView"/>
+        <property name="cFamilyName" value="PatientAttributeValue"/>
     </bean>
 
     <bean id="patientAttributeDao" class="ua.com.alus.medhosp.frontend.server.services.spring.dao.PatientAttributeDao"

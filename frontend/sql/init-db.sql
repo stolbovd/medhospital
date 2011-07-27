@@ -3,7 +3,7 @@
 create keyspace Hospital;
 use Hospital;
 
-create column family PatientView with
+create column family PatientAttributeValue with
   column_type='Super' and
   comparator='BytesType' and
   subcomparator='BytesType' and
