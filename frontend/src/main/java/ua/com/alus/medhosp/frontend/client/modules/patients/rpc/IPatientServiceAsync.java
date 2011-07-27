@@ -24,4 +24,6 @@ public interface IPatientServiceAsync {
     void savePatientAttribute(AttributeDTO attributeDTO, AsyncCallback<Void> async);
 
     void getAllAttributes(AsyncCallback<List<AttributeDTO>> async);
+
+    void getPatientsByAttributeValue(String attributeId, String value, AsyncCallback<List<PatientAttributeValue>> async);
 }
