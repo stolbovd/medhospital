@@ -40,6 +40,13 @@ public class TasksTable extends ListGrid {
         resultColumn.setImageURLPrefix("icons/tasks/");
         resultColumn.setImageURLSuffix(".png");
 
+        resultColumn.setHoverCustomizer(new HoverCustomizer() {
+            public String hoverHTML(Object o, ListGridRecord listGridRecord, int i, int i1) {
+                return listGridRecord.getAttributeAsString(TaskColumns.ERROR_MESSAGE.getColumnName());
+            }
+        });
+        resultColumn.setShowHover(true);
+
 
         SimpleField messageBody = new SimpleField(TaskColumns.MESSAGE_BODY.getColumnName(), "messageBody");
         messageBody.setType(ListGridFieldType.TEXT);

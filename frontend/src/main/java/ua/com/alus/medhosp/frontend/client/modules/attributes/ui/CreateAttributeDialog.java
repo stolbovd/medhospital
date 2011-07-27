@@ -4,6 +4,7 @@ import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.VerticalAlignment;
 import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.IButton;
+import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.Window;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
@@ -33,6 +34,9 @@ public class CreateAttributeDialog extends Window {
         return controller;
     }
 
+    private TextItem shortCodeItem;
+    private TextItem nameItem;
+
     public CreateAttributeDialog(AttributesController controller) {
         super();
         this.controller = controller;
@@ -49,25 +53,30 @@ public class CreateAttributeDialog extends Window {
         form.setHeight100();
         form.setWidth100();
         form.setLayoutAlign(VerticalAlignment.BOTTOM);
-        final TextItem nameItem = new TextItem();
+
+        shortCodeItem = new TextItem();
+        shortCodeItem.setTitle(bundle.shortCode());
+        shortCodeItem.setRequired(true);
+
+
+        nameItem = new TextItem();
         nameItem.setTitle(bundle.name());
+        nameItem.setRequired(true);
 
         IButton saveButton = new IButton(bundle.saveAttribute());
         saveButton.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent clickEvent) {
-                if (nameItem.getValue() == null || nameItem.getValue().toString().trim().length() == 0) {
-                    SC.say(bundle.nameCannotBeEmpty());
-                    return;
+                if (validateForm()) {
+                    AttributeDTO attributeDTO = new AttributeDTO();
+                    attributeDTO.put(BaseColumns.ENTITY_ID.getColumnName(), shortCodeItem.getValueAsString());
+                    attributeDTO.put(AttributeColumns.NAME.getColumnName(), nameItem.getValueAsString());
+                    getController().saveAttribute(attributeDTO);
+                    destroy();
                 }
-                AttributeDTO attributeDTO = new AttributeDTO();
-                attributeDTO.put(BaseColumns.ENTITY_ID.getColumnName(), UUID.uuid());
-                attributeDTO.put(AttributeColumns.NAME.getColumnName(), nameItem.getValueAsString());
-                getController().saveAttribute(attributeDTO);
-                destroy();
             }
         });
 
-        form.setItems(nameItem);
+        form.setItems(shortCodeItem, nameItem);
 
         HLayout buttonLayout = new HLayout();
         buttonLayout.setAlign(Alignment.CENTER);
@@ -79,5 +88,18 @@ public class CreateAttributeDialog extends Window {
         mainPanel.setMembers(form, buttonLayout);
 
         addItem(mainPanel);
+    }
+
+
+    private boolean validateForm() {
+        if (nameItem.getValue() == null || nameItem.getValue().toString().trim().length() == 0) {
+            SC.say(bundle.nameCannotBeEmpty());
+            return false;
+        }
+        if (shortCodeItem.getValue() == null || shortCodeItem.getValue().toString().trim().length() == 0) {
+            SC.say(bundle.shortCodeCannotBeEmpty());
+            return false;
+        }
+        return true;
     }
 }
