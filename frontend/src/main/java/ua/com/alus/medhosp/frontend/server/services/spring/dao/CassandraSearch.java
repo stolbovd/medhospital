@@ -11,7 +11,6 @@ public class CassandraSearch {
     private int count = 100;
     private HashMap<String, HashMap<String, String>> superNames2Values = new HashMap<String, HashMap<String, String>>();
     private HashMap<String, String> simpleNames2Values = new HashMap<String, String>();
-
     private boolean returnOnlyKeys = false;
 
     public String getKeyStart() {
@@ -42,7 +41,7 @@ public class CassandraSearch {
         return superNames2Values;
     }
 
-    public void setNames2Values(HashMap<String, HashMap<String, String>> superNames2Values) {
+    public void setSuperNames2Values(HashMap<String, HashMap<String, String>> superNames2Values) {
         this.superNames2Values = superNames2Values;
     }
 

@@ -1,17 +1,20 @@
 package ua.com.alus.medhosp.frontend.server.services.spring.dao;
 
+import me.prettyprint.cassandra.model.IndexedSlicesQuery;
 import me.prettyprint.hector.api.beans.*;
 import me.prettyprint.hector.api.factory.HFactory;
 import me.prettyprint.hector.api.mutation.Mutator;
 import me.prettyprint.hector.api.query.QueryResult;
 import me.prettyprint.hector.api.query.RangeSlicesQuery;
 import me.prettyprint.hector.api.query.RangeSuperSlicesQuery;
+import me.prettyprint.hector.api.query.SuperSliceQuery;
 import ua.com.alus.medhosp.frontend.shared.AbstractDTO;
 import ua.com.alus.medhosp.frontend.shared.SuperColumn;
 import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -111,6 +114,9 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
         if (dtoObject instanceof SuperColumn) {
             return findSuper(cassandraSearch);
         } else {
+            if (cassandraSearch.getSimpleNames2Values().size() > 0) {
+                return findSimpleIndexed(cassandraSearch);
+            }
             return findSimple(cassandraSearch);
         }
     }
@@ -126,6 +132,39 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
             rangeSlicesQuery.setRange("", "", false, cassandraSearch.getCount());
             rangeSlicesQuery.setKeys(cassandraSearch.getKeyStart(), cassandraSearch.getKeyEnd());
             QueryResult<OrderedRows<String, String, String>> result = rangeSlicesQuery.execute();
+            OrderedRows<String, String, String> orderedRows = result.get();
+
+            for (Row<String, String, String> row : orderedRows) {
+                if (row.getColumnSlice().getColumns().size() == 0) {
+                    continue;
+                }
+                D currentDto = dtoClass.newInstance();
+                for (String column : dtoObject.getColumns()) {
+                    HColumn hColumn = row.getColumnSlice().getColumnByName(column);
+                    currentDto.put(column, hColumn == null ? "" : String.valueOf(hColumn.getValue()));
+                }
+                abstractDTOs.add(currentDto);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return abstractDTOs;
+    }
+
+    private List<D> findSimpleIndexed(CassandraSearch cassandraSearch) {
+        ArrayList<D> abstractDTOs = new ArrayList<D>();
+        try {
+            IndexedSlicesQuery<String, String, String> indexedSlicesQuery =
+                    HFactory.createIndexedSlicesQuery(keyspace, ss, ss, ss);
+            indexedSlicesQuery.setColumnFamily(cFamilyName);
+            indexedSlicesQuery.setColumnNames(dtoObject.getColumns());
+            //100 rows by default
+            indexedSlicesQuery.setRange("", "", false, cassandraSearch.getCount());
+            for (String columnName : cassandraSearch.getSimpleNames2Values().keySet()) {
+                indexedSlicesQuery.addEqualsExpression(columnName, cassandraSearch.getSimpleNames2Values().get(columnName));
+            }
+            QueryResult<OrderedRows<String, String, String>> result = indexedSlicesQuery.execute();
             OrderedRows<String, String, String> orderedRows = result.get();
 
             for (Row<String, String, String> row : orderedRows) {

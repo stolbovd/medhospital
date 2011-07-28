@@ -12,7 +12,10 @@ create column family PatientAttributeValue with
 
 create column family Patients with
   comparator='BytesType' and
-  gc_grace=0
+  gc_grace=0 and
+  column_metadata=[
+  {column_name : entityId, validation_class : BytesType, index_type : KEYS}
+  ];
 ;
 
 create column family Attributes with
