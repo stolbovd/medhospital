@@ -8,7 +8,9 @@ import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
+import com.smartgwt.client.widgets.form.fields.SelectItem;
 import com.smartgwt.client.widgets.form.fields.TextItem;
+import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.layout.HLayout;
 import ua.com.alus.medhosp.frontend.client.ServiceStorage;
 import ua.com.alus.medhosp.frontend.client.main.ui.MainPanel;
@@ -93,13 +95,12 @@ public class PatientsPanel extends HLayout {
         return patientsToolbar;
     }
 
-    private ComboBoxItem attributesCombobox;
+    private SelectItem attributesCombobox;
 
-    private ComboBoxItem getAttributesCombobox() {
+    private SelectItem getAttributesCombobox() {
         if (attributesCombobox == null) {
-            attributesCombobox = new ComboBoxItem();
+            attributesCombobox = new SelectItem();
             attributesCombobox.setTitle(bundle.searchByAttribute());
-            //attributesCombobox.setHint("<nobr>" + bundle.searchByAttribute() + "</nobr>");
             attributesCombobox.setType("comboBox");
             attributesCombobox.setWidth(150);
         }
@@ -127,9 +128,13 @@ public class PatientsPanel extends HLayout {
                 public void onClick(ClickEvent event) {
                     String search;
                     if ((search = searchField.getValueAsString()) != null && getAttributesCombobox().getValueAsString() != null) {
+                        if (BaseColumns.ENTITY_ID.getColumnName().equals(getAttributesCombobox().getValueAsString())) {
+                            getPatientsTable().getController().refreshTable(search);
+                            return;
+                        }
                         searchByAttribute(getAttributesCombobox().getValueAsString(), search);
-                    } else if ((search = searchField.getValueAsString()) != null) {
-                        getPatientsTable().getController().refreshTable(search);
+                    } else {
+                        SC.say(bundle.noParamForSearch());
                     }
                 }
             });
@@ -157,6 +162,7 @@ public class PatientsPanel extends HLayout {
 
             public void onSuccess(List<AttributeDTO> attributeDTOs) {
                 LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
+                map.put(BaseColumns.ENTITY_ID.getColumnName(), bundle.entityId());
                 for (AttributeDTO attributeDTO : attributeDTOs) {
                     map.put(attributeDTO.get(AttributeColumns.ENTITY_ID.getColumnName()), attributeDTO.get(AttributeColumns.NAME.getColumnName()));
                 }
