@@ -19,8 +19,8 @@ public class RemoveAttributeValueEvent extends AttributeValueEvent {
         return DtoGoal.REMOVE;
     }
 
-    public RemoveAttributeValueEvent(String entityId, String messageId, String userId, String patientId) {
+    public RemoveAttributeValueEvent(String entityId, String messageId, String userId, String attributeId) {
         super(entityId, messageId, userId);
-        setPatientId(patientId);
+        setAttributeId(attributeId);
     }
 }

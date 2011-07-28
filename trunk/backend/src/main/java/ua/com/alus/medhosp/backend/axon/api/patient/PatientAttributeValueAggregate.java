@@ -15,7 +15,7 @@ import java.io.Serializable;
  */
 public class PatientAttributeValueAggregate extends AbstractAnnotatedAggregateRoot implements Serializable {
     public static final String AGGREGATE_IDENT_TEMPL = "%s-%s";
-    private String patientId;
+    private String attributeId;
     private String attributeValue;
     private String entityId;
     private String userId;
@@ -25,22 +25,22 @@ public class PatientAttributeValueAggregate extends AbstractAnnotatedAggregateRo
     }
 
 
-    public PatientAttributeValueAggregate(String entityId, String patientId, String userId, String attributeValue) {
-        super(generateIdentifier(entityId, patientId));
+    public PatientAttributeValueAggregate(String entityId, String attributeId, String userId, String attributeValue) {
+        super(generateIdentifier(entityId, attributeId));
         this.entityId = entityId;
-        this.patientId = patientId;
+        this.attributeId = attributeId;
         this.attributeValue = attributeValue;
         this.userId = userId;
     }
 
     public void save(String messageId) {
         SaveAttributeValueEvent event = new SaveAttributeValueEvent(entityId, messageId, userId,
-                patientId, attributeValue);
+                attributeId, attributeValue);
         apply(event);
     }
 
     public void remove(String messageId) {
-        RemoveAttributeValueEvent event = new RemoveAttributeValueEvent(entityId, messageId, patientId);
+        RemoveAttributeValueEvent event = new RemoveAttributeValueEvent(entityId, messageId, attributeId);
         apply(event);
     }
 
@@ -48,12 +48,12 @@ public class PatientAttributeValueAggregate extends AbstractAnnotatedAggregateRo
         return new StringAggregateIdentifier(String.format(AGGREGATE_IDENT_TEMPL, entityId, attributeId));
     }
 
-    public String getPatientId() {
-        return patientId;
+    public String getAttributeId() {
+        return attributeId;
     }
 
-    public void setPatientId(String patientId) {
-        this.patientId = patientId;
+    public void setAttributeId(String attributeId) {
+        this.attributeId = attributeId;
     }
 
     public String getAttributeValue() {

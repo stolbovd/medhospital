@@ -18,7 +18,7 @@ public class AttributeValueEventHandler {
 
     @EventHandler
     public void saveAttributeValueEventHandler(SaveAttributeValueEvent event) {
-        patientService.savePatientAttributeValue(event.getEntityId(), event.getPatientId(), event.getAttributeValue());
+        patientService.savePatientAttributeValue(event.getEntityId(), event.getAttributeId(), event.getAttributeValue());
     }
 
     @EventHandler
