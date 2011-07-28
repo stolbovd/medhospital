@@ -6,6 +6,7 @@ import ua.com.alus.medhosp.frontend.client.ServiceStorage;
 import ua.com.alus.medhosp.frontend.client.modules.patients.cto.PatientCTO;
 import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
+import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
 
 import java.util.List;
 
@@ -25,8 +26,8 @@ public class PatientsController implements IController {
         this.patientsTable = patientsTable;
     }
 
-    public void refreshTable() {
-        ServiceStorage.getInstance().getPatientServiceAsync().getPatients("", new AsyncCallback<List<PatientDTO>>() {
+    public void refreshTable(String entityId) {
+        ServiceStorage.getInstance().getPatientServiceAsync().getPatients(entityId, new AsyncCallback<List<PatientDTO>>() {
             public void onFailure(Throwable caught) {
                 SC.say("Error:" + caught);
             }
@@ -45,14 +46,14 @@ public class PatientsController implements IController {
 
     }
 
-    public void createPatient(PatientDTO patientDTO) {
+    public void createPatient(final PatientDTO patientDTO) {
         ServiceStorage.getInstance().getPatientJmsServiceAsync().savePatient(patientDTO, new AsyncCallback<Void>() {
             public void onFailure(Throwable caught) {
                 SC.say("Error:" + caught);
             }
 
             public void onSuccess(Void result) {
-                refreshTable();
+                refreshTable(patientDTO.get(BaseColumns.ENTITY_ID.getColumnName()));
             }
         });
     }

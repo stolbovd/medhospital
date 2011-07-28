@@ -12,7 +12,7 @@ import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 public interface IController {
     void removeSelected();
 
-    void refreshTable();
+    void refreshTable(String entityId);
 
     void savePatientAttributeValue(PatientAttributeValue patientDTO, String... column);
 

@@ -56,10 +56,6 @@ public class PatientsPanel extends HLayout {
             final ToolbarButton createButton = new ToolbarButton(icons.add(),
                     bundle.createPatient());
 
-            final ToolbarButton getAllButton = new ToolbarButton(icons.refresh(),
-                    bundle.getAllPatients());
-
-
             final ToolbarButton deleteButton = new ToolbarButton(icons.remove(),
                     bundle.deletePatients());
             deleteButton.setTooltip(bundle.deletePatients());
@@ -79,12 +75,6 @@ public class PatientsPanel extends HLayout {
                 }
             });
 
-            getAllButton.addClickHandler(new ClickHandler() {
-                public void onClick(ClickEvent event) {
-                    getPatientsTable().getController().refreshTable();
-                }
-            });
-
             deleteButton.addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {
                     getPatientsTable().getController().removeSelected();
@@ -96,7 +86,7 @@ public class PatientsPanel extends HLayout {
             searchPanel.setWidth(400);
             searchPanel.setNumCols(5);
 
-            patientsToolbar.setMembers(createButton, deleteButton, getAllButton, searchPanel, getSearchButton());
+            patientsToolbar.setMembers(createButton, deleteButton, searchPanel, getSearchButton());
             patientsToolbar.setHeight(30);
             patientsToolbar.setWidth(400);
         }
@@ -138,6 +128,8 @@ public class PatientsPanel extends HLayout {
                     String search;
                     if ((search = searchField.getValueAsString()) != null && getAttributesCombobox().getValueAsString() != null) {
                         searchByAttribute(getAttributesCombobox().getValueAsString(), search);
+                    } else if ((search = searchField.getValueAsString()) != null) {
+                        getPatientsTable().getController().refreshTable(search);
                     }
                 }
             });
@@ -152,6 +144,7 @@ public class PatientsPanel extends HLayout {
             }
 
             public void onSuccess(List<PatientAttributeValue> attributeDTOs) {
+                getPatientsTable().getController().refreshTable("");
             }
         });
     }
