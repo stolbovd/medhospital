@@ -28,4 +28,6 @@ public interface IPatientService extends RemoteService {
     List<AttributeDTO> getAllAttributes();
 
     List<PatientAttributeValue> getPatientsByAttributeValue(String attributeId, String value);
+
+    List<PatientAttributeValue> getAttributeValuesByPatientId(String entityId);
 }

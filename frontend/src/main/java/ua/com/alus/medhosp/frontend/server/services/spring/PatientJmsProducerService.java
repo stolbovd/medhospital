@@ -5,8 +5,10 @@ import org.codehaus.jackson.map.ObjectMapper;
 import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientJmsService;
 import ua.com.alus.medhosp.frontend.server.jms.JmsCommandProducer;
 import ua.com.alus.medhosp.frontend.shared.AttributeDTO;
+import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 import ua.com.alus.medhosp.prototype.cassandra.dto.AttributeColumns;
+import ua.com.alus.medhosp.prototype.cassandra.dto.AttributeValueColumns;
 import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
 import ua.com.alus.medhosp.prototype.commands.Command;
 import ua.com.alus.medhosp.prototype.json.CommandJson;
@@ -52,6 +54,18 @@ public class PatientJmsProducerService implements IPatientJmsService {
         saveAttributeCommand.getProperties().put(AttributeColumns.ENTITY_ID.getColumnName(), attributeDTO.get(AttributeColumns.ENTITY_ID.getColumnName()));
         saveAttributeCommand.getProperties().put(AttributeColumns.NAME.getColumnName(), attributeDTO.get(AttributeColumns.NAME.getColumnName()));
         commandsListJson.getCommands().add(saveAttributeCommand);
+        sendJms(commandsListJson);
+    }
+
+    public void saveAttributeValue(PatientAttributeValue patientAttributeValue) {
+        CommandsListJson commandsListJson = new CommandsListJson();
+        CommandJson saveAttributeValueCommand = new CommandJson();
+        saveAttributeValueCommand.setCommand(Command.SAVE_ATTRIBUTE_VALUE.getCommandName());
+        saveAttributeValueCommand.getProperties().put(AttributeValueColumns.SUPER_KEY_NAME.getColumnName(), patientAttributeValue.getSuperKeyName());
+        saveAttributeValueCommand.getProperties().put(AttributeValueColumns.ENTITY_ID.getColumnName(), patientAttributeValue.get(AttributeValueColumns.ENTITY_ID.getColumnName()));
+        saveAttributeValueCommand.getProperties().put(AttributeValueColumns.ATTRIBUTE_ID.getColumnName(), patientAttributeValue.get(AttributeValueColumns.ATTRIBUTE_ID.getColumnName()));
+        saveAttributeValueCommand.getProperties().put(AttributeValueColumns.ATTRIBUTE_VALUE.getColumnName(), patientAttributeValue.get(AttributeValueColumns.ATTRIBUTE_VALUE.getColumnName()));
+        commandsListJson.getCommands().add(saveAttributeValueCommand);
         sendJms(commandsListJson);
     }
 

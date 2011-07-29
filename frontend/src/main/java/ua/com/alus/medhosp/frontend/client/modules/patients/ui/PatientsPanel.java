@@ -14,6 +14,7 @@ import ua.com.alus.medhosp.frontend.client.ServiceStorage;
 import ua.com.alus.medhosp.frontend.client.main.ui.MainPanel;
 import ua.com.alus.medhosp.frontend.client.main.ui.ToolBarPanel;
 import ua.com.alus.medhosp.frontend.client.main.ui.ToolbarButton;
+import ua.com.alus.medhosp.frontend.client.modules.attributeValues.ui.PatientAttributeValueDialog;
 import ua.com.alus.medhosp.frontend.client.resources.images.Icons;
 import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientBundle;
 import ua.com.alus.medhosp.frontend.client.utils.Bundle;
@@ -60,6 +61,10 @@ public class PatientsPanel extends HLayout {
                     bundle.deletePatients());
             deleteButton.setTooltip(bundle.deletePatients());
 
+            final ToolbarButton editPatient = new ToolbarButton(icons.remove(),
+                    bundle.deletePatients());
+            editPatient.setTooltip(bundle.editPatient());
+
 
             createButton.addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {
@@ -81,12 +86,24 @@ public class PatientsPanel extends HLayout {
                 }
             });
 
+            editPatient.addClickHandler(new ClickHandler() {
+                public void onClick(ClickEvent clickEvent) {
+                    if (getPatientsTable().getSelectedRecord() == null) {
+                        SC.say(bundle.noPatientIsSelected());
+                        return;
+                    }
+                    new PatientAttributeValueDialog(
+                            getPatientsTable().getSelectedRecord().getAttributeAsString(BaseColumns.ENTITY_ID.getColumnName())
+                    ).show();
+                }
+            });
+
             DynamicForm searchPanel = new DynamicForm();
             searchPanel.setFields(getAttributesCombobox(), getSearchField());
             searchPanel.setWidth(400);
             searchPanel.setNumCols(5);
 
-            patientsToolbar.setMembers(createButton, deleteButton, searchPanel, getSearchButton());
+            patientsToolbar.setMembers(createButton, deleteButton, editPatient, searchPanel, getSearchButton());
             patientsToolbar.setHeight(30);
             patientsToolbar.setWidth(400);
         }
