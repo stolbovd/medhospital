@@ -61,7 +61,7 @@ public class PatientsPanel extends HLayout {
                     bundle.deletePatients());
             deleteButton.setTooltip(bundle.deletePatients());
 
-            final ToolbarButton editPatient = new ToolbarButton(icons.remove(),
+            final ToolbarButton editPatient = new ToolbarButton(icons.search(),
                     bundle.deletePatients());
             editPatient.setTooltip(bundle.editPatient());
 
