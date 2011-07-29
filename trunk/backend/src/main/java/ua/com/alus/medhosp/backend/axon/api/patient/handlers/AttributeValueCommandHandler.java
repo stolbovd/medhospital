@@ -37,6 +37,7 @@ public class AttributeValueCommandHandler {
                             saveAttributeValueCommand.getAttributeValue());
             repository.add(patientAttributeValueAggregate);
         }
+        patientAttributeValueAggregate.setUserId(saveAttributeValueCommand.getUserId());
         patientAttributeValueAggregate.setAttributeValue(saveAttributeValueCommand.getAttributeValue());
         patientAttributeValueAggregate.save(saveAttributeValueCommand.getMessageId());
         logger.info("Handling saveAttributeValue event");
