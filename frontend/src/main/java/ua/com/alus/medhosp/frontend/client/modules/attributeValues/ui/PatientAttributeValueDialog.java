@@ -1,15 +1,16 @@
 package ua.com.alus.medhosp.frontend.client.modules.attributeValues.ui;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.smartgwt.client.types.Alignment;
+import com.smartgwt.client.types.VerticalAlignment;
 import com.smartgwt.client.util.SC;
-import com.smartgwt.client.widgets.IButton;
 import com.smartgwt.client.widgets.Window;
-import com.smartgwt.client.widgets.events.ClickEvent;
-import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.fields.ButtonItem;
 import com.smartgwt.client.widgets.form.fields.SelectItem;
 import com.smartgwt.client.widgets.form.fields.TextItem;
-import com.smartgwt.client.widgets.layout.HLayout;
+import com.smartgwt.client.widgets.form.fields.events.ClickEvent;
+import com.smartgwt.client.widgets.form.fields.events.ClickHandler;
 import com.smartgwt.client.widgets.layout.VLayout;
 import ua.com.alus.medhosp.frontend.client.ServiceStorage;
 import ua.com.alus.medhosp.frontend.client.main.ui.ToolBarPanel;
@@ -50,19 +51,22 @@ public class PatientAttributeValueDialog extends Window {
         retrieveData();
     }
 
-    private HLayout addAttributeValuePanel;
+    private VLayout addAttributeValuePanel;
 
-    private HLayout getAddAttributeValuePanel() {
+    private VLayout getAddAttributeValuePanel() {
         if (addAttributeValuePanel == null) {
-            addAttributeValuePanel = new HLayout();
+            addAttributeValuePanel = new VLayout();
             addAttributeValuePanel.setWidth100();
-            addAttributeValuePanel.setHeight(300);
+            addAttributeValuePanel.setHeight(100);
 
             DynamicForm addAttrValueForm = new DynamicForm();
-            addAttrValueForm.setFields(getAttributesCombobox(), getValueField());
-            addAttrValueForm.setWidth(400);
+            addAttrValueForm.setItems(getAttributesCombobox(), getValueField(), getSaveButton());
+            //addAttrValueForm.setWidth(100);
             addAttrValueForm.setNumCols(2);
-            addAttributeValuePanel.setMembers(addAttrValueForm, getSaveButton());
+
+            addAttrValueForm.setAlign(Alignment.CENTER);
+            //addAttrValueForm.setLayoutAlign(VerticalAlignment.CENTER);
+            addAttributeValuePanel.setMembers(addAttrValueForm);
         }
         return addAttributeValuePanel;
     }
@@ -114,12 +118,13 @@ public class PatientAttributeValueDialog extends Window {
         return mainPanel;
     }
 
-    private IButton saveButton;
+    private ButtonItem saveButton;
 
-    private IButton getSaveButton() {
+    private ButtonItem getSaveButton() {
         if (saveButton == null) {
-            saveButton = new IButton();
+            saveButton = new ButtonItem();
             saveButton.setTitle(bundle.save());
+            saveButton.setWidth(50);
             saveButton.addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent clickEvent) {
                     if (getAttributesCombobox().getValueAsString() == null || getValueField().getValueAsString() == null ||
@@ -166,8 +171,8 @@ public class PatientAttributeValueDialog extends Window {
                     bundle.refresh());
 
 
-            refreshButton.addClickHandler(new ClickHandler() {
-                public void onClick(ClickEvent event) {
+            refreshButton.addClickHandler(new com.smartgwt.client.widgets.events.ClickHandler() {
+                public void onClick(com.smartgwt.client.widgets.events.ClickEvent event) {
                     getPatientAttributeValuesTable().getController().refreshTable();
                 }
             });
