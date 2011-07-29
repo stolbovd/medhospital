@@ -61,11 +61,9 @@ public class PatientAttributeValueDialog extends Window {
 
             DynamicForm addAttrValueForm = new DynamicForm();
             addAttrValueForm.setItems(getAttributesCombobox(), getValueField(), getSaveButton());
-            //addAttrValueForm.setWidth(100);
             addAttrValueForm.setNumCols(2);
 
             addAttrValueForm.setAlign(Alignment.CENTER);
-            //addAttrValueForm.setLayoutAlign(VerticalAlignment.CENTER);
             addAttributeValuePanel.setMembers(addAttrValueForm);
         }
         return addAttributeValuePanel;
