@@ -16,7 +16,6 @@ import ua.com.alus.medhosp.frontend.client.main.ui.ToolBarPanel;
 import ua.com.alus.medhosp.frontend.client.main.ui.ToolbarButton;
 import ua.com.alus.medhosp.frontend.client.resources.images.Icons;
 import ua.com.alus.medhosp.frontend.client.resources.locales.attrValues.AttributeValuesBundle;
-import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientBundle;
 import ua.com.alus.medhosp.frontend.client.utils.Bundle;
 import ua.com.alus.medhosp.frontend.client.utils.Constants;
 import ua.com.alus.medhosp.frontend.shared.AttributeDTO;
@@ -33,7 +32,7 @@ import java.util.List;
  * Created by Usatov Alexey
  */
 public class PatientAttributeValueDialog extends Window {
-    PatientBundle bundle = Bundle.getInstance().getPsBundle();
+    AttributeValuesBundle bundle = Bundle.getInstance().getAttributeValuesBundle();
     private VLayout mainPanel;
     private String entityId;
     private Icons icons = Constants.getInstance().getIcons();
@@ -100,7 +99,7 @@ public class PatientAttributeValueDialog extends Window {
     private SelectItem getAttributesCombobox() {
         if (attributesCombobox == null) {
             attributesCombobox = new SelectItem();
-            attributesCombobox.setTitle(bundle.searchByAttribute());
+            attributesCombobox.setTitle(bundle.attribute());
             attributesCombobox.setType("comboBox");
             attributesCombobox.setWidth(150);
         }
@@ -120,7 +119,7 @@ public class PatientAttributeValueDialog extends Window {
     private IButton getSaveButton() {
         if (saveButton == null) {
             saveButton = new IButton();
-            saveButton.setTitle(bundle.savePatient());
+            saveButton.setTitle(bundle.save());
             saveButton.addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent clickEvent) {
                     if (getAttributesCombobox().getValueAsString() == null || getValueField().getValueAsString() == null ||
