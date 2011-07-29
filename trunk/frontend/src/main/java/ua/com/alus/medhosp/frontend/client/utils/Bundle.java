@@ -1,6 +1,7 @@
 package ua.com.alus.medhosp.frontend.client.utils;
 
 import com.google.gwt.core.client.GWT;
+import ua.com.alus.medhosp.frontend.client.resources.locales.attrValues.AttributeValuesBundle;
 import ua.com.alus.medhosp.frontend.client.resources.locales.attributes.AttributesBundle;
 import ua.com.alus.medhosp.frontend.client.resources.locales.patients.PatientBundle;
 import ua.com.alus.medhosp.frontend.client.resources.locales.tasks.TasksBundle;
@@ -47,5 +48,14 @@ public class Bundle {
             attributesBundle = (AttributesBundle) GWT.create(AttributesBundle.class);
         }
         return attributesBundle;
+    }
+
+    private AttributeValuesBundle attributeValuesBundle;
+
+    public AttributeValuesBundle getAttributeValuesBundle() {
+        if (attributeValuesBundle == null) {
+            attributeValuesBundle = (AttributeValuesBundle) GWT.create(AttributeValuesBundle.class);
+        }
+        return attributeValuesBundle;
     }
 }
