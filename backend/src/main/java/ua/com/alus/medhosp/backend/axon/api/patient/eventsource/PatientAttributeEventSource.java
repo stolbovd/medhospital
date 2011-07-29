@@ -38,6 +38,7 @@ public class PatientAttributeEventSource extends AttributeValueEventSource<Patie
             root.setName(attributeValueEvent.getName());
             root.setType(attributeValueEvent.getType());
             root.setValueType(attributeValueEvent.getValueType());
+            root.setUserId(attributeValueEvent.getUserId());
         }
         return root;
     }
