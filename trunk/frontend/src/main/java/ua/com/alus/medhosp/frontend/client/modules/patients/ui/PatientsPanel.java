@@ -61,7 +61,7 @@ public class PatientsPanel extends HLayout {
                     bundle.deletePatients());
             deleteButton.setTooltip(bundle.deletePatients());
 
-            final ToolbarButton editPatient = new ToolbarButton(icons.search(),
+            final ToolbarButton editPatient = new ToolbarButton(icons.edit(),
                     bundle.deletePatients());
             editPatient.setTooltip(bundle.editPatient());
 
@@ -133,12 +133,11 @@ public class PatientsPanel extends HLayout {
     }
 
 
-    private IButton searchButton;
+    private ToolbarButton searchButton;
 
-    private IButton getSearchButton() {
+    private ToolbarButton getSearchButton() {
         if (searchButton == null) {
-            searchButton = new IButton();
-            searchButton.setTitle(bundle.search());
+            searchButton = new ToolbarButton(icons.search(), bundle.search());
             searchButton.addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {
                     String search;
