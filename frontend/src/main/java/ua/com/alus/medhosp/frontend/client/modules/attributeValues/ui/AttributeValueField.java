@@ -1,4 +1,4 @@
-package ua.com.alus.medhosp.frontend.client.modules.patients.ui;
+package ua.com.alus.medhosp.frontend.client.modules.attributeValues.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.smartgwt.client.widgets.grid.CellFormatter;
