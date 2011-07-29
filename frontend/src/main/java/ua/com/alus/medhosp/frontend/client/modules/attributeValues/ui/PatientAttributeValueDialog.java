@@ -43,6 +43,7 @@ public class PatientAttributeValueDialog extends Window {
     }
 
     private void initDialog() {
+        setTitle(bundle.patientAttributesAndValues());
         addItem(getMainPanel());
         setWidth(700);
         setHeight(700);
