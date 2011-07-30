@@ -1,7 +1,6 @@
 package ua.com.alus.medhosp.frontend.server.services.spring;
 
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientJmsService;
 import ua.com.alus.medhosp.frontend.server.jms.JmsCommandProducer;
 import ua.com.alus.medhosp.frontend.shared.AttributeDTO;
@@ -33,12 +32,6 @@ public class PatientJmsProducerService implements IPatientJmsService {
 
     public void setJmsCommandProducer(JmsCommandProducer jmsCommandProducer) {
         this.jmsCommandProducer = jmsCommandProducer;
-    }
-
-    private ObjectMapper mapper = new ObjectMapper();
-
-    private ObjectMapper getMapper() {
-        return mapper;
     }
 
     public void savePatient(PatientDTO patientDTO) {
