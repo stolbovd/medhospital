@@ -64,6 +64,8 @@ public class PatientServiceImpl implements IPatientService {
         if (entityId != null) {
             cassandraSearch.setKeyStart(entityId);
             cassandraSearch.setKeyEnd(entityId);
+            //TODO this is just for example of indexed search
+            //cassandraSearch.getSimpleNames2Values().put(BaseColumns.ENTITY_ID.getColumnName(), entityId);
         }
         return getPatientDao().find(cassandraSearch);
     }
