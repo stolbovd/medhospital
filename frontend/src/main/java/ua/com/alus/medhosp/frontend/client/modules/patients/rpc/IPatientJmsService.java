@@ -6,6 +6,8 @@ import ua.com.alus.medhosp.frontend.shared.AttributeDTO;
 import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 
+import java.util.List;
+
 /**
  * Service
  * <p/>
@@ -18,4 +20,6 @@ public interface IPatientJmsService extends RemoteService {
     public void saveAttribute(AttributeDTO attributeDTO);
 
     void saveAttributeValue(PatientAttributeValue patientAttributeValue);
+
+    void removePatients(List<String> ids);
 }

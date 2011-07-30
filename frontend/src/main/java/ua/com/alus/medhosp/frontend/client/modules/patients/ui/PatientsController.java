@@ -8,6 +8,7 @@ import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -59,22 +60,18 @@ public class PatientsController implements IController {
     }
 
     public void removeSelected() {
-        /*  final List<String> ids = new ArrayList<String>();
-     for (String key : getPatientsTable().getSelectedPatients()) {
-         ids.add(String.valueOf(key));
-     }
-     if (ids.size() == 0) {
-         SC.say("Nothing is selected!");
-         return;
-     }
-     ServiceStorage.getInstance().getPatientServiceAsync().removeSelected(ids, new AsyncCallback<Void>() {
-         public void onFailure(Throwable caught) {
-             SC.say("Error:" + caught);
-         }
+        final List<String> ids = new ArrayList<String>();
+        for (String key : getPatientsTable().getSelectedPatients()) {
+            ids.add(String.valueOf(key));
+        }
+        ServiceStorage.getInstance().getPatientJmsServiceAsync().removePatients(ids, new AsyncCallback<Void>() {
+            public void onFailure(Throwable throwable) {
+                SC.say("Error:" + throwable);
+            }
 
-         public void onSuccess(Void v) {
-             refreshTable();
-         }
-     });   */
+            public void onSuccess(Void aVoid) {
+                SC.say("Success");
+            }
+        });
     }
 }

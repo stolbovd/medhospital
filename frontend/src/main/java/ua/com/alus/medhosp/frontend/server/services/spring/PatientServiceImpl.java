@@ -67,7 +67,12 @@ public class PatientServiceImpl implements IPatientService {
         return getPatientDao().find(cassandraSearch);
     }
 
+    /**
+     * Remove selected patients. We need also remove all attributeValues for that patient.
+     * @param ids - entityId
+     */
     public void removeSelected(List<String> ids) {
+        getPatientAttributeValueDao().removeAllByKey(ids);
         getPatientDao().removeSelected(ids);
     }
 
