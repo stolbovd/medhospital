@@ -145,12 +145,12 @@ public class PatientsPanel extends HLayout {
             searchButton = new ToolbarButton(icons.search(), bundle.search());
             searchButton.addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {
-                    String search;
-                    if ((search = searchField.getValueAsString()) != null && getAttributesCombobox().getValueAsString() != null) {
-                        if (BaseColumns.ENTITY_ID.getColumnName().equals(getAttributesCombobox().getValueAsString())) {
-                            getPatientsTable().getController().refreshTable(search);
-                            return;
-                        }
+                    String search = searchField.getValueAsString();
+                    if(BaseColumns.ENTITY_ID.getColumnName().equals(getAttributesCombobox().getValueAsString())){
+                        getPatientsTable().getController().refreshTable(search);
+                        return;
+                    }
+                    if (getAttributesCombobox().getValueAsString() != null && search != null) {
                         searchByAttribute(getAttributesCombobox().getValueAsString(), search);
                     } else {
                         SC.say(bundle.noParamForSearch());
