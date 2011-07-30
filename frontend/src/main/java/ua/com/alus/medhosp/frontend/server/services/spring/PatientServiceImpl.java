@@ -61,9 +61,10 @@ public class PatientServiceImpl implements IPatientService {
      */
     public List<PatientDTO> getPatients(String entityId) {
         CassandraSearch cassandraSearch = new CassandraSearch();
-        cassandraSearch.setKeyStart(entityId);
-        cassandraSearch.setKeyEnd(entityId);
-        cassandraSearch.getSimpleNames2Values().put(BaseColumns.ENTITY_ID.getColumnName(), entityId);
+        if (entityId != null) {
+            cassandraSearch.setKeyStart(entityId);
+            cassandraSearch.setKeyEnd(entityId);
+        }
         return getPatientDao().find(cassandraSearch);
     }
 
