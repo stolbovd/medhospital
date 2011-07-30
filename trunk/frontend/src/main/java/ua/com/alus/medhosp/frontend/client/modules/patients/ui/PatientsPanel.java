@@ -81,7 +81,13 @@ public class PatientsPanel extends HLayout {
 
             deleteButton.addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {
-                    getPatientsTable().getController().removeSelected();
+                    SC.confirm(bundle.deletePatients(), bundle.confirmContinute(), new BooleanCallback() {
+                        public void execute(Boolean aBoolean) {
+                            if (aBoolean) {
+                                getPatientsTable().getController().removeSelected();
+                            }
+                        }
+                    });
                 }
             });
 

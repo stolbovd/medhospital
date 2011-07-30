@@ -10,9 +10,12 @@ import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 import ua.com.alus.medhosp.prototype.cassandra.dto.AttributeColumns;
 import ua.com.alus.medhosp.prototype.cassandra.dto.AttributeValueColumns;
 import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
+import ua.com.alus.medhosp.prototype.cassandra.dto.PatientColumns;
 import ua.com.alus.medhosp.prototype.commands.Command;
 import ua.com.alus.medhosp.prototype.json.CommandJson;
 import ua.com.alus.medhosp.prototype.json.CommandsListJson;
+
+import java.util.List;
 
 /**
  * Class that generate JMS-message for creating patient, attributes and attributeValues.
@@ -66,6 +69,17 @@ public class PatientJmsProducerService implements IPatientJmsService {
         saveAttributeValueCommand.getProperties().put(AttributeValueColumns.ATTRIBUTE_ID.getColumnName(), patientAttributeValue.get(AttributeValueColumns.ATTRIBUTE_ID.getColumnName()));
         saveAttributeValueCommand.getProperties().put(AttributeValueColumns.ATTRIBUTE_VALUE.getColumnName(), patientAttributeValue.get(AttributeValueColumns.ATTRIBUTE_VALUE.getColumnName()));
         commandsListJson.getCommands().add(saveAttributeValueCommand);
+        sendJms(commandsListJson);
+    }
+
+    public void removePatients(List<String> ids){
+        CommandsListJson commandsListJson = new CommandsListJson();
+        for(String id : ids){
+        CommandJson removePatientCommand = new CommandJson();
+            removePatientCommand.setCommand(Command.REMOVE_PATIENT.getCommandName());
+            removePatientCommand.getProperties().put(PatientColumns.ENTITY_ID.getColumnName(), id);
+            commandsListJson.getCommands().add(removePatientCommand);
+        }
         sendJms(commandsListJson);
     }
 

@@ -238,6 +238,10 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
         }
     }
 
+    public Integer removeAllByKey(List<String> keys) {
+        return removeSelectedSimple(keys);
+    }
+
     private Integer removeSelectedSuper(List<String> keys) {
         Mutator<String> mutator = createMutator();
         for (String key : keys) {

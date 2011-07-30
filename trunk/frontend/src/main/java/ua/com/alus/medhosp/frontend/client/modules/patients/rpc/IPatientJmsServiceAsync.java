@@ -5,6 +5,8 @@ import ua.com.alus.medhosp.frontend.shared.AttributeDTO;
 import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 
+import java.util.List;
+
 /**
  * Async service
  * Create by UsatovAlexey
@@ -15,4 +17,6 @@ public interface IPatientJmsServiceAsync {
     void saveAttribute(AttributeDTO attributeDTO, AsyncCallback<Void> async);
 
     void saveAttributeValue(PatientAttributeValue patientAttributeValue, AsyncCallback<Void> async);
+
+    void removePatients(List<String> ids, AsyncCallback<Void> async);
 }
