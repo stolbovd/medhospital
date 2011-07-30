@@ -4,6 +4,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import ua.com.alus.medhosp.backend.axon.api.patient.event.RemovePatientEvent;
 import ua.com.alus.medhosp.backend.axon.api.patient.event.SaveAttributeEvent;
 import ua.com.alus.medhosp.backend.axon.api.patient.event.SaveAttributeValueEvent;
 import ua.com.alus.medhosp.backend.axon.api.patient.event.SavePatientEvent;
@@ -69,6 +70,8 @@ public class EventHandlerAspect {
         } else if(event instanceof SaveAttributeEvent){
             answer.put(AttributeColumns.NAME.getColumnName(),  ((SaveAttributeEvent) event).getName());
             answer.put(Constants.CLASS, Dto.ATTRIBUTE.getDtoName());
+        }else if(event instanceof RemovePatientEvent){
+            answer.put(Constants.CLASS, Dto.PATIENT.getDtoName());
         }
     }
 }
