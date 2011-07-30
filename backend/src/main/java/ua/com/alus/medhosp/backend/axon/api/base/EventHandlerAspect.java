@@ -55,7 +55,7 @@ public class EventHandlerAspect {
     public void setiJmsEventProducer(IJmsEventProducer iJmsEventProducer) {
         this.iJmsEventProducer = iJmsEventProducer;
     }
-
+    //TODO maybe it will be better exclude this logic to frontend.
     private void fillAllParams(AbstractEntityEvent event, Map<String, String> answer) {
         answer.put(BaseColumns.ENTITY_ID.getColumnName(), event.getEntityId());
         answer.put(Constants.GOAL, event.getGoal().name());
