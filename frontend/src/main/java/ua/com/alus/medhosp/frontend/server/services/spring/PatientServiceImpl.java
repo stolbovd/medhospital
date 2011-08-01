@@ -8,7 +8,6 @@ import ua.com.alus.medhosp.frontend.server.services.spring.dao.PatientDao;
 import ua.com.alus.medhosp.frontend.shared.AttributeDTO;
 import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
-import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
 
 import java.util.HashMap;
 import java.util.List;
