@@ -6,7 +6,7 @@ use Hospital;
 create column family PatientAttributeValue with
   column_type='Super' and
   comparator='BytesType' and
-  subcomparator='BytesType' and
+  subcomparator='UTF8Type' and
   gc_grace=0
 ;
 
@@ -26,6 +26,6 @@ create column family Attributes with
 create column family TasksView with
   column_type='Super' and
   comparator='BytesType' and
-  subcomparator='BytesType' and
+  subcomparator='TimeUUIDType' and
   gc_grace=0
 ;
