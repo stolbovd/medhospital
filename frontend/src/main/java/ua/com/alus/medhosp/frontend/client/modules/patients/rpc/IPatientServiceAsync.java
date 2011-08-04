@@ -28,4 +28,6 @@ public interface IPatientServiceAsync {
     void getPatientsByAttributeValue(String attributeId, String value, AsyncCallback<List<PatientAttributeValue>> async);
 
     void getAttributeValuesByPatientId(String entityId, AsyncCallback<List<PatientAttributeValue>> async);
+
+    void removeAttributeValues(String entityId, String attributeId, AsyncCallback<Void> async);
 }

@@ -19,4 +19,6 @@ public interface IPatientJmsServiceAsync {
     void saveAttributeValue(PatientAttributeValue patientAttributeValue, AsyncCallback<Void> async);
 
     void removePatients(List<String> ids, AsyncCallback<Void> async);
+
+    void removeSelectedAttrValues(String entityId, List<String> attrIds, AsyncCallback<Void> async);
 }

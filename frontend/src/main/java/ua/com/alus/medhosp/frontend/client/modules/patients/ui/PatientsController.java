@@ -2,11 +2,13 @@ package ua.com.alus.medhosp.frontend.client.modules.patients.ui;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.smartgwt.client.util.SC;
+import com.smartgwt.client.widgets.grid.ListGridRecord;
 import ua.com.alus.medhosp.frontend.client.ServiceStorage;
 import ua.com.alus.medhosp.frontend.client.modules.patients.cto.PatientCTO;
 import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
 import ua.com.alus.medhosp.frontend.shared.PatientDTO;
 import ua.com.alus.medhosp.prototype.cassandra.dto.BaseColumns;
+import ua.com.alus.medhosp.prototype.cassandra.dto.PatientColumns;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,8 +63,8 @@ public class PatientsController implements IController {
 
     public void removeSelected() {
         final List<String> ids = new ArrayList<String>();
-        for (String key : getPatientsTable().getSelectedPatients()) {
-            ids.add(String.valueOf(key));
+        for (ListGridRecord record : getPatientsTable().getSelectedPatients()) {
+            ids.add(String.valueOf(record.getAttributeAsString(PatientColumns.ENTITY_ID.getColumnName())));
         }
         ServiceStorage.getInstance().getPatientJmsServiceAsync().removePatients(ids, new AsyncCallback<Void>() {
             public void onFailure(Throwable throwable) {
@@ -70,6 +72,7 @@ public class PatientsController implements IController {
             }
 
             public void onSuccess(Void aVoid) {
+                getPatientsTable().getSelectedPatients().clear();
                 SC.say("Success");
             }
         });
