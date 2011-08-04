@@ -46,7 +46,7 @@ public class CommandProcessorImpl implements ICommandProcessor {
     @Override
     @SuppressWarnings("unchecked")
     public void processCommand(String json) {
-        logger.trace("Processing json: " + json);
+        logger.info("Processing json: " + json);
         try {
             CommandsListJson commandsData = getJsonMapper().readValue(json, CommandsListJson.class);
 
@@ -54,7 +54,7 @@ public class CommandProcessorImpl implements ICommandProcessor {
                 HashMap<String, String> properties = command.getProperties();
                 Object commandObject = createObject(command.getCommand(), properties);
                 if (commandObject == null) {
-                    logger.trace("Cannot proceed command:" + command);
+                    logger.error("Cannot proceed command:" + command);
                 }
                 commandBus.dispatch(commandObject);
             }
