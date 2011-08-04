@@ -25,7 +25,7 @@ create column family Attributes with
 
 create column family TasksView with
   column_type='Super' and
-  comparator='BytesType' and
-  subcomparator='TimeUUIDType' and
+  comparator='TimeUUIDType' and
+  subcomparator='BytesType' and
   gc_grace=0
 ;
