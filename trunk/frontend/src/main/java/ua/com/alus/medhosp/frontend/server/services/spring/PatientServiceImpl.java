@@ -103,4 +103,8 @@ public class PatientServiceImpl implements IPatientService {
         cassandraSearch.setKeyEnd(entityId);
         return getPatientAttributeValueDao().find(cassandraSearch);
     }
+
+    public void removeAttributeValues(String entityId, String attributeId){
+        getPatientAttributeValueDao().removeSelectedSuperBySuperKeyName(entityId, attributeId);
+    }
 }

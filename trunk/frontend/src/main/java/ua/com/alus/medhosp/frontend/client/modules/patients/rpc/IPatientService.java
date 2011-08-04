@@ -30,4 +30,6 @@ public interface IPatientService extends RemoteService {
     List<PatientAttributeValue> getPatientsByAttributeValue(String attributeId, String value);
 
     List<PatientAttributeValue> getAttributeValuesByPatientId(String entityId);
+
+    void removeAttributeValues(String entityId, String attributeId);
 }

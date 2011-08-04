@@ -45,9 +45,9 @@ public class PatientsTable extends ListGrid implements ITable {
                 Boolean value = (Boolean) event.getNewValue();
                 event.getRecord().setAttribute(SELECTED, value);
                 if (value) {
-                    getSelectedPatients().add(getSelectedRecord().getAttributeAsString(BaseColumns.ENTITY_ID.getColumnName()));
+                    getSelectedPatients().add(getSelectedRecord());
                 } else {
-                    getSelectedPatients().remove(getSelectedRecord().getAttributeAsString(BaseColumns.ENTITY_ID.getColumnName()));
+                    getSelectedPatients().remove(getSelectedRecord());
                 }
 
             }
@@ -72,9 +72,9 @@ public class PatientsTable extends ListGrid implements ITable {
         return super.getValueIcon(field, value, record);
     }
 
-    private HashSet<String> selectedPatients = new HashSet<String>();
+    private HashSet<ListGridRecord> selectedPatients = new HashSet<ListGridRecord>();
 
-    public HashSet<String> getSelectedPatients() {
+    public HashSet<ListGridRecord> getSelectedPatients() {
         return selectedPatients;
     }
 

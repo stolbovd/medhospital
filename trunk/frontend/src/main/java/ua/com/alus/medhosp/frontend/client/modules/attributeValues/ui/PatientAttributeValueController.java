@@ -2,10 +2,13 @@ package ua.com.alus.medhosp.frontend.client.modules.attributeValues.ui;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.smartgwt.client.util.SC;
+import com.smartgwt.client.widgets.grid.ListGridRecord;
 import ua.com.alus.medhosp.frontend.client.ServiceStorage;
 import ua.com.alus.medhosp.frontend.client.modules.attributeValues.cto.AttributeValueCTO;
 import ua.com.alus.medhosp.frontend.shared.PatientAttributeValue;
+import ua.com.alus.medhosp.prototype.cassandra.dto.AttributeValueColumns;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,6 +44,23 @@ public class PatientAttributeValueController {
                     attributeCTOs[i] = getPatientAttributeValuesTable().getCtoSample().convertPersonDTO(result.get(i), new AttributeValueCTO());
                 }
                 getPatientAttributeValuesTable().refreshData(attributeCTOs);
+            }
+        });
+    }
+
+    public void removeSelected() {
+        List<String> attrIds = new ArrayList<String>();
+        for (ListGridRecord record : getPatientAttributeValuesTable().getSelectedAttributeValues()) {
+            attrIds.add(record.getAttributeAsString(AttributeValueColumns.ATTRIBUTE_ID.getColumnName()));
+        }
+        ServiceStorage.getInstance().getPatientJmsServiceAsync().removeSelectedAttrValues(getPatientAttributeValuesTable().getEntityId(), attrIds, new AsyncCallback<Void>() {
+            public void onFailure(Throwable throwable) {
+                SC.say("Error:" + throwable);
+            }
+
+            public void onSuccess(Void aVoid) {
+                getPatientAttributeValuesTable().getSelectedAttributeValues().clear();
+                SC.say("Success");
             }
         });
     }

@@ -22,4 +22,6 @@ public interface IPatientJmsService extends RemoteService {
     void saveAttributeValue(PatientAttributeValue patientAttributeValue);
 
     void removePatients(List<String> ids);
+
+    void removeSelectedAttrValues(String entityId, List<String> attrIds);
 }

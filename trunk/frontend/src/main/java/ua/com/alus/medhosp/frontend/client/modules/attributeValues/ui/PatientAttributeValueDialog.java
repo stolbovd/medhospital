@@ -2,6 +2,7 @@ package ua.com.alus.medhosp.frontend.client.modules.attributeValues.ui;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.smartgwt.client.types.Alignment;
+import com.smartgwt.client.util.BooleanCallback;
 import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.Window;
 import com.smartgwt.client.widgets.form.DynamicForm;
@@ -168,6 +169,9 @@ public class PatientAttributeValueDialog extends Window {
             final ToolbarButton refreshButton = new ToolbarButton(icons.refresh(),
                     bundle.refresh());
 
+            final ToolbarButton deleteButton = new ToolbarButton(icons.remove(),
+                    bundle.delete());
+            deleteButton.setTooltip(bundle.delete());
 
             refreshButton.addClickHandler(new com.smartgwt.client.widgets.events.ClickHandler() {
                 public void onClick(com.smartgwt.client.widgets.events.ClickEvent event) {
@@ -175,7 +179,19 @@ public class PatientAttributeValueDialog extends Window {
                 }
             });
 
-            toolbar.setMembers(refreshButton);
+            deleteButton.addClickHandler(new com.smartgwt.client.widgets.events.ClickHandler() {
+                public void onClick(com.smartgwt.client.widgets.events.ClickEvent event) {
+                    SC.confirm(bundle.delete(), bundle.confirmContinute(), new BooleanCallback() {
+                        public void execute(Boolean aBoolean) {
+                            if (aBoolean) {
+                                getPatientAttributeValuesTable().getController().removeSelected();
+                            }
+                        }
+                    });
+                }
+            });
+
+            toolbar.setMembers(refreshButton, deleteButton);
             toolbar.setHeight(30);
         }
         return toolbar;

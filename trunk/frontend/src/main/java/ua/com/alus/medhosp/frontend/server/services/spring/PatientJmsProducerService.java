@@ -76,6 +76,19 @@ public class PatientJmsProducerService implements IPatientJmsService {
         sendJms(commandsListJson);
     }
 
+    public void removeSelectedAttrValues(String entityId, List<String> attrIds){
+        CommandsListJson commandsListJson = new CommandsListJson();
+        for(String id : attrIds){
+            CommandJson removeAttributeValueCommand = new CommandJson();
+            removeAttributeValueCommand.setCommand(Command.REMOVE_ATTRIBUTE_VALUE.getCommandName());
+            removeAttributeValueCommand.getProperties().put(AttributeValueColumns.SUPER_KEY_NAME.getColumnName(), id);
+            removeAttributeValueCommand.getProperties().put(AttributeValueColumns.ENTITY_ID.getColumnName(), entityId);
+            removeAttributeValueCommand.getProperties().put(AttributeValueColumns.ATTRIBUTE_ID.getColumnName(), id);
+            commandsListJson.getCommands().add(removeAttributeValueCommand);
+        }
+        sendJms(commandsListJson);
+    }
+
     public void sendJms(CommandsListJson commandsListJson) {
         getJmsCommandProducer().generateCommands(commandsListJson);
     }

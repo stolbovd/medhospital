@@ -6,6 +6,7 @@ import ua.com.alus.medhosp.frontend.client.modules.patients.rpc.IPatientService;
 import ua.com.alus.medhosp.frontend.server.quartz.MessageUtilsBean;
 import ua.com.alus.medhosp.frontend.server.services.spring.TaskService;
 import ua.com.alus.medhosp.frontend.shared.*;
+import ua.com.alus.medhosp.prototype.cassandra.dto.AttributeValueColumns;
 import ua.com.alus.medhosp.prototype.cassandra.dto.PatientColumns;
 import ua.com.alus.medhosp.prototype.cassandra.dto.TaskColumns;
 import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoal;
@@ -144,6 +145,11 @@ public class JmsCommandListener implements MessageListener {
                     ArrayList<String> ids = new ArrayList<String>();
                     ids.add(object.get(PatientColumns.ENTITY_ID.getColumnName()));
                     getPatientService().removeSelected(ids);
+                }else if(object instanceof PatientAttributeValue){
+                    getPatientService().removeAttributeValues(
+                            object.get(AttributeValueColumns.ENTITY_ID.getColumnName()),
+                            object.get(AttributeValueColumns.ATTRIBUTE_ID.getColumnName())
+                    );
                 }
                 break;
         }
