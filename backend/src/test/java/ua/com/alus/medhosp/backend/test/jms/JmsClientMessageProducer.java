@@ -3,7 +3,6 @@ package ua.com.alus.medhosp.backend.test.jms;
 import org.apache.log4j.Logger;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
-import ua.com.alus.medhosp.backend.jms.JmsCommandListener;
 import ua.com.alus.medhosp.prototype.data.Constants;
 
 import javax.jms.JMSException;

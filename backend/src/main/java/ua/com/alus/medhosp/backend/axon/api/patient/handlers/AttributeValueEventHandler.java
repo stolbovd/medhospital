@@ -23,7 +23,7 @@ public class AttributeValueEventHandler {
 
     @EventHandler
     public void removeAttributeValueEventHandler(RemoveAttributeValueEvent event) {
-        patientService.removePatientAttributeValue(event.getEntityId(), event.getEntityId());
+        patientService.removePatientAttributeValue(event.getEntityId(), event.getAttributeId());
     }
 
     public void setPatientService(PatientService patientService) {

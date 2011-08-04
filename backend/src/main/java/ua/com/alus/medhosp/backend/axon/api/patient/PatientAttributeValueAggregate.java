@@ -40,7 +40,7 @@ public class PatientAttributeValueAggregate extends AbstractAnnotatedAggregateRo
     }
 
     public void remove(String messageId) {
-        RemoveAttributeValueEvent event = new RemoveAttributeValueEvent(entityId, messageId, attributeId);
+        RemoveAttributeValueEvent event = new RemoveAttributeValueEvent(entityId, messageId, userId, attributeId);
         apply(event);
     }
 

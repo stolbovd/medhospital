@@ -4,10 +4,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import ua.com.alus.medhosp.backend.axon.api.patient.event.RemovePatientEvent;
-import ua.com.alus.medhosp.backend.axon.api.patient.event.SaveAttributeEvent;
-import ua.com.alus.medhosp.backend.axon.api.patient.event.SaveAttributeValueEvent;
-import ua.com.alus.medhosp.backend.axon.api.patient.event.SavePatientEvent;
+import ua.com.alus.medhosp.backend.axon.api.patient.command.RemoveAttributeValueCommand;
+import ua.com.alus.medhosp.backend.axon.api.patient.event.*;
 import ua.com.alus.medhosp.backend.jms.IJmsEventProducer;
 import ua.com.alus.medhosp.prototype.cassandra.dto.AttributeColumns;
 import ua.com.alus.medhosp.prototype.cassandra.dto.AttributeValueColumns;
@@ -72,6 +70,10 @@ public class EventHandlerAspect {
             answer.put(Constants.CLASS, Dto.ATTRIBUTE.getDtoName());
         }else if(event instanceof RemovePatientEvent){
             answer.put(Constants.CLASS, Dto.PATIENT.getDtoName());
+        } else if(event instanceof RemoveAttributeValueEvent){
+            answer.put(AttributeValueColumns.ATTRIBUTE_ID.getColumnName(), ((RemoveAttributeValueEvent) event).getAttributeId());
+            answer.put(AttributeValueColumns.SUPER_KEY_NAME.getColumnName(), ((RemoveAttributeValueEvent) event).getAttributeId());
+            answer.put(Constants.CLASS, Dto.PATIENT_ATTRIBUTE_VALUE.getDtoName());
         }
     }
 }
