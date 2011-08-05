@@ -21,8 +21,8 @@ public class PatientAttribute extends EntityObject {
     @Column(name = "TYPE")
     private String type;
 
-    @Column(name = "VALUE_TYPE")
-    private String valueType;
+    @Column(name = "DEFINITION")
+    private String definition;
 
     public String getName() {
         return name;
@@ -32,19 +32,19 @@ public class PatientAttribute extends EntityObject {
         this.name = name;
     }
 
-    public String getValueType() {
-        return valueType;
-    }
-
-    public void setValueType(String valueType) {
-        this.valueType = valueType;
-    }
-
     public String getType() {
         return type;
     }
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getDefinition() {
+        return definition;
+    }
+
+    public void setDefinition(String definition) {
+        this.definition = definition;
     }
 }

@@ -10,7 +10,7 @@ import ua.com.alus.medhosp.backend.axon.api.base.AbstractEntityCommand;
 public class SaveAttributeCommand extends AbstractEntityCommand {
     private String type;
     private String name;
-    private String valueType;
+    private String definition;
 
     public SaveAttributeCommand() {
 
@@ -29,12 +29,12 @@ public class SaveAttributeCommand extends AbstractEntityCommand {
         this.type = type;
     }
 
-    public String getValueType() {
-        return valueType;
+    public String getDefinition() {
+        return definition;
     }
 
-    public void setValueType(String valueType) {
-        this.valueType = valueType;
+    public void setDefinition(String definition) {
+        this.definition = definition;
     }
 
     public String getName() {

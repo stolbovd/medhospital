@@ -12,7 +12,7 @@ import java.io.Serializable;
 public abstract class AttributeEvent extends AbstractEntityEvent implements Serializable {
     private String type;
     private String name;
-    private String valueType;
+    private String definition;
 
 
     public AttributeEvent(String entityId, String messageId, String userId, String name) {
@@ -36,11 +36,11 @@ public abstract class AttributeEvent extends AbstractEntityEvent implements Seri
         this.name = name;
     }
 
-    public String getValueType() {
-        return valueType;
+    public String getDefinition() {
+        return definition;
     }
 
-    public void setValueType(String valueType) {
-        this.valueType = valueType;
+    public void setDefinition(String definition) {
+        this.definition = definition;
     }
 }
