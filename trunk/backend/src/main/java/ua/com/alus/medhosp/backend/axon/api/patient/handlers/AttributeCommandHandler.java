@@ -31,7 +31,7 @@ public class AttributeCommandHandler {
             repository.add(patientAttributeAggregate);
         }
         patientAttributeAggregate.setType(saveAttributeCommand.getType());
-        patientAttributeAggregate.setValueType(saveAttributeCommand.getValueType());
+        patientAttributeAggregate.setDefinition(saveAttributeCommand.getDefinition());
         patientAttributeAggregate.setName(saveAttributeCommand.getName());
 
         patientAttributeAggregate.save(saveAttributeCommand.getMessageId(), saveAttributeCommand.getUserId());

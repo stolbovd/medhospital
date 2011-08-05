@@ -26,7 +26,7 @@ public class AttributeEventHandler {
         }
         attribute.setName(event.getName());
         attribute.setType(event.getType());
-        attribute.setValueType(event.getValueType());
+        attribute.setDefinition(event.getDefinition());
         patientService.savePatientAttribute(attribute);
         logger.info("Handled SaveAttributeEvent");
     }

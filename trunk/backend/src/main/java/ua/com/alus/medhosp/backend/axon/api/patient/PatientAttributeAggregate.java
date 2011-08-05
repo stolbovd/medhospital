@@ -17,7 +17,7 @@ public class PatientAttributeAggregate extends AbstractAnnotatedAggregateRoot im
     private String entityId;
     private String type;
     private String name;
-    private String valueType;
+    private String definition;
     private String userId;
 
     public PatientAttributeAggregate(AggregateIdentifier identifier) {
@@ -33,7 +33,7 @@ public class PatientAttributeAggregate extends AbstractAnnotatedAggregateRoot im
     public void save(String messageId, String userId) {
         SaveAttributeEvent event = new SaveAttributeEvent(getIdentifier().asString(), messageId, userId, name);
         event.setType(type);
-        event.setValueType(valueType);
+        event.setDefinition(definition);
         apply(event);
     }
 
@@ -53,12 +53,12 @@ public class PatientAttributeAggregate extends AbstractAnnotatedAggregateRoot im
         this.name = name;
     }
 
-    public String getValueType() {
-        return valueType;
+    public String getDefinition() {
+        return definition;
     }
 
-    public void setValueType(String valueType) {
-        this.valueType = valueType;
+    public void setDefinition(String definition) {
+        this.definition = definition;
     }
 
     public String getEntityId() {
