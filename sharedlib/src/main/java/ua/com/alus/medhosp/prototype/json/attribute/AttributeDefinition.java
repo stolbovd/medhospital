@@ -13,13 +13,13 @@ import java.util.ArrayList;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AttributeDefinition {
-    @JsonProperty("validators")
+
     private ArrayList<IValidator> validators = new ArrayList<IValidator>();
 
     public ArrayList<IValidator> getValidators() {
         return validators;
     }
-
+    @JsonProperty("validators")
     public void setValidators(ArrayList<IValidator> validators) {
         this.validators = validators;
     }
