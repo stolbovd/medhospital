@@ -67,6 +67,7 @@ public class EventHandlerAspect {
             answer.put(Constants.CLASS, Dto.PATIENT.getDtoName());
         } else if(event instanceof SaveAttributeEvent){
             answer.put(AttributeColumns.NAME.getColumnName(),  ((SaveAttributeEvent) event).getName());
+            answer.put(AttributeColumns.DEFINTITION.getColumnName(), ((SaveAttributeEvent) event).getDefinition());
             answer.put(Constants.CLASS, Dto.ATTRIBUTE.getDtoName());
         }else if(event instanceof RemovePatientEvent){
             answer.put(Constants.CLASS, Dto.PATIENT.getDtoName());
