@@ -6,7 +6,7 @@ package ua.com.alus.medhosp.prototype.cassandra.dto;
  * Create by Usatov Alexey
  */
 public enum AttributeColumns {
-    ENTITY_ID("entityId"), NAME("name");
+    ENTITY_ID("entityId"), NAME("name"), DEFINTITION("definition");
 
     AttributeColumns(String columnName) {
         this.columnName = columnName;
