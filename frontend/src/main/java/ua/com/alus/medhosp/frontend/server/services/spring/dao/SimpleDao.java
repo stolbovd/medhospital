@@ -35,6 +35,7 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
                 .getActualTypeArguments()[0];
         try {
             dtoObject = dtoClass.newInstance();
+            mutator =  HFactory.createMutator(keyspace, ss);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -45,9 +46,6 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
     }
 
     private Mutator<String> createMutator() {
-        if (mutator == null) {
-            mutator = HFactory.createMutator(keyspace, ss);
-        }
         return mutator;
     }
 
