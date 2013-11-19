@@ -8,6 +8,10 @@ import org.axonframework.repository.Repository;
 import ua.com.alus.medhosp.backend.axon.api.patient.PatientAggregate;
 import ua.com.alus.medhosp.backend.axon.api.patient.command.RemovePatientCommand;
 import ua.com.alus.medhosp.backend.axon.api.patient.command.SavePatientCommand;
+import ua.com.alus.medhosp.backend.domen.entity.patient.Patient;
+import ua.com.alus.medhosp.backend.service.PatientService;
+
+import java.util.ArrayList;
 
 /**
  * Created by Usatov Alexey
@@ -20,29 +24,43 @@ public class PatientCommandHandler {
 
     private Repository<PatientAggregate> repository;
 
+    private PatientService patientService;
+
     @CommandHandler
-    public void savePatient(SavePatientCommand savePatientCommand) {
+    public void savePatientCommandHandler(SavePatientCommand command) {
+        logger.debug("Handling removePatient command");
+        Patient patient = new Patient();
+        patient.setEntityId(command.getEntityId());
+        patientService.savePatient(patient);
+
         PatientAggregate patientAggregate;
         try {
-            patientAggregate = repository.load(new StringAggregateIdentifier(savePatientCommand.getEntityId()));
+            patientAggregate = repository.load(new StringAggregateIdentifier(command.getEntityId()));
         } catch (AggregateNotFoundException agnf) {
             logger.info("Aggregate PatientAggregate not found, adding to repository");
-            patientAggregate = new PatientAggregate(savePatientCommand.getEntityId());
+            patientAggregate = new PatientAggregate(command.getEntityId());
             repository.add(patientAggregate);
         }
-        patientAggregate.save(savePatientCommand.getMessageId(), savePatientCommand.getUserId());
+        patientAggregate.save(command.getMessageId(), command.getUserId());
         logger.debug("Handling savePatient command");
     }
 
     @CommandHandler
-    public void removePatient(RemovePatientCommand removePatientCommand) {
-        logger.debug("Handling removePatient command");
+    public void removePatientCommandHandler(RemovePatientCommand command) {
+        ArrayList<String> ids = new ArrayList<String>();
+        ids.add(command.getEntityId());
+        patientService.removeSelected(ids);
+
         PatientAggregate patientAggregate;
-        patientAggregate = repository.load(new StringAggregateIdentifier(removePatientCommand.getEntityId()));
-        patientAggregate.remove(removePatientCommand.getMessageId(), removePatientCommand.getUserId());
+        patientAggregate = repository.load(new StringAggregateIdentifier(command.getEntityId()));
+        patientAggregate.remove(command.getMessageId(), command.getUserId());
     }
 
     public void setRepository(Repository<PatientAggregate> repository) {
         this.repository = repository;
+    }
+
+    public void setPatientService(PatientService patientService) {
+        this.patientService = patientService;
     }
 }

@@ -17,6 +17,8 @@ import ua.com.alus.medhosp.backend.axon.api.patient.command.SavePatientCommand;
 import ua.com.alus.medhosp.backend.service.PatientService;
 import ua.com.alus.medhosp.prototype.util.UUID;
 
+import java.util.Random;
+
 /**
  * Created by Usatov Alexey
  * Date: 19.05.11
@@ -37,21 +39,14 @@ public class PatientAxonSpringTest extends AbstractTransactionalJUnit4SpringCont
     @Test
     public void savePatient() {
         String uuid = UUID.uuid();
-        commandBus.dispatch(new SavePatientCommand(uuid, "99965656565", "fake"));
-        try {
-            Thread.sleep(25000);
-            uuid = UUID.uuid();
-            commandBus.dispatch(new SavePatientCommand(uuid, "1231321","fake"));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        commandBus.dispatch(new SavePatientCommand(uuid, new Random().nextInt() + "", "fake"));
     }
 
     @Test
     public void removePatient() {
         String uuid = UUID.uuid();
-        commandBus.dispatch(new SavePatientCommand(uuid, null,"fake"));
-        commandBus.dispatch(new RemovePatientCommand(uuid, null,"fake"));
+        commandBus.dispatch(new SavePatientCommand(uuid, new Random().nextInt() + "","fake"));
+        commandBus.dispatch(new RemovePatientCommand(uuid, new Random().nextInt() + "","fake"));
     }
 
     @Ignore
@@ -62,14 +57,15 @@ public class PatientAxonSpringTest extends AbstractTransactionalJUnit4SpringCont
         String value = "hello1";
 
         //commandBus.dispatch(new SavePatientCommand(entityId,null));
-        commandBus.dispatch(new SaveAttributeValueCommand(entityId, null,"fake", attributeId, value));
+        commandBus.dispatch(new SaveAttributeValueCommand(entityId, new Random().nextInt() + "","fake", attributeId, value));
     }
 
+    @Ignore
     @Test
     public void saveAttribute() {
         String entityId = "2CA5D151-0A7A-44F1-B3EF-7BAAF79BDEA9";
         String name = "hhhhh";
-        commandBus.dispatch(new SaveAttributeCommand(entityId, null,"fake", name));
+        commandBus.dispatch(new SaveAttributeCommand(entityId, new Random().nextInt() + "","fake", name));
     }
 
     @Test

@@ -15,23 +15,8 @@ public class AttributeEventHandler {
 
     private Logger logger = Logger.getLogger(PatientEventHandler.class);
 
-    private PatientService patientService;
-
     @EventHandler
     public void saveAttributeEventHandler(SaveAttributeEvent event) {
-        PatientAttribute attribute = patientService.getPatientAttributeDao().findById(event.getEntityId());
-        if (attribute == null) {
-            attribute = new PatientAttribute();
-            attribute.setEntityId(event.getEntityId());
-        }
-        attribute.setName(event.getName());
-        attribute.setType(event.getType());
-        attribute.setDefinition(event.getDefinition());
-        patientService.savePatientAttribute(attribute);
-        logger.info("Handled SaveAttributeEvent");
-    }
 
-    public void setPatientService(PatientService patientService) {
-        this.patientService = patientService;
     }
 }

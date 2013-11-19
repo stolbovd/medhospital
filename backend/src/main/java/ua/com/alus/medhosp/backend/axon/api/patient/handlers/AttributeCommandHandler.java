@@ -7,6 +7,8 @@ import org.axonframework.repository.AggregateNotFoundException;
 import org.axonframework.repository.Repository;
 import ua.com.alus.medhosp.backend.axon.api.patient.PatientAttributeAggregate;
 import ua.com.alus.medhosp.backend.axon.api.patient.command.SaveAttributeCommand;
+import ua.com.alus.medhosp.backend.domen.entity.patient.PatientAttribute;
+import ua.com.alus.medhosp.backend.service.PatientService;
 
 /**
  * Created Usatov Alexey
@@ -18,27 +20,44 @@ public class AttributeCommandHandler {
 
     private Repository<PatientAttributeAggregate> repository;
 
+    private PatientService patientService;
+
 
     @CommandHandler
-    public void saveAttributeHandle(SaveAttributeCommand saveAttributeCommand) {
+    public void saveAttributeCommandHandler(SaveAttributeCommand command) {
+        PatientAttribute attribute = patientService.getPatientAttributeDao().findById(command.getEntityId());
+        if (attribute == null) {
+            attribute = new PatientAttribute();
+            attribute.setEntityId(command.getEntityId());
+        }
+        attribute.setName(command.getName());
+        attribute.setType(command.getType());
+        attribute.setDefinition(command.getDefinition());
+        patientService.savePatientAttribute(attribute);
+        logger.info("Handled SaveAttributeEvent");
+
         PatientAttributeAggregate patientAttributeAggregate;
         try {
             patientAttributeAggregate = repository.load(
-                    new StringAggregateIdentifier(saveAttributeCommand.getEntityId()));
+                    new StringAggregateIdentifier(command.getEntityId()));
         } catch (AggregateNotFoundException agnfe) {
-            patientAttributeAggregate = new PatientAttributeAggregate(saveAttributeCommand.getEntityId(),
-                    saveAttributeCommand.getName());
+            patientAttributeAggregate = new PatientAttributeAggregate(command.getEntityId(),
+                    command.getName());
             repository.add(patientAttributeAggregate);
         }
-        patientAttributeAggregate.setType(saveAttributeCommand.getType());
-        patientAttributeAggregate.setDefinition(saveAttributeCommand.getDefinition());
-        patientAttributeAggregate.setName(saveAttributeCommand.getName());
+        patientAttributeAggregate.setType(command.getType());
+        patientAttributeAggregate.setDefinition(command.getDefinition());
+        patientAttributeAggregate.setName(command.getName());
+        patientAttributeAggregate.save(command.getMessageId(), command.getUserId());
 
-        patientAttributeAggregate.save(saveAttributeCommand.getMessageId(), saveAttributeCommand.getUserId());
         logger.info("Handling SaveAttributeCommand");
     }
 
     public void setRepository(Repository<PatientAttributeAggregate> repository) {
         this.repository = repository;
+    }
+
+    public void setPatientService(PatientService patientService) {
+        this.patientService = patientService;
     }
 }

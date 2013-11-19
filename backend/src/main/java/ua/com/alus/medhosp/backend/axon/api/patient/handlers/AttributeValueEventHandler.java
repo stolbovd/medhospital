@@ -14,19 +14,13 @@ import ua.com.alus.medhosp.backend.service.PatientService;
 public class AttributeValueEventHandler {
     private Logger logger = Logger.getLogger(PatientEventHandler.class);
 
-    private PatientService patientService;
-
     @EventHandler
     public void saveAttributeValueEventHandler(SaveAttributeValueEvent event) {
-        patientService.savePatientAttributeValue(event.getEntityId(), event.getAttributeId(), event.getAttributeValue());
+
     }
 
     @EventHandler
     public void removeAttributeValueEventHandler(RemoveAttributeValueEvent event) {
-        patientService.removePatientAttributeValue(event.getEntityId(), event.getAttributeId());
-    }
 
-    public void setPatientService(PatientService patientService) {
-        this.patientService = patientService;
     }
 }
