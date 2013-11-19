@@ -165,6 +165,12 @@
 
     <repositories>
         <repository>
+            <id>repository.jboss.org-public</id>
+            <name>JBoss repository</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public</url>
+        </repository>
+
+        <repository>
             <id>openccdb.org</id>
             <name>openccdb.org</name>
             <url>http://openccdb.org:8081/nexus/content/repositories/maven2-repository.jboss.com/</url>

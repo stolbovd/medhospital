@@ -37,12 +37,11 @@ public class EventHandlerAspect {
         return result;
     }
 
-    @AfterThrowing(value = "execution(* *EventHandler(..)) && args(event))", throwing = "e")
-    public void afterThrowingException(AbstractEntityEvent event, Throwable e) {
+    @AfterThrowing(value = "execution(* *CommandHandler(..)) && args(command))", throwing = "e")
+    public void afterThrowingException(AbstractEntityCommand command, Throwable e) {
         Map<String, String> answer = new HashMap<String, String>();
-        answer.put(Constants.MESSAGE_ID, event.getMessageId());
+        answer.put(Constants.MESSAGE_ID, command.getMessageId());
         answer.put(Constants.ERROR, e.getMessage());
-        fillAllParams(event, answer);
         getiJmsEventProducer().sendResult(answer);
     }
 

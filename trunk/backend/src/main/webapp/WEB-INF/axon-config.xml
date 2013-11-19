@@ -22,10 +22,10 @@
     <bean id="patientCommandHandler"
           class="ua.com.alus.medhosp.backend.axon.api.patient.handlers.PatientCommandHandler">
         <property name="repository" ref="patientRepository"/>
+        <property name="patientService" ref="patientService"/>
     </bean>
 
     <bean id="patientEventHandler" class="ua.com.alus.medhosp.backend.axon.api.patient.handlers.PatientEventHandler">
-        <property name="patientService" ref="patientService"/>
     </bean>
 
     <!--############################ AttributeValue axon config #######################################-->
@@ -60,11 +60,11 @@
     <bean id="attributeValueCommandHandler"
           class="ua.com.alus.medhosp.backend.axon.api.patient.handlers.AttributeValueCommandHandler">
         <property name="repository" ref="patientAttributeValueEvSource"/>
+        <property name="patientService" ref="patientService"/>
     </bean>
 
     <bean id="attributeValueEventHandler"
           class="ua.com.alus.medhosp.backend.axon.api.patient.handlers.AttributeValueEventHandler">
-        <property name="patientService" ref="patientService"/>
     </bean>
     <!--############################## End of AttributeValue axon config ######################-->
 
@@ -99,11 +99,11 @@
     <bean id="attributeCommandHandler"
           class="ua.com.alus.medhosp.backend.axon.api.patient.handlers.AttributeCommandHandler">
         <property name="repository" ref="patientAttributeEvSource"/>
+        <property name="patientService" ref="patientService"/>
     </bean>
 
     <bean id="attributeEventHandler"
           class="ua.com.alus.medhosp.backend.axon.api.patient.handlers.AttributeEventHandler">
-        <property name="patientService" ref="patientService"/>
     </bean>
 
 
