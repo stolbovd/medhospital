@@ -5,6 +5,8 @@ import me.prettyprint.cassandra.serializers.StringSerializer;
 import me.prettyprint.cassandra.serializers.UUIDSerializer;
 import me.prettyprint.hector.api.Cluster;
 import me.prettyprint.hector.api.Keyspace;
+import me.prettyprint.hector.api.factory.HFactory;
+import me.prettyprint.hector.api.mutation.Mutator;
 
 /**
  * Created by Usatov Alexey
@@ -35,9 +37,16 @@ public abstract class AbstractDao {
 
     public void setKeyspace(Keyspace keyspace) {
         this.keyspace = keyspace;
+        mutator = HFactory.createMutator(keyspace, ss);
     }
 
     protected Keyspace keyspace;
+
+    private Mutator<String> mutator;
+
+    protected Mutator<String> getMutator() {
+        return mutator;
+    }
 
 
 }

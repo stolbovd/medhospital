@@ -25,7 +25,7 @@ import java.io.IOException;
 @Aspect
 public class JmsProducerAspect {
 
-    private Logger logger = Logger.getLogger(JmsProducerAspect.class);
+    private static final Logger LOGGER = Logger.getLogger(JmsProducerAspect.class);
     private TaskService taskService;
 
     public TaskService getTaskService() {
@@ -50,6 +50,7 @@ public class JmsProducerAspect {
 
     @AfterThrowing(value = "execution(* generateCommands(..)) && args(commandsListJson))", throwing = "e")
     public void afterThrowingException(CommandsListJson commandsListJson, Throwable e) {
+        LOGGER.error("Exception occured: ", e);
         failTasks(commandsListJson, e.getMessage());
     }
 
@@ -65,7 +66,7 @@ public class JmsProducerAspect {
             try {
                 taskDTO.put(TaskColumns.MESSAGE_BODY.getColumnName(), getMapper().writeValueAsString(commandJson));
             } catch (IOException e) {
-                logger.error("Error while mapping object to json", e);
+                LOGGER.error("Error while mapping object to json", e);
             }
             getTaskService().saveTask(taskDTO);
         }

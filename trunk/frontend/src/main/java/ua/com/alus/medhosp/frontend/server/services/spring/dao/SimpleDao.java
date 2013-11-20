@@ -25,8 +25,6 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
     private Class<D> dtoClass;
     private D dtoObject;
 
-    private Mutator<String> mutator;
-
     @SuppressWarnings("unchecked")
     public SimpleDao() {
         ParameterizedType genericSuperclass = (ParameterizedType) getClass()
@@ -35,7 +33,6 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
                 .getActualTypeArguments()[0];
         try {
             dtoObject = dtoClass.newInstance();
-            mutator =  HFactory.createMutator(keyspace, ss);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -43,10 +40,6 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
 
     public void setcFamilyName(String cFamilyName) {
         this.cFamilyName = cFamilyName;
-    }
-
-    private Mutator<String> createMutator() {
-        return mutator;
     }
 
     public void save(D abstractDTO, String... columns) {
@@ -61,7 +54,7 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
         if (columns == null || columns.length == 0) {
             columns = abstractDTO.getColumns();
         }
-        Mutator<String> m1 = createMutator();
+        Mutator<String> m1 = getMutator();
         if (abstractDTO.get(BaseColumns.ENTITY_ID.getColumnName()) == null) {
             abstractDTO.put(BaseColumns.ENTITY_ID.getColumnName(), String.valueOf(keyspace.createClock()));
         }
@@ -85,7 +78,7 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
         if (columns == null || columns.length == 0) {
             columns = abstractDTO.getColumns();
         }
-        Mutator<String> m1 = createMutator();
+        Mutator<String> m1 = getMutator();
         if (abstractDTO.get(BaseColumns.ENTITY_ID.getColumnName()) == null) {
             abstractDTO.put(BaseColumns.ENTITY_ID.getColumnName(), String.valueOf(keyspace.createClock()));
         }
@@ -241,7 +234,7 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
     }
 
     private Integer removeSelectedSuper(List<String> keys) {
-        Mutator<String> mutator = createMutator();
+        Mutator<String> mutator = getMutator();
         for (String key : keys) {
             mutator.addSuperDelete(key, cFamilyName, ((SuperColumn) dtoObject).getSuperKeyName(), ss);
         }
@@ -250,14 +243,14 @@ public abstract class SimpleDao<D extends AbstractDTO> extends AbstractDao {
     }
 
     public Integer removeSelectedSuperBySuperKeyName(String key, String superKeyName) {
-        Mutator<String> mutator = createMutator();
+        Mutator<String> mutator = getMutator();
         mutator.addSuperDelete(key, cFamilyName, superKeyName, ss);
         mutator.execute();
         return 1;
     }
 
     private Integer removeSelectedSimple(List<String> keys) {
-        Mutator<String> mutator = createMutator();
+        Mutator<String> mutator = getMutator();
         for (String key : keys) {
             mutator.addDeletion(key, cFamilyName);
         }
