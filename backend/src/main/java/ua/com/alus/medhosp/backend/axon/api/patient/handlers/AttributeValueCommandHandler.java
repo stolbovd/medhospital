@@ -1,5 +1,6 @@
 package ua.com.alus.medhosp.backend.axon.api.patient.handlers;
 
+import lombok.Setter;
 import org.apache.log4j.Logger;
 import org.axonframework.commandhandling.annotation.CommandHandler;
 import org.axonframework.repository.AggregateNotFoundException;
@@ -17,13 +18,11 @@ import ua.com.alus.medhosp.backend.service.PatientService;
 public class AttributeValueCommandHandler {
     private Logger logger = Logger.getLogger(this.getClass());
 
+    @Setter
     private Repository<PatientAttributeValueAggregate> repository;
 
+    @Setter
     private PatientService patientService;
-
-    public void setRepository(Repository<PatientAttributeValueAggregate> repository) {
-        this.repository = repository;
-    }
 
     @CommandHandler
     private void saveAttributeValueCommandHandler(SaveAttributeValueCommand command) {
@@ -58,9 +57,5 @@ public class AttributeValueCommandHandler {
                         command.getAttributeId()));
         aggregate.remove(command.getMessageId());
         logger.trace("Handling removeAttributeValue event");
-    }
-
-    public void setPatientService(PatientService patientService) {
-        this.patientService = patientService;
     }
 }

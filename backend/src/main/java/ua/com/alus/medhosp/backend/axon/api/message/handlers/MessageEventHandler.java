@@ -1,5 +1,8 @@
 package ua.com.alus.medhosp.backend.axon.api.message.handlers;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.log4j.Logger;
 import org.axonframework.eventhandling.annotation.EventHandler;
 import ua.com.alus.medhosp.backend.axon.api.message.event.ReSendMessageEvent;
@@ -15,25 +18,9 @@ import ua.com.alus.medhosp.backend.service.MessageService;
 public class MessageEventHandler {
     private Logger logger = Logger.getLogger(MessageEventHandler.class);
 
-    private MessageService messageService;
+    @Setter @Getter private MessageService messageService;
 
-    public MessageService getMessageService() {
-        return messageService;
-    }
-
-    public void setMessageService(MessageService messageService) {
-        this.messageService = messageService;
-    }
-
-    IJmsEventProducer jmsEventProducer;
-
-    public IJmsEventProducer getJmsEventProducer() {
-        return jmsEventProducer;
-    }
-
-    public void setJmsEventProducer(IJmsEventProducer jmsEventProducer) {
-        this.jmsEventProducer = jmsEventProducer;
-    }
+    @Setter @Getter IJmsEventProducer jmsEventProducer;
 
     @EventHandler
     public void resendMessageEventHandlerJMS(ReSendMessageEvent event) {

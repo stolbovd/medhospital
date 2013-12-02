@@ -1,5 +1,7 @@
 package ua.com.alus.medhosp.backend.jms;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.jms.JmsException;
@@ -23,21 +25,12 @@ public class JmsEventProducer implements IJmsEventProducer {
 
     private static final Logger logger = Logger.getLogger(JmsEventProducer.class);
 
+    @Setter
     private JmsTemplate template = null;
 
-    public void setTemplate(JmsTemplate template) {
-        this.template = template;
-    }
-
+    @Setter
+    @Getter
     private MessageService messageService;
-
-    public MessageService getMessageService() {
-        return messageService;
-    }
-
-    public void setMessageService(MessageService messageService) {
-        this.messageService = messageService;
-    }
 
     private final ObjectMapper jsonMapper = new ObjectMapper();
 

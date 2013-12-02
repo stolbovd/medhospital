@@ -15,7 +15,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "PATIENT_ATTRIBUTE_VALUE")
 @NamedQueries(value = {
-        @NamedQuery(name = "selectAttributeValue", query = "SELECT p FROM PatientAttributeValue p WHERE p.entityId=:entityId and p.attributeId=:attrId")
+        @NamedQuery(name = "selectAttributeValue", query = "SELECT p FROM PatientAttributeValue p WHERE p.entityId=:entityId and p.attributeId=:attrId"),
+        @NamedQuery(name = "deleteAttributeValue", query = "delete from PatientAttributeValue p " +
+                "where p.attributeId=:attributeId and p.entityId=:entityId")
 })
 public class PatientAttributeValue extends EntityAttributeValue {
 

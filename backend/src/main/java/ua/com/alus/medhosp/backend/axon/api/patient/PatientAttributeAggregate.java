@@ -1,5 +1,7 @@
 package ua.com.alus.medhosp.backend.axon.api.patient;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.axonframework.domain.AggregateIdentifier;
 import org.axonframework.domain.StringAggregateIdentifier;
 import org.axonframework.eventsourcing.annotation.AbstractAnnotatedAggregateRoot;
@@ -14,10 +16,20 @@ import java.io.Serializable;
  */
 public class PatientAttributeAggregate extends AbstractAnnotatedAggregateRoot implements Serializable {
 
+    @Setter
+    @Getter
     private String entityId;
+    @Setter
+    @Getter
     private String type;
+    @Setter
+    @Getter
     private String name;
+    @Setter
+    @Getter
     private String definition;
+    @Setter
+    @Getter
     private String userId;
 
     public PatientAttributeAggregate(AggregateIdentifier identifier) {
@@ -35,45 +47,5 @@ public class PatientAttributeAggregate extends AbstractAnnotatedAggregateRoot im
         event.setType(type);
         event.setDefinition(definition);
         apply(event);
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDefinition() {
-        return definition;
-    }
-
-    public void setDefinition(String definition) {
-        this.definition = definition;
-    }
-
-    public String getEntityId() {
-        return entityId;
-    }
-
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 }

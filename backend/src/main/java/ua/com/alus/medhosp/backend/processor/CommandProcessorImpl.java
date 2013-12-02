@@ -1,5 +1,7 @@
 package ua.com.alus.medhosp.backend.processor;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.log4j.Logger;
 import org.axonframework.commandhandling.CommandBus;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -19,23 +21,13 @@ import java.util.Map;
  */
 public class CommandProcessorImpl implements ICommandProcessor {
 
+    @Setter
+    @Getter
     private Map<String, String> command2Class = new HashMap<String, String>();
-
-    public void setCommand2Class(Map<String, String> command2class) {
-        this.command2Class = command2class;
-    }
-
-    public Map<String, String> getCommand2Class() {
-        return command2Class;
-    }
 
     private Logger logger = Logger.getLogger(CommandProcessorImpl.class);
 
-    private CommandBus commandBus;
-
-    public void setCommandBus(CommandBus commandBus) {
-        this.commandBus = commandBus;
-    }
+    @Setter private CommandBus commandBus;
 
     private final ObjectMapper jsonMapper = new ObjectMapper();
 

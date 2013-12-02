@@ -79,11 +79,7 @@ public class PatientService {
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void removePatientAttributeValue(String entityId, String attributeId) {
-        PatientAttributeValue patientAttributeValue = getPatientAttributeValue(entityId, attributeId);
-        if (patientAttributeValue == null) {
-            return;
-        }
-        getPatientAttributeValueDao().remove(patientAttributeValue);
+        getPatientAttributeValueDao().removeAttributeValue(entityId, attributeId);
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
