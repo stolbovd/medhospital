@@ -1,6 +1,8 @@
 package ua.com.alus.medhosp.backend.service;
 
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.alus.medhosp.backend.domen.dao.patient.PatientAttributeDao;
@@ -19,33 +21,15 @@ import java.util.List;
  */
 public class PatientService {
 
+    @Setter
+    @Getter
     private PatientDao patientDao;
+    @Setter
+    @Getter
     private PatientAttributeValueDao patientAttributeValueDao;
+    @Setter
+    @Getter
     private PatientAttributeDao patientAttributeDao;
-
-    public PatientAttributeDao getPatientAttributeDao() {
-        return patientAttributeDao;
-    }
-
-    public void setPatientAttributeDao(PatientAttributeDao patientAttributeDao) {
-        this.patientAttributeDao = patientAttributeDao;
-    }
-
-    public PatientDao getPatientDao() {
-        return patientDao;
-    }
-
-    public void setPatientDao(PatientDao patientDao) {
-        this.patientDao = patientDao;
-    }
-
-    public void setPatientAttributeValueDao(PatientAttributeValueDao patientAttributeValueDao) {
-        this.patientAttributeValueDao = patientAttributeValueDao;
-    }
-
-    public PatientAttributeValueDao getPatientAttributeValueDao() {
-        return patientAttributeValueDao;
-    }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void savePatient(Patient gwtPatient) {
