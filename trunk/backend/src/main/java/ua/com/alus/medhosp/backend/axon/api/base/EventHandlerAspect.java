@@ -1,5 +1,7 @@
 package ua.com.alus.medhosp.backend.axon.api.base;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
@@ -23,8 +25,8 @@ import java.util.Map;
  */
 @Aspect
 public class EventHandlerAspect {
-
-
+    @Setter
+    @Getter
     private IJmsEventProducer iJmsEventProducer;
 
     @Around(value = "execution(* *EventHandler(..)) && args(event))", argNames = "pjp,event")
@@ -33,7 +35,7 @@ public class EventHandlerAspect {
         Map<String, String> answer = new HashMap<String, String>();
         answer.put(Constants.MESSAGE_ID, event.getMessageId());
         fillAllParams(event, answer);
-        getiJmsEventProducer().sendResult(answer);
+        getIJmsEventProducer().sendResult(answer);
         return result;
     }
 
@@ -42,16 +44,9 @@ public class EventHandlerAspect {
         Map<String, String> answer = new HashMap<String, String>();
         answer.put(Constants.MESSAGE_ID, command.getMessageId());
         answer.put(Constants.ERROR, e.getMessage());
-        getiJmsEventProducer().sendResult(answer);
+        getIJmsEventProducer().sendResult(answer);
     }
 
-    public IJmsEventProducer getiJmsEventProducer() {
-        return iJmsEventProducer;
-    }
-
-    public void setiJmsEventProducer(IJmsEventProducer iJmsEventProducer) {
-        this.iJmsEventProducer = iJmsEventProducer;
-    }
     //TODO looks a little ugly :)
     private void fillAllParams(AbstractEntityEvent event, Map<String, String> answer) {
         answer.put(BaseColumns.ENTITY_ID.getColumnName(), event.getEntityId());

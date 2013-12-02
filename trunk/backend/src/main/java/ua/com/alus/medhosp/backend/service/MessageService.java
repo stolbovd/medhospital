@@ -1,5 +1,7 @@
 package ua.com.alus.medhosp.backend.service;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.alus.medhosp.backend.domen.dao.message.MessageDao;
@@ -11,15 +13,10 @@ import ua.com.alus.medhosp.backend.domen.entity.message.Message;
  * Created by Usatov Alexey
  */
 public class MessageService {
+
+    @Getter
+    @Setter
     private MessageDao messageDao;
-
-    public MessageDao getMessageDao() {
-        return messageDao;
-    }
-
-    public void setMessageDao(MessageDao messageDao) {
-        this.messageDao = messageDao;
-    }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void saveMessage(Message message) {

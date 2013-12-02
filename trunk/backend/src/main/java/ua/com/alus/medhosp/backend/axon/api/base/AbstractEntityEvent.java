@@ -1,5 +1,9 @@
 package ua.com.alus.medhosp.backend.axon.api.base;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.axonframework.domain.DomainEvent;
 import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoal;
 
@@ -8,40 +12,16 @@ import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoal;
  * Date: 19.05.11
  * Time: 13:22
  */
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public abstract class AbstractEntityEvent extends DomainEvent {
+    @Setter
+    @Getter
     private String entityId;
+    @Setter
+    @Getter
     private String messageId;
+    @Setter
+    @Getter
     private String userId;
-
-    public AbstractEntityEvent(String entityId, String messageId, String userId) {
-        this.entityId = entityId;
-        this.messageId = messageId;
-        this.userId = userId;
-    }
-
-    public String getEntityId() {
-        return entityId;
-    }
-
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
-    }
-
-    public String getMessageId() {
-        return messageId;
-    }
-
-    public void setMessageId(String messageId) {
-        this.messageId = messageId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
     public abstract DtoGoal getGoal();
 }
