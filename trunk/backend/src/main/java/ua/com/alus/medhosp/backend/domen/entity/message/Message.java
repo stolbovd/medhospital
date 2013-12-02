@@ -1,5 +1,7 @@
 package ua.com.alus.medhosp.backend.domen.entity.message;
 
+import lombok.Getter;
+import lombok.Setter;
 import ua.com.alus.medhosp.backend.domen.entity.EntityObject;
 
 import javax.persistence.Column;
@@ -15,13 +17,7 @@ import javax.persistence.Table;
 @Table(name = "MESSAGE")
 public class Message extends EntityObject {
     @Column(name = "JSON")
+    @Setter
+    @Getter
     private String json;
-
-    public String getJson() {
-        return json;
-    }
-
-    public void setJson(String json) {
-        this.json = json;
-    }
 }

@@ -1,5 +1,6 @@
 package ua.com.alus.medhosp.backend.axon.api.patient.handlers;
 
+import lombok.Setter;
 import org.apache.log4j.Logger;
 import org.axonframework.commandhandling.annotation.CommandHandler;
 import org.axonframework.domain.StringAggregateIdentifier;
@@ -18,8 +19,10 @@ import ua.com.alus.medhosp.backend.service.PatientService;
 public class AttributeCommandHandler {
     private Logger logger = Logger.getLogger(this.getClass());
 
+    @Setter
     private Repository<PatientAttributeAggregate> repository;
 
+    @Setter
     private PatientService patientService;
 
 
@@ -51,13 +54,5 @@ public class AttributeCommandHandler {
         patientAttributeAggregate.save(command.getMessageId(), command.getUserId());
 
         logger.info("Handling SaveAttributeCommand");
-    }
-
-    public void setRepository(Repository<PatientAttributeAggregate> repository) {
-        this.repository = repository;
-    }
-
-    public void setPatientService(PatientService patientService) {
-        this.patientService = patientService;
     }
 }

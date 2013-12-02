@@ -1,6 +1,9 @@
 package ua.com.alus.medhosp.backend.domen.entity;
 
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -15,13 +18,7 @@ public abstract class EntityObject implements Serializable {
 
     @Id
     @Column(name = "PK_ENTITY_ID")
+    @Setter
+    @Getter
     private String entityId;
-
-    public String getEntityId() {
-        return entityId;
-    }
-
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
-    }
 }

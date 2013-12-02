@@ -1,5 +1,6 @@
 package ua.com.alus.medhosp.backend.axon.api.message.handlers;
 
+import lombok.Setter;
 import org.apache.log4j.Logger;
 import org.axonframework.commandhandling.annotation.CommandHandler;
 import org.axonframework.domain.StringAggregateIdentifier;
@@ -17,11 +18,8 @@ public class MessageCommandHandler {
 
     private Logger logger = Logger.getLogger(this.getClass());
 
+    @Setter
     private Repository<MessageAggregate> repository;
-
-    public void setRepository(Repository<MessageAggregate> repository) {
-        this.repository = repository;
-    }
 
     @CommandHandler
     public void resendMessage(ReSendMessageCommand command){

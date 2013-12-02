@@ -1,6 +1,7 @@
 package ua.com.alus.medhosp.backend.jms;
 
 
+import lombok.Setter;
 import org.apache.log4j.Logger;
 import ua.com.alus.medhosp.backend.processor.ICommandProcessor;
 import ua.com.alus.medhosp.prototype.data.Constants;
@@ -17,11 +18,8 @@ import javax.jms.MessageListener;
 public class JmsCommandListener implements MessageListener {
     private Logger logger = Logger.getLogger(JmsCommandListener.class);
 
+    @Setter
     private ICommandProcessor commandProcessor;
-
-    public void setCommandProcessor(ICommandProcessor commandProcessor) {
-        this.commandProcessor = commandProcessor;
-    }
 
     @Override
     @SuppressWarnings("unchecked")

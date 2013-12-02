@@ -1,6 +1,8 @@
 package ua.com.alus.medhosp.backend.axon.api.patient.event;
 
 
+import lombok.Getter;
+import lombok.Setter;
 import ua.com.alus.medhosp.prototype.cassandra.goals.DtoGoal;
 
 import java.io.Serializable;
@@ -12,7 +14,7 @@ import java.io.Serializable;
  */
 public class SaveAttributeValueEvent extends AttributeValueEvent implements Serializable {
 
-    private String attributeValue;
+    private @Setter @Getter String attributeValue;
 
     public SaveAttributeValueEvent(String entityId, String messageId, String userId) {
         super(entityId, messageId, userId);
@@ -21,14 +23,6 @@ public class SaveAttributeValueEvent extends AttributeValueEvent implements Seri
     public SaveAttributeValueEvent(String entityId, String messageId, String userId, String attributeId, String attributeValue) {
         super(entityId, messageId, userId);
         setAttributeId(attributeId);
-        this.attributeValue = attributeValue;
-    }
-
-    public String getAttributeValue() {
-        return attributeValue;
-    }
-
-    public void setAttributeValue(String attributeValue) {
         this.attributeValue = attributeValue;
     }
 
